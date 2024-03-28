@@ -3,6 +3,7 @@ kind: Application
 metadata:
   name: {{ lower .Values.show }}-orion
   namespace: argocd
+
 spec:
   project: default
   destination:
@@ -13,6 +14,13 @@ spec:
     - path: .
       repoURL: {{ .Values.titan.chart }}
       targetRevision: {{ .Values.titan.branch }}
+      helm:
+        valueFiles:
+          - $values/values.yaml
+
+    - path: .
+      repoURL: {{ .Values.mars.chart }}
+      targetRevision: {{ .Values.mars.branch }}
       helm:
         valueFiles:
           - $values/values.yaml
