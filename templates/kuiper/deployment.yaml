@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: kuiper
+  namespace: {{ .Values.namespace }}
+spec:
+  revisionHistoryLimit: 0
+  selector:
+    matchLabels:
+      app: kuiper
+
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 50%
+    type: RollingUpdate
+
+  template:
+    metadata:
+      labels:
+        app: kuiper
+
+    spec:
+      serviceAccountName: kuiper
+
+      {{- if .Values.kuiper.node_selector.enable }}
+      nodeSelector:
+        {{- range $key, $value := .Values.kuiper.node_selector.labels }}
+        {{ $key }}: {{ $value }}
+        {{- end }}
+      {{- end }}
+      containers:
+        - name: kuiper
+          image: {{ .Values.kuiper.image }}
+          imagePullPolicy: Always
+          resources:
+            requests:
+              cpu: 200m
+              memory: 200Mi
+          ports:
+            - containerPort: 8000
+              name: endpoint
