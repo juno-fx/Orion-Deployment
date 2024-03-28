@@ -1,0 +1,22 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: {{ lower .Values.show }}-orion
+  namespace: argocd
+spec:
+  project: default
+  destination:
+    server: {{ .Values.cluster }}
+    namespace: argocd
+
+  sources:
+    - path: .
+      repoURL: {{ .Values.titan.chart }}
+      targetRevision: {{ .Values.titan.branch }}
+      helm:
+        valueFiles:
+          - $values/values.yaml
+
+    - repoURL: {{ .Values.values.repo }}
+      targetRevision: {{ .Values.values.branch }}
+      ref: values

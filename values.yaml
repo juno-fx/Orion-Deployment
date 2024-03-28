@@ -1,0 +1,25 @@
+# Where to load your values from
+values:
+  repo: https://github.com/juno-fx/Orion-Deployment.git
+  branch: main
+
+cluster: https://kubernetes.default.svc                    # The cluster to target for deployment
+show: SQM                                                  # Show code
+
+titan:
+  chart: https://github.com/juno-fx/Titan-Deployment.git
+  branch: main
+  image: empty/titan:main                                 # Registry to pull the Titan server image from
+  namespace: production                                   # Namespace to deploy the Titan server to
+
+  owner: bob                                              # Owner of the cluster
+
+  node_selector:                                          # Node selector to deploy the Titan server to
+    enable: true                                          # Enable node selector
+    labels:                                               # Node selector to deploy the Titan server to
+      kubernetes.io/arch: amd64
+
+
+  autoscaling:
+    min_replicas: 3                                       # Minimum number of replicas to run
+    max_replicas: 5                                       # Maximum number of replicas to run
