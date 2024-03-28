@@ -1,7 +1,7 @@
 # Where to load your values from
 values:
   repo: https://github.com/juno-fx/Orion-Deployment.git
-  branch: main
+  branch: testing
 
 cluster: https://kubernetes.default.svc                    # The cluster to target for deployment
 show: SQM                                                  # Show code
