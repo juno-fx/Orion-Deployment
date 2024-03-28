@@ -30,12 +30,12 @@ argo:
 	@kubectl wait --namespace argocd \
 		--for=condition=ready pod \
 		--selector=app.kubernetes.io/name=argocd-server \
-		--timeout=90s > /dev/null 2>&1
+		--timeout=90s
 	@kubectl -n argocd apply -f juno/argo-service.yaml
 
 orion:
 	@echo "Installing Orion..."
-	@helm install -f juno/test-values.yaml $(PROJECT) ./ --wait
+	@helm install -f values.yaml $(PROJECT) ./ --wait
 
 argo-credentials:
 	@echo "ArgoCD Credentials..."
