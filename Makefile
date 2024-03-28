@@ -45,4 +45,4 @@ argo-credentials:
 	@kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d
 	@echo
 	@echo "ArgoCD URL:"
-	@echo "http://localhost:30900/"
+	@echo "https://localhost/"

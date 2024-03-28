@@ -1,21 +1,17 @@
-<br />
-<p align="center">
-    <img src="https://avatars.githubusercontent.com/u/9037579?v=4"/>
-    <h3 align="center">Orion Creation Platform</h3>
-    <p align="center">
-        Documentation for the Orion Creation Platform
-    </p>
-</p>
+
+![Orion Logo](https://juno-fx.github.io/Orion-Documentation/assets/orion.png)
+
+
+[Read the full documentation here](https://juno-fx.github.io/Orion-Documentation/)
 
 
 ## Dependencies
 
-- [Juno Cluster Builder](https://github.com/juno-fx/Cluster-Builder)
-- [ArgoCD](https://argo-cd.readthedocs.io/en/stable/)
+- [helm](https://helm.sh/)
 
-## Usage
+## Usage**
 
-This is a meta chart that compiles a full Orion cluster. It is designed to be used with ArgoCD and Helm.
+This describes a full deployment of Orion. For a more detailed guide, please see the [setup documentation](https://juno-fx.github.io/Orion-Documentation/setup).
 
 ## Local Testing
 
