@@ -1,0 +1,25 @@
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: titan
+  namespace: {{ .Values.namespace }}
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: titan
+  minReplicas: {{ .Values.titan.autoscaling.min_replicas }}
+  maxReplicas: {{ .Values.titan.autoscaling.max_replicas }}
+  behavior:
+    scaleDown:
+      stabilizationWindowSeconds: 30
+    scaleUp:
+      stabilizationWindowSeconds: 10
+  metrics:
+    - type: ContainerResource
+      containerResource:
+        name: cpu
+        container: titan
+        target:
+          type: Utilization
+          averageUtilization: 50

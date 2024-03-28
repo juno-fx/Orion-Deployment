@@ -1,0 +1,18 @@
+{{ range .Values.kuiper.workstations }}
+apiVersion: junovfx.com/v1
+kind: Workstation
+metadata:
+  name: {{ .name }}
+  namespace: {{ $.Values.namespace }}
+spec:
+  registry: {{ .registry }}
+  icon: {{ .icon }}
+  label: {{ .label }}
+  group: {{ .group }}
+  tag: {{ .tag }}
+  repo: {{ .repo }}
+  cpu: {{ .cpu }}
+  ram: {{ .ram }}
+  gpu: {{ .gpu }}
+---
+{{ end }}
