@@ -5,7 +5,7 @@ values:
 
 cluster: https://kubernetes.default.svc                    # The cluster to target for deployment
 show: SQM                                                  # Show code
-namespace: production                                      # Namespace to deploy the Titan server to
+namespace: default                                         # Namespace to deploy the Titan server to
 
 titan:
   chart: https://github.com/juno-fx/Titan-Deployment.git
