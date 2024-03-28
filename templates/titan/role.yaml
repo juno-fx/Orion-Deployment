@@ -1,0 +1,15 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: titan
+  namespace: {{ .Values.namespace }}
+rules:
+  - apiGroups: ["junovfx.com"]
+    resources: ["groups", "users"]
+    verbs: ["list", "create", "delete", "get", "patch", "update"]
+  - apiGroups: [""]
+    resources: ["pods", "services"]
+    verbs: ["list", "get"]
+  - apiGroups: [""]
+    resources: ["secrets"]
+    verbs: ["list", "get", "create", "delete", "patch", "update"]

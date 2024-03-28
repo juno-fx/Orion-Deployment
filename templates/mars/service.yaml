@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: mars
+  namespace: {{ .Values.namespace }}
+spec:
+  selector:
+    app: mars
+  ports:
+    - port: 8000
+      targetPort: 8000
+      protocol: TCP
+      name: endpoint

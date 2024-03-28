@@ -1,0 +1,62 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mars
+  namespace: {{ .Values.namespace }}
+spec:
+  revisionHistoryLimit: 0
+  selector:
+    matchLabels:
+      app: mars
+
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 50%
+    type: RollingUpdate
+
+  template:
+    metadata:
+      labels:
+        app: mars
+
+    spec:
+      {{- if .Values.mars.node_selector.enable }}
+      nodeSelector:
+        {{- range $key, $value := .Values.mars.node_selector.labels }}
+        {{ $key }}: {{ $value }}
+        {{- end }}
+      {{- end }}
+      containers:
+        - name: mars
+          image: {{ .Values.mars.image }}
+          imagePullPolicy: Always
+          startupProbe:
+            httpGet:
+              path: "/.health"
+              port: 8000
+            initialDelaySeconds: 15
+            periodSeconds: 5
+            failureThreshold: 2
+          resources:
+            requests:
+              cpu: 100m
+              memory: 200Mi
+          env:
+            - name: SHOW
+              value: {{ .Values.show }}
+          ports:
+            - containerPort: 8000
+              name: endpoint
+          volumeMounts:
+            {{- range .Values.mars.mounts }}
+            - mountPath: {{ .mount_path }}
+              name: {{ .name }}
+              subPath: {{ .sub_path }}
+            {{- end }}
+      volumes:
+        {{- range .Values.mars.mounts }}
+        - name: {{ .name }}
+          persistentVolumeClaim:
+            claimName: {{ .claim_name }}
+        {{- end }}

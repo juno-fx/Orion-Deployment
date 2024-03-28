@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: titan
+  namespace: {{ .Values.namespace }}
+spec:
+  selector:
+    app: titan
+  ports:
+    - port: 8000
+      targetPort: 8000
+      protocol: TCP
+      name: endpoint
