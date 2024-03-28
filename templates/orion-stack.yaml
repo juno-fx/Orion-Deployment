@@ -20,3 +20,12 @@ spec:
     - repoURL: {{ .Values.values.repo }}
       targetRevision: {{ .Values.values.branch }}
       ref: values
+
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+      allowEmpty: false
+
+    syncOptions:
+      - CreateNamespace=true
