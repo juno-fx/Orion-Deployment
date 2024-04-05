@@ -25,3 +25,5 @@ spec:
       containers:
         - name: kuiper
           image: alpine
+          command: [ "/bin/ash", "-c", "--" ]
+          args: [ "while true; do sleep 30; done;" ]
