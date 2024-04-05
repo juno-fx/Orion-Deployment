@@ -21,9 +21,9 @@ spec:
         app: debug
 
     spec:
-      serviceAccountName: kuiper
+      serviceAccountName: debug
       containers:
-        - name: kuiper
+        - name: debug
           image: alpine
           command: [ "/bin/ash", "-c", "--" ]
           args: [ "while true; do sleep 30; done;" ]
