@@ -29,7 +29,7 @@ spec:
       {{- end }}
       containers:
         - name: mars
-          image: {{ .Values.mars.image }}
+          image: {{.Values.registry}}/{{ .Values.mars.image }}
           imagePullPolicy: Always
           startupProbe:
             httpGet:

@@ -1,8 +1,9 @@
 show: SQM                                                  # Show code
 namespace: default                                         # Namespace to deploy the Titan server to
+registry: empty.com
 
 titan:
-  image: empty/titan:main                                 # Registry to pull the Titan server image from
+  image: titan:main                                 # Registry to pull the Titan server image from
 
   owner: bob                                              # Owner of the cluster
 
@@ -16,7 +17,7 @@ titan:
     max_replicas: 5                                       # Maximum number of replicas to run
 
 mars:
-  image: empty/mars:main                                  # Registry to pull the Mars server image from
+  image: mars:main                                  # Registry to pull the Mars server image from
 
   node_selector:                                          # Node selector to deploy the Mars server to
     enable: true                                          # Enable node selector
@@ -35,7 +36,7 @@ mars:
 #      sub_path:                                           # Sub path on the persistent volume to mount
 
 kuiper:
-  image: empty/kuiper:main         # Registry to pull the Kuiper server image from
+  image: kuiper:main         # Registry to pull the Kuiper server image from
 
   node_selector:                   # Node selector to deploy the Kuiper server to
     enable: true                   # Enable node selector

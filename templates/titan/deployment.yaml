@@ -32,7 +32,7 @@ spec:
 
       containers:
         - name: titan
-          image: {{ .Values.titan.image }}
+          image: {{.Values.registry}}/{{ .Values.titan.image }}
           env:
             - name: ORION_OWNER
               value: {{ .Values.titan.owner }}
