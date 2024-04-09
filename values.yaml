@@ -1,42 +1,42 @@
-show: SQM                                                  # Show code
-namespace: default                                         # Namespace to deploy the Titan server to
-registry: empty.com
+show: SQM                          # Show code
+namespace: default                 # Namespace to deploy the Titan server to
+registry: empty.com                # Registry to pull the Orion images from
 
 titan:
-  image: titan:main                                 # Registry to pull the Titan server image from
+  image: titan:unstable            # Image to pull for Titan
 
-  owner: bob                                              # Owner of the cluster
+  owner: bob                       # Owner of the cluster
 
-  node_selector:                                          # Node selector to deploy the Titan server to
-    enable: true                                          # Enable node selector
-    labels:                                               # Node selector to deploy the Titan server to
+  node_selector:                   # Node selector to deploy the Titan server to
+    enable: true                   # Enable node selector
+    labels:                        # Node selector to deploy the Titan server to
       kubernetes.io/arch: amd64
 
   autoscaling:
-    min_replicas: 3                                       # Minimum number of replicas to run
-    max_replicas: 5                                       # Maximum number of replicas to run
+    min_replicas: 3                # Minimum number of replicas to run
+    max_replicas: 5                # Maximum number of replicas to run
 
 mars:
-  image: mars:main                                  # Registry to pull the Mars server image from
+  image: mars:unstable             # Image to pull for Mars
 
-  node_selector:                                          # Node selector to deploy the Mars server to
-    enable: true                                          # Enable node selector
-    labels:                                               # Node selector to deploy the Mars server to
+  node_selector:                   # Node selector to deploy the Mars server to
+    enable: true                   # Enable node selector
+    labels:                        # Node selector to deploy the Mars server to
       kubernetes.io/arch: amd64
 
 
   autoscaling:
-    min_replicas: 1                                        # Minimum number of replicas to run
-    max_replicas: 4                                        # Maximum number of replicas to run
+    min_replicas: 1                # Minimum number of replicas to run
+    max_replicas: 4                # Maximum number of replicas to run
 
-  mounts: []                                               # Mounts to attach to the Mars server
-#    - name:                                               # Name of the mount
-#      claim_name:                                         # Name of the persistent volume claim to mount
-#      mount_path:                                         # Where to mount the persistent volume into the Mars server
-#      sub_path:                                           # Sub path on the persistent volume to mount
+  mounts: []                       # Mounts to attach to the Mars server
+#    - name:                       # Name of the mount
+#      claim_name:                 # Name of the persistent volume claim to mount
+#      mount_path:                 # Where to mount the persistent volume into the Mars server
+#      sub_path:                   # Sub path on the persistent volume to mount
 
 kuiper:
-  image: kuiper:main         # Registry to pull the Kuiper server image from
+  image: kuiper:unstable           # Image to pull for Kuiper
 
   node_selector:                   # Node selector to deploy the Kuiper server to
     enable: true                   # Enable node selector
@@ -59,3 +59,15 @@ kuiper:
 #      ram:                         # RAM to allocate to the workstation
 #      name:                        # Name of the workstation
 #      gpu:                         # GPU to allocate to the workstation
+
+hubble:
+    image: hubble:unstable          # Image to pull for Hubble
+
+    node_selector:                  # Node selector to deploy the Hubble server to
+        enable: true                # Enable node selector
+        labels:                     # Node selector to deploy the Hubble server to
+        kubernetes.io/arch: amd64
+
+    autoscaling:
+        min_replicas: 1             # Minimum number of replicas to run
+        max_replicas: 3             # Maximum number of replicas to run

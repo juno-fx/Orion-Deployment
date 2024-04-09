@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hubble
+  namespace: production
+spec:
+  revisionHistoryLimit: 0
+  selector:
+    matchLabels:
+      app: hubble
+
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 50%
+    type: RollingUpdate
+
+  template:
+    metadata:
+      labels:
+        app: hubble
+
+    spec:
+      {{- if .Values.hubble.node_selector.enable }}
+      nodeSelector:
+        {{- range $key, $value := .Values.hubble.node_selector.labels }}
+        {{ $key }}: {{ $value }}
+        {{- end }}
+      {{- end }}
+      containers:
+        - name: hubble
+          image: {{.Values.registry}}/{{ .Values.hubble.image }}
+          imagePullPolicy: Always
+          resources:
+            requests:
+              cpu: 200m
+              memory: 500Mi
+          ports:
+            - containerPort: 3000
+              name: endpoint
