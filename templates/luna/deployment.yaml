@@ -1,0 +1,45 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: luna
+  namespace: {{ .Values.namespace }}
+spec:
+  revisionHistoryLimit: 0
+  selector:
+    matchLabels:
+      app: luna
+
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 50%
+    type: RollingUpdate
+
+  template:
+    metadata:
+      labels:
+        app: luna
+
+    spec:
+      {{- if .Values.luna.node_selector.enable }}
+      nodeSelector:
+        {{- range $key, $value := .Values.luna.node_selector.labels }}
+        {{ $key }}: {{ $value }}
+        {{- end }}
+      {{- end }}
+      containers:
+        - name: luna
+          image: {{.Values.registry}}/{{ .Values.luna.image }}
+          imagePullPolicy: Always
+          resources:
+            requests:
+              cpu: 100m
+              memory: 200Mi
+          env:
+            - name: MONGO
+              value: "shows-db"
+            - name: SHOW
+              value: "{{upper .Values.show }}"
+          ports:
+            - containerPort: 8000
+              name: endpoint

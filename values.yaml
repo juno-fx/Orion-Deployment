@@ -71,3 +71,15 @@ hubble:
     autoscaling:
         min_replicas: 1             # Minimum number of replicas to run
         max_replicas: 3             # Maximum number of replicas to run
+
+luna:
+  image: luna:unstable          # Image to pull for Luna
+
+  node_selector:                # Node selector to deploy the Hubble server to
+    enable: true                # Enable node selector
+    labels:                     # Node selector to deploy the Hubble server to
+      kubernetes.io/arch: amd64
+
+  autoscaling:
+    min_replicas: 1             # Minimum number of replicas to run
+    max_replicas: 3             # Maximum number of replicas to run
