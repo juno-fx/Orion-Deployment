@@ -39,4 +39,4 @@ spec:
       volumes:
         - name: show-data
           persistentVolumeClaim:
-              claimName: show-db
+            claimName: {{ .Values.luna.persistent_volume_claim }}

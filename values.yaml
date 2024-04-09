@@ -74,7 +74,7 @@ hubble:
 
 luna:
   image: luna:unstable          # Image to pull for Luna
-
+  persistent_volume_claim:      # Persistent volume claim to mount to the Luna server
   node_selector:                # Node selector to deploy the Hubble server to
     enable: true                # Enable node selector
     labels:                     # Node selector to deploy the Hubble server to
