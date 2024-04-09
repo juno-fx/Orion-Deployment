@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: hubble
-  namespace: production
+  namespace: {{ .Values.namespace }}
 spec:
   revisionHistoryLimit: 0
   selector:
