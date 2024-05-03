@@ -37,7 +37,7 @@ mars:
 
 kuiper:
   image: kuiper:unstable           # Image to pull for Kuiper
-
+  host:                            # Host that the ingress will be pointing to
   node_selector:                   # Node selector to deploy the Kuiper server to
     enable: true                   # Enable node selector
     labels:                        # Node selector to deploy the Kuiper server to
