@@ -33,6 +33,9 @@ spec:
         - name: kuiper
           image: {{.Values.registry}}/{{ .Values.kuiper.image }}
           imagePullPolicy: Always
+          env:
+            - name: HOST
+              value: {{ .Values.kuiper.host }}
           resources:
             requests:
               cpu: 200m
