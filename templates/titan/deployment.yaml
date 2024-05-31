@@ -36,6 +36,10 @@ spec:
           env:
             - name: ORION_OWNER
               value: {{ .Values.titan.owner }}
+            - name: PROJECT
+              value: {{lower .Values.show }}
+            - name: PROJECT_GUID
+              value: {{lower .Values.guid }}
           resources:
             requests:
               cpu: 100m
