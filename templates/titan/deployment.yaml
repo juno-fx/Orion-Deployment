@@ -42,7 +42,7 @@ spec:
               value: "{{ .Values.guid }}"
           resources:
             requests:
-              cpu: 100m
+              cpu: 500m
               memory: 200Mi
           ports:
             - containerPort: 8000
