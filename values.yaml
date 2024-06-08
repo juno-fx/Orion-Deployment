@@ -1,6 +1,7 @@
 show: SQM                          # Show code
 namespace: default                 # Namespace to deploy the Titan server to
 registry: empty.com                # Registry to pull the Orion images from
+guid: 3300                         # GUID of the project
 
 titan:
   image: titan:unstable            # Image to pull for Titan
