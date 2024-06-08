@@ -35,7 +35,9 @@ spec:
           imagePullPolicy: Always
           env:
             - name: HOST
-              value: {{ .Values.kuiper.host }}
+              value: "{{ .Values.kuiper.host }}"
+            - name: SHOW
+              value: "{{ .Values.show }}"
           resources:
             requests:
               cpu: 200m
