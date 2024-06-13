@@ -32,6 +32,7 @@ spec:
 
       containers:
         - name: titan
+          imagePullPolicy: Always
           image: {{.Values.registry}}/{{ .Values.titan.image }}
           env:
             - name: ORION_OWNER
