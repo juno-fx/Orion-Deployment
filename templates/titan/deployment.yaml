@@ -34,19 +34,6 @@ spec:
         - name: titan
           imagePullPolicy: Always
           image: {{.Values.registry}}/{{ .Values.titan.image }}
-          livenessProbe:
-            httpGet:
-              path: "/.health"
-              port: 8000
-            periodSeconds: 5
-            failureThreshold: 2
-          startupProbe:
-            httpGet:
-              path: "/.health"
-              port: 8000
-            initialDelaySeconds: 15
-            periodSeconds: 5
-            failureThreshold: 2
           env:
             - name: ORION_OWNER
               value: {{ .Values.titan.owner }}
