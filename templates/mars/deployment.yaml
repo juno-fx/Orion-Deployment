@@ -21,6 +21,7 @@ spec:
         app: mars
 
     spec:
+      serviceAccountName: mars
       {{- if .Values.mars.node_selector.enable }}
       nodeSelector:
         {{- range $key, $value := .Values.mars.node_selector.labels }}
