@@ -35,14 +35,14 @@ spec:
           imagePullPolicy: Always
           livenessProbe:
             httpGet:
-              path: "/.health"
+              path: "/kuiper/.health"
               port: 8000
             initialDelaySeconds: 15
             periodSeconds: 5
             failureThreshold: 2
           startupProbe:
             httpGet:
-              path: "/.health"
+              path: "/kuiper/.health"
               port: 8000
             initialDelaySeconds: 15
             periodSeconds: 5
