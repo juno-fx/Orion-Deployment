@@ -32,6 +32,12 @@ spec:
         - name: mars
           image: {{.Values.registry}}/{{ .Values.mars.image }}
           imagePullPolicy: Always
+          livenessProbe:
+            httpGet:
+              path: "/.health"
+              port: 8000
+            periodSeconds: 5
+            failureThreshold: 2
           startupProbe:
             httpGet:
               path: "/.health"
