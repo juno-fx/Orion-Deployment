@@ -3,6 +3,8 @@ kind: Service
 metadata:
   name: hubble
   namespace: {{ .Values.namespace }}
+  annotations:
+    linkerd.io/inject: enabled
 spec:
   selector:
     app: hubble

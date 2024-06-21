@@ -3,6 +3,8 @@ kind: Deployment
 metadata:
   name: kuiper
   namespace: {{ .Values.namespace }}
+  annotations:
+    linkerd.io/inject: enabled
 spec:
   revisionHistoryLimit: 0
   selector:
@@ -17,6 +19,8 @@ spec:
 
   template:
     metadata:
+      annotations:
+        linkerd.io/inject: enabled
       labels:
         app: kuiper
 
