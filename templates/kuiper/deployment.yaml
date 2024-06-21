@@ -40,7 +40,7 @@ spec:
               value: "{{ .Values.show }}"
           resources:
             requests:
-              cpu: 200m
+              cpu: 750m
               memory: 200Mi
           ports:
             - containerPort: 8000
