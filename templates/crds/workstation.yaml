@@ -14,6 +14,9 @@ spec:
           properties:
             spec:
               type: object
+              x-kubernetes-validations:
+                - rule: "self.mode == 'interactive' || self.mode == 'headless'"
+                  message: "Mode needs to be either interactive or headless"
               required:
                 - label
                 - tag
@@ -22,6 +25,9 @@ spec:
                 - cpu
                 - ram
               properties:
+                mode:
+                  type: string
+                  default: "interactive"
                 label:
                   type: string
                 registry:
@@ -41,6 +47,15 @@ spec:
                   type: string
                 ram:
                   type: string
+                env:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      name:
+                        type: string
+                      value:
+                        type: string
 
   scope: Namespaced
   names:

@@ -1,0 +1,25 @@
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: hubble
+  namespace: {{ .Values.namespace }}
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: hubble
+  minReplicas: {{ .Values.hubble.autoscaling.min_replicas }}
+  maxReplicas: {{ .Values.hubble.autoscaling.max_replicas }}
+  behavior:
+    scaleDown:
+      stabilizationWindowSeconds: 30
+    scaleUp:
+      stabilizationWindowSeconds: 30
+  metrics:
+    - type: ContainerResource
+      containerResource:
+        name: cpu
+        container: hubble
+        target:
+          type: Utilization
+          averageUtilization: 50
