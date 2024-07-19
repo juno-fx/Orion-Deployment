@@ -1,0 +1,74 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: terra
+  namespace: {{ .Values.namespace }}
+  annotations:
+    linkerd.io/inject: enabled
+spec:
+  revisionHistoryLimit: 0
+  selector:
+    matchLabels:
+      app: terra
+
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 50%
+    type: RollingUpdate
+
+  template:
+    metadata:
+      annotations:
+        linkerd.io/inject: enabled
+      labels:
+        app: terra
+    spec:
+      serviceAccountName: terra
+      {{- if .Values.terra.node_selector.enable }}
+      nodeSelector:
+        {{- range $key, $value := .Values.terra.node_selector.labels }}
+        {{ $key }}: {{ $value }}
+        {{- end }}
+      {{- end }}
+
+      containers:
+        - name: terra
+          image: {{.Values.registry}}/{{ .Values.terra.image }}
+          imagePullPolicy: Always
+          readinessProbe:
+            httpGet:
+              path: "/.health"
+              port: 8000
+            initialDelaySeconds: 5
+            periodSeconds: 5
+            failureThreshold: 15
+          livenessProbe:
+            httpGet:
+              path: "/.health"
+              port: 8000
+            initialDelaySeconds: 5
+            periodSeconds: 5
+            failureThreshold: 15
+          startupProbe:
+            httpGet:
+              path: "/.health"
+              port: 8000
+            initialDelaySeconds: 5
+            periodSeconds: 5
+            failureThreshold: 15
+          ports:
+            - containerPort: 8000
+              name: endpoint
+          volumeMounts:
+            {{- range .Values.mars.mounts }}
+            - mountPath: {{ .mount_path }}
+              name: {{ .name }}
+              subPath: {{ .sub_path }}
+            {{- end }}
+      volumes:
+        {{- range .Values.mars.mounts }}
+        - name: {{ .name }}
+          persistentVolumeClaim:
+            claimName: {{ .claim_name }}
+        {{- end }}
