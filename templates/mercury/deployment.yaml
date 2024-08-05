@@ -1,0 +1,61 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mercury
+  namespace: {{ .Values.namespace }}
+  annotations:
+    linkerd.io/inject: enabled
+spec:
+  revisionHistoryLimit: 0
+  selector:
+    matchLabels:
+      app: mercury
+
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 50%
+    type: RollingUpdate
+
+  template:
+    metadata:
+      annotations:
+        linkerd.io/inject: enabled
+      labels:
+        app: mercury
+
+    spec:
+      serviceAccountName: mercury
+
+      {{- if .Values.mercury.node_selector.enable }}
+      nodeSelector:
+        {{- range $key, $value := .Values.mercury.node_selector.labels }}
+        {{ $key }}: {{ $value }}
+        {{- end }}
+      {{- end }}
+
+      containers:
+        - name: mercury
+          image: {{.Values.registry}}/{{ .Values.mercury.image }}
+          imagePullPolicy: Always
+          livenessProbe:
+            httpGet:
+              path: "/.health"
+              port: 8000
+            initialDelaySeconds: 15
+            periodSeconds: 5
+            failureThreshold: 2
+          startupProbe:
+            httpGet:
+              path: "/.health"
+              port: 8000
+            initialDelaySeconds: 15
+            periodSeconds: 5
+            failureThreshold: 2
+          ports:
+            - containerPort: 8000
+              name: endpoint
+          resources:
+            requests:
+              cpu: 750m
+              memory: 200Mi
