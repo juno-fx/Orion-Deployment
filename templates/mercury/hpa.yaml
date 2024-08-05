@@ -1,0 +1,25 @@
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: mercury
+  namespace: {{ .Values.namespace }}
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: mercury
+  minReplicas: {{ .Values.mercury.autoscaling.min_replicas }}
+  maxReplicas: {{ .Values.mercury.autoscaling.max_replicas }}
+  behavior:
+    scaleDown:
+      stabilizationWindowSeconds: 30
+    scaleUp:
+      stabilizationWindowSeconds: 30
+  metrics:
+    - type: ContainerResource
+      containerResource:
+        name: cpu
+        container: mercury
+        target:
+          type: Utilization
+          averageUtilization: 50
