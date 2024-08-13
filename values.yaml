@@ -3,6 +3,14 @@ namespace: default                 # Namespace to deploy the Titan server to
 registry: empty.com                # Registry to pull the Orion images from
 guid: 3300                         # GUID of the project
 
+cache:
+  image: redis:alpine
+
+  node_selector:                   # Node selector to deploy the Redis server to
+    enable: true                   # Enable node selector
+    labels:                        # Node selector to deploy the Redis server to
+      kubernetes.io/arch: amd64
+
 titan:
   image: titan:unstable            # Image to pull for Titan
 

@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: cache
+  namespace: {{ .Values.namespace }}
+  annotations:
+    linkerd.io/inject: enabled
+spec:
+  selector:
+    app: cache
+  ports:
+    - port: 6379
+      targetPort: 6379
+      protocol: TCP
+      name: endpoint
