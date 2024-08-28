@@ -1,0 +1,44 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: webb
+  namespace: {{ .Values.namespace }}
+  annotations:
+    linkerd.io/inject: enabled
+spec:
+  revisionHistoryLimit: 0
+  selector:
+    matchLabels:
+      app: webb
+  template:
+    metadata:
+      annotations:
+        linkerd.io/inject: enabled
+      labels:
+        app: webb
+    spec:
+      {{- if .Values.webb.node_selector.enable }}
+      nodeSelector:
+        {{- range $key, $value := .Values.webb.node_selector.labels }}
+        {{ $key }}: {{ $value }}
+        {{- end }}
+      {{- end }}
+
+      containers:
+        - name: webb
+          image: {{ .Values.registry }}/{{ .Values.webb.image }}
+          ports:
+            - containerPort: 8000
+              name: endpoint
+          volumeMounts:
+            {{- range .Values.webb.mounts }}
+            - mountPath: {{ .mount_path }}
+              name: {{ .name }}
+              subPath: {{ .sub_path }}
+            {{- end }}
+      volumes:
+        {{- range .Values.webb.mounts }}
+        - name: {{ .name }}
+          persistentVolumeClaim:
+            claimName: {{ .claim_name }}
+        {{- end }}
