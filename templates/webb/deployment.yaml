@@ -26,6 +26,7 @@ spec:
 
       containers:
         - name: webb
+          imagePullPolicy: Always
           image: {{ .Values.registry }}/{{ .Values.webb.image }}
           ports:
             - containerPort: 8000
