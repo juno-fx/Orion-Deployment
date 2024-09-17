@@ -3,8 +3,6 @@ kind: Service
 metadata:
   name: shows-db
   namespace: {{ .Values.namespace }}
-  annotations:
-    linkerd.io/inject: enabled
 spec:
   selector:
     app: shows-db
@@ -19,8 +17,6 @@ kind: Service
 metadata:
   name: luna
   namespace: {{ .Values.namespace }}
-  annotations:
-    linkerd.io/inject: enabled
 spec:
   selector:
     app: luna

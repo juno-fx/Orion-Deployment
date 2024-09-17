@@ -3,8 +3,6 @@ kind: Service
 metadata:
   name: mars
   namespace: {{ .Values.namespace }}
-  annotations:
-    linkerd.io/inject: enabled
 spec:
   selector:
     app: mars

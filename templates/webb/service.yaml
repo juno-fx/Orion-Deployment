@@ -3,8 +3,6 @@ kind: Service
 metadata:
   name: webb
   namespace: {{ .Values.namespace }}
-  annotations:
-    linkerd.io/inject: enabled
 spec:
   selector:
     app: webb

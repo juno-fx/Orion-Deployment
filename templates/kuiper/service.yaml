@@ -3,8 +3,6 @@ kind: Service
 metadata:
   name: kuiper
   namespace: {{ .Values.namespace }}
-  annotations:
-    linkerd.io/inject: enabled
 spec:
   selector:
     app: kuiper

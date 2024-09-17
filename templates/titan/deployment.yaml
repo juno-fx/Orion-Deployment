@@ -3,8 +3,6 @@ kind: Deployment
 metadata:
   name: titan
   namespace: {{ .Values.namespace }}
-  annotations:
-    linkerd.io/inject: enabled
 spec:
   revisionHistoryLimit: 0
   selector:
@@ -19,8 +17,6 @@ spec:
 
   template:
     metadata:
-      annotations:
-        linkerd.io/inject: enabled
       labels:
         app: titan
 

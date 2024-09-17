@@ -3,8 +3,6 @@ kind: StatefulSet
 metadata:
   name: shows-db
   namespace: {{ .Values.namespace }}
-  annotations:
-    linkerd.io/inject: enabled
 spec:
   serviceName: shows-db-ss
   replicas: 1
@@ -15,8 +13,6 @@ spec:
 
   template:
     metadata:
-      annotations:
-        linkerd.io/inject: enabled
       labels:
         app: shows-db
 
