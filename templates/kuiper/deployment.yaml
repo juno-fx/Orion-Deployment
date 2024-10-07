@@ -31,11 +31,30 @@ spec:
       {{- end }}
       containers:
         - name: kuiper
-          image: {{ .Values.kuiper.image }}
+          image: {{.Values.registry}}/{{ .Values.kuiper.image }}
           imagePullPolicy: Always
+          livenessProbe:
+            httpGet:
+              path: "/kuiper/.health"
+              port: 8000
+            initialDelaySeconds: 15
+            periodSeconds: 5
+            failureThreshold: 2
+          startupProbe:
+            httpGet:
+              path: "/kuiper/.health"
+              port: 8000
+            initialDelaySeconds: 15
+            periodSeconds: 5
+            failureThreshold: 2
+          env:
+            - name: HOST
+              value: "{{ .Values.kuiper.host }}"
+            - name: SHOW
+              value: "{{ .Values.show }}"
           resources:
             requests:
-              cpu: 200m
+              cpu: 750m
               memory: 200Mi
           ports:
             - containerPort: 8000

@@ -1,13 +1,13 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: mars
+  name: terra
   namespace: {{ .Values.namespace }}
 spec:
   revisionHistoryLimit: 0
   selector:
     matchLabels:
-      app: mars
+      app: terra
 
   strategy:
     rollingUpdate:
@@ -18,40 +18,41 @@ spec:
   template:
     metadata:
       labels:
-        app: mars
-
+        app: terra
     spec:
-      serviceAccountName: mars
-      {{- if .Values.mars.node_selector.enable }}
+      serviceAccountName: terra
+      {{- if .Values.terra.node_selector.enable }}
       nodeSelector:
-        {{- range $key, $value := .Values.mars.node_selector.labels }}
+        {{- range $key, $value := .Values.terra.node_selector.labels }}
         {{ $key }}: {{ $value }}
         {{- end }}
       {{- end }}
+
       containers:
-        - name: mars
-          image: {{.Values.registry}}/{{ .Values.mars.image }}
+        - name: terra
+          image: {{.Values.registry}}/{{ .Values.terra.image }}
           imagePullPolicy: Always
+          readinessProbe:
+            httpGet:
+              path: "/.health"
+              port: 8000
+            initialDelaySeconds: 5
+            periodSeconds: 5
+            failureThreshold: 15
           livenessProbe:
             httpGet:
               path: "/.health"
               port: 8000
+            initialDelaySeconds: 5
             periodSeconds: 5
-            failureThreshold: 2
+            failureThreshold: 15
           startupProbe:
             httpGet:
               path: "/.health"
               port: 8000
-            initialDelaySeconds: 15
+            initialDelaySeconds: 5
             periodSeconds: 5
-            failureThreshold: 2
-          resources:
-            requests:
-              cpu: 100m
-              memory: 200Mi
-          env:
-            - name: SHOW
-              value: {{ .Values.show }}
+            failureThreshold: 15
           ports:
             - containerPort: 8000
               name: endpoint

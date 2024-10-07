@@ -1,13 +1,13 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: mars
+  name: luna
   namespace: {{ .Values.namespace }}
 spec:
   revisionHistoryLimit: 0
   selector:
     matchLabels:
-      app: mars
+      app: luna
 
   strategy:
     rollingUpdate:
@@ -18,19 +18,18 @@ spec:
   template:
     metadata:
       labels:
-        app: mars
+        app: luna
 
     spec:
-      serviceAccountName: mars
-      {{- if .Values.mars.node_selector.enable }}
+      {{- if .Values.luna.node_selector.enable }}
       nodeSelector:
-        {{- range $key, $value := .Values.mars.node_selector.labels }}
+        {{- range $key, $value := .Values.luna.node_selector.labels }}
         {{ $key }}: {{ $value }}
         {{- end }}
       {{- end }}
       containers:
-        - name: mars
-          image: {{.Values.registry}}/{{ .Values.mars.image }}
+        - name: luna
+          image: {{.Values.registry}}/{{ .Values.luna.image }}
           imagePullPolicy: Always
           livenessProbe:
             httpGet:
@@ -50,20 +49,10 @@ spec:
               cpu: 100m
               memory: 200Mi
           env:
+            - name: MONGO
+              value: "shows-db"
             - name: SHOW
-              value: {{ .Values.show }}
+              value: "{{upper .Values.show }}"
           ports:
             - containerPort: 8000
               name: endpoint
-          volumeMounts:
-            {{- range .Values.mars.mounts }}
-            - mountPath: {{ .mount_path }}
-              name: {{ .name }}
-              subPath: {{ .sub_path }}
-            {{- end }}
-      volumes:
-        {{- range .Values.mars.mounts }}
-        - name: {{ .name }}
-          persistentVolumeClaim:
-            claimName: {{ .claim_name }}
-        {{- end }}

@@ -32,14 +32,29 @@ spec:
 
       containers:
         - name: titan
-          image: {{ .Values.titan.image }}
+          imagePullPolicy: Always
+          image: {{.Values.registry}}/{{ .Values.titan.image }}
           env:
             - name: ORION_OWNER
               value: {{ .Values.titan.owner }}
+            - name: PROJECT
+              value: {{lower .Values.show }}
+            - name: PROJECT_GUID
+              value: "{{ .Values.guid }}"
           resources:
             requests:
-              cpu: 100m
+              cpu: 500m
               memory: 200Mi
           ports:
             - containerPort: 8000
               name: endpoint
+          volumeMounts:
+            - mountPath: /opt/titan
+              name: juno-auth
+      volumes:
+        - name: juno-auth
+          configMap:
+            name: juno-auth
+            items:
+              - key: key.json
+                path: key.json

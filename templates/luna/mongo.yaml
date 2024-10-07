@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: shows-db
+  namespace: {{ .Values.namespace }}
+spec:
+  serviceName: shows-db-ss
+  replicas: 1
+  revisionHistoryLimit: 0
+  selector:
+    matchLabels:
+      app: shows-db
+
+  template:
+    metadata:
+      labels:
+        app: shows-db
+
+    spec:
+
+      {{- if .Values.luna.node_selector.enable }}
+      nodeSelector:
+        {{- range $key, $value := .Values.luna.node_selector.labels }}
+        {{ $key }}: {{ $value }}
+        {{- end }}
+      {{- end }}
+      containers:
+        - name: shows-db
+          image: mongo:latest
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 27017
+              name: "mongo-port"
+
+          volumeMounts:
+            - mountPath: /data/db
+              name: show-data
+
+      volumes:
+        - name: show-data
+          persistentVolumeClaim:
+            claimName: {{ .Values.luna.persistent_volume_claim }}
