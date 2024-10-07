@@ -1,25 +1,22 @@
-show: SQM                          # Show code
+show:                              # Show code
 namespace: default                 # Namespace to deploy the Titan server to
 registry: empty.com                # Registry to pull the Orion images from
-guid: 3300                         # GUID of the project
+guid:                              # GUID of the project
 
 cache:
   image: redis:alpine
-
   node_selector:                   # Node selector to deploy the Redis server to
     enable: true                   # Enable node selector
     labels:                        # Node selector to deploy the Redis server to
-      kubernetes.io/arch: amd64
+      junovfx/node: "service"
 
 titan:
   image: titan:unstable            # Image to pull for Titan
-
   owner: bob                       # Owner of the cluster
-
   node_selector:                   # Node selector to deploy the Titan server to
     enable: true                   # Enable node selector
     labels:                        # Node selector to deploy the Titan server to
-      kubernetes.io/arch: amd64
+      junovfx/node: "service"
 
   autoscaling:
     min_replicas: 3                # Minimum number of replicas to run
@@ -31,8 +28,7 @@ terra:
   node_selector:                   # Node selector to deploy the Terra server to
     enable: true                   # Enable node selector
     labels:                        # Node selector to deploy the Terra server to
-      kubernetes.io/arch: amd64
-
+      junovfx/node: "service"
 
   autoscaling:
     min_replicas: 1                # Minimum number of replicas to run
@@ -44,8 +40,7 @@ mercury:
   node_selector:                   # Node selector to deploy the Terra server to
     enable: true                   # Enable node selector
     labels:                        # Node selector to deploy the Terra server to
-      kubernetes.io/arch: amd64
-
+      junovfx/node: "service"
 
   autoscaling:
     min_replicas: 1                # Minimum number of replicas to run
@@ -57,8 +52,7 @@ mars:
   node_selector:                   # Node selector to deploy the Mars server to
     enable: true                   # Enable node selector
     labels:                        # Node selector to deploy the Mars server to
-      kubernetes.io/arch: amd64
-
+      junovfx/node: "service"
 
   autoscaling:
     min_replicas: 1                # Minimum number of replicas to run
@@ -76,7 +70,7 @@ kuiper:
   node_selector:                   # Node selector to deploy the Kuiper server to
     enable: true                   # Enable node selector
     labels:                        # Node selector to deploy the Kuiper server to
-      kubernetes.io/arch: amd64
+      junovfx/node: "service"
 
 
   autoscaling:
@@ -100,7 +94,7 @@ webb:
     node_selector:                  # Node selector to deploy the Hubble server to
       enable: true                  # Enable node selector
       labels:                       # Node selector to deploy the Hubble server to
-        kubernetes.io/arch: amd64
+        junovfx/node: "service"
 
     autoscaling:
       min_replicas: 1               # Minimum number of replicas to run
@@ -111,11 +105,10 @@ webb:
 
 hubble:
     image: hubble:unstable          # Image to pull for Hubble
-
     node_selector:                  # Node selector to deploy the Hubble server to
         enable: true                # Enable node selector
         labels:                     # Node selector to deploy the Hubble server to
-          kubernetes.io/arch: amd64
+          junovfx/node: "service"
 
     autoscaling:
         min_replicas: 1             # Minimum number of replicas to run
@@ -127,7 +120,7 @@ luna:
   node_selector:                    # Node selector to deploy the Hubble server to
     enable: true                    # Enable node selector
     labels:                         # Node selector to deploy the Hubble server to
-      kubernetes.io/arch: amd64
+      junovfx/node: "service"
 
   autoscaling:
     min_replicas: 1                 # Minimum number of replicas to run
