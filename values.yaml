@@ -19,8 +19,8 @@ titan:
       junovfx/node: "service"
 
   autoscaling:
-    min_replicas: 3                # Minimum number of replicas to run
-    max_replicas: 5                # Maximum number of replicas to run
+    min_replicas: 1                # Minimum number of replicas to run
+    max_replicas: 3                # Maximum number of replicas to run
 
 terra:
   image: terra:unstable             # Image to pull for Terra
