@@ -37,6 +37,8 @@ spec:
           env:
             - name: ORION_OWNER
               value: {{ .Values.titan.owner }}
+            - name: ORION_EMAIL
+              value: {{ .Values.titan.email }}
             - name: PROJECT
               value: {{lower .Values.show }}
             - name: PROJECT_GUID

@@ -15,6 +15,7 @@ titan:
   image: titan:v0.0.5                 # Image to pull for Titan
 
   owner: bob                          # Owner of the cluster
+  email: test@email.com               # Email for the owner of the cluster
 
   node_selector:                      # Node selector to deploy the Titan server to
     enable: true                      # Enable node selector
