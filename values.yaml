@@ -5,7 +5,6 @@ guid:                                 # GUID of the project
 
 cache:
   image: redis:alpine
-
   node_selector:                      # Node selector to deploy the Redis server to
     enable: true                      # Enable node selector
     labels:                           # Node selector to deploy the Redis server to
@@ -13,8 +12,6 @@ cache:
 
 titan:
   image: titan:v0.0.5                 # Image to pull for Titan
-  mongo: mongo:8.0.1
-
   owner: bob                          # Owner of the cluster
   email: test@email.com               # Email for the owner of the cluster
 
@@ -34,34 +31,26 @@ terra:
     enable: true                      # Enable node selector
     labels:                           # Node selector to deploy the Terra server to
       kubernetes.io/arch: amd64
-
-
   autoscaling:
     min_replicas: 1                   # Minimum number of replicas to run
     max_replicas: 4                   # Maximum number of replicas to run
 
 mercury:
   image: mercury:v0.0.1               # Image to pull for Terra
-
   node_selector:                      # Node selector to deploy the Terra server to
     enable: true                      # Enable node selector
     labels:                           # Node selector to deploy the Terra server to
       kubernetes.io/arch: amd64
-
-
   autoscaling:
     min_replicas: 1                   # Minimum number of replicas to run
     max_replicas: 4                   # Maximum number of replicas to run
 
 mars:
   image: mars:v0.0.2                  # Image to pull for Mars
-
   node_selector:                      # Node selector to deploy the Mars server to
     enable: true                      # Enable node selector
     labels:                           # Node selector to deploy the Mars server to
       kubernetes.io/arch: amd64
-
-
   autoscaling:
     min_replicas: 1                   # Minimum number of replicas to run
     max_replicas: 4                   # Maximum number of replicas to run
@@ -103,11 +92,9 @@ webb:
       enable: true                    # Enable node selector
       labels:                         # Node selector to deploy the Hubble server to
         kubernetes.io/arch: amd64
-
     autoscaling:
       min_replicas: 1                 # Minimum number of replicas to run
       max_replicas: 3                 # Maximum number of replicas to run
-
     mounts: []                        # Mounts to attach to the Webb server
 
 
@@ -117,19 +104,18 @@ hubble:
         enable: true                  # Enable node selector
         labels:                       # Node selector to deploy the Hubble server to
           kubernetes.io/arch: amd64
-
     autoscaling:
         min_replicas: 1               # Minimum number of replicas to run
         max_replicas: 3               # Maximum number of replicas to run
 
 luna:
   image: luna:v0.0.3                  # Image to pull for Luna
+  mongo: mongo:8.0.1                  # Be sure to include the registry if needed
   persistent_volume_claim:            # Persistent volume claim to mount to the Luna server
   node_selector:                      # Node selector to deploy the Hubble server to
     enable: true                      # Enable node selector
     labels:                           # Node selector to deploy the Hubble server to
       kubernetes.io/arch: amd64
-
   autoscaling:
     min_replicas: 1                   # Minimum number of replicas to run
     max_replicas: 3                   # Maximum number of replicas to run
