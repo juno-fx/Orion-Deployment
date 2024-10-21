@@ -13,6 +13,7 @@ cache:
 
 titan:
   image: titan:v0.0.5                 # Image to pull for Titan
+  mongo: mongo:8.0.1
 
   owner: bob                          # Owner of the cluster
   email: test@email.com               # Email for the owner of the cluster
