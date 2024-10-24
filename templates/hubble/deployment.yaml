@@ -32,6 +32,8 @@ spec:
           image: {{.Values.registry}}/{{ .Values.hubble.image }}
           imagePullPolicy: Always
           env:
+            - name: AUTH_TRUST_HOST
+              value: "true"
             - name: NEXTAUTH_URL
               value: "https://{{ .Values.host }}/api/auth"
           {{- range $key, $value := .Values.hubble.env }}
