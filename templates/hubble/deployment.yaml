@@ -33,7 +33,7 @@ spec:
           imagePullPolicy: Always
           env:
             - name: NEXTAUTH_URL
-              value: "https://${{ .Values.host }}/api/auth"
+              value: "https://{{ .Values.host }}/api/auth"
           {{- range $key, $value := .Values.hubble.env }}
             - name: {{ $key }}
               value: {{ $value }}
