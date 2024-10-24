@@ -30,4 +30,4 @@ spec:
     singular: group
     kind: Group
     shortNames:
-    - g
+      - g
