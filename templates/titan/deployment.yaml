@@ -50,13 +50,3 @@ spec:
           ports:
             - containerPort: 8000
               name: endpoint
-          volumeMounts:
-            - mountPath: /opt/titan
-              name: juno-auth
-      volumes:
-        - name: juno-auth
-          configMap:
-            name: juno-auth
-            items:
-              - key: key.json
-                path: key.json

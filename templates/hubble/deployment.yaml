@@ -31,6 +31,13 @@ spec:
         - name: hubble
           image: {{.Values.registry}}/{{ .Values.hubble.image }}
           imagePullPolicy: Always
+          env:
+            - name: NEXTAUTH_URL
+              value: "https://${{ .Values.host }}/api/auth"
+          {{- range $key, $value := .Values.hubble.env }}
+            - name: {{ $key }}
+              value: {{ $value }}
+          {{- end }}
           resources:
             requests:
               cpu: 200m
