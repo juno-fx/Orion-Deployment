@@ -4,6 +4,10 @@ metadata:
   name: hubble
   namespace: {{ .Values.namespace }}
 spec:
+  sessionAffinity: ClientIP
+  sessionAffinityConfig:
+    clientIP:
+      timeoutSeconds: 600
   selector:
     app: hubble
   ports:
