@@ -1,5 +1,7 @@
+{{- if .Values.active }}
 kind: ServiceAccount
 apiVersion: v1
 metadata:
   name: mercury
   namespace: {{ .Values.namespace }}
+{{- end}}

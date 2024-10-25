@@ -3,6 +3,7 @@ namespace: default                    # Namespace to deploy the Titan server to
 registry: empty.com                   # Registry to pull the Orion images from
 guid:                                 # GUID of the project
 host:                                 # Hostname of the project
+active: true                          # Whether the project is active
 
 cache:
   image: redis:alpine
@@ -67,17 +68,6 @@ kuiper:
   autoscaling:
     min_replicas: 1                   # Minimum number of replicas to run
     max_replicas: 3                   # Maximum number of replicas to run
-  workstations: []                    # List of workstation templates to deploy
-#    - registry:                      # Registry to pull the workstation image from
-#      icon:                          # Icon to display for the workstation
-#      label:                         # Label to display for the workstation
-#      group:                         # Group to display the workstation under
-#      tag:                           # Tag to pull the workstation image from
-#      repo:                          # Repository to pull the workstation image from
-#      cpu:                           # CPU to allocate to the workstation
-#      ram:                           # RAM to allocate to the workstation
-#      name:                          # Name of the workstation
-#      gpu:                           # GPU to allocate to the workstation
 
 webb:
     image: webb:v0.0.1                # Image to pull for Webb

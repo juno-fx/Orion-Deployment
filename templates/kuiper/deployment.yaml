@@ -1,3 +1,4 @@
+{{- if .Values.active }}
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -59,3 +60,4 @@ spec:
           ports:
             - containerPort: 8000
               name: endpoint
+{{- end }}

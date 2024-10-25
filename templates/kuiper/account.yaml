@@ -1,5 +1,7 @@
+{{- if .Values.active }}
 kind: ServiceAccount
 apiVersion: v1
 metadata:
   name: kuiper
   namespace: {{ .Values.namespace }}
+{{- end }}

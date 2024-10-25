@@ -1,3 +1,4 @@
+{{- if .Values.active }}
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -55,3 +56,4 @@ spec:
             requests:
               cpu: 750m
               memory: 200Mi
+{{- end }}
