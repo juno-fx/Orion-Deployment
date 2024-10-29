@@ -17,6 +17,7 @@ metadata:
     nginx.ingress.kubernetes.io/session-cookie-path: "/"
 
 spec:
+  ingressClassName: nginx
   rules:
     - host: {{ .Values.host }}
       http:
