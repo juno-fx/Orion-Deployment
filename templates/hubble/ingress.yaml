@@ -33,7 +33,7 @@ spec:
             pathType: ImplementationSpecific
             backend:
               service:
-                name: hubble
+                name: hubble-socket
                 port:
                   number: 8000
 {{- end}}
