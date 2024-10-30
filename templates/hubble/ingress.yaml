@@ -29,11 +29,11 @@ spec:
                 name: hubble
                 port:
                   number: 3000
-          - path: "/socket.io"
-            pathType: ImplementationSpecific
-            backend:
-              service:
-                name: hubble
-                port:
-                  number: 8000
+{{/*          - path: "/socket.io"*/}}
+{{/*            pathType: ImplementationSpecific*/}}
+{{/*            backend:*/}}
+{{/*              service:*/}}
+{{/*                name: hubble*/}}
+{{/*                port:*/}}
+{{/*                  number: 8000*/}}
 {{- end}}
