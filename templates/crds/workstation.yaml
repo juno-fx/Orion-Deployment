@@ -24,7 +24,11 @@ spec:
                 - repo
                 - cpu
                 - ram
+                - deploy
               properties:
+                deploy:
+                  type: string
+                  default: "latest"
                 mode:
                   type: string
                   default: "interactive"
