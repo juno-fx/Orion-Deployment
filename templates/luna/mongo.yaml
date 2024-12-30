@@ -1,3 +1,4 @@
+{{- if .Values.active }}
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
@@ -26,7 +27,7 @@ spec:
       {{- end }}
       containers:
         - name: shows-db
-          image: mongo:latest
+          image: {{ .Values.luna.mongo }}
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 27017
@@ -40,3 +41,4 @@ spec:
         - name: show-data
           persistentVolumeClaim:
             claimName: {{ .Values.luna.persistent_volume_claim }}
+{{- end }}

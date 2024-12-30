@@ -17,10 +17,12 @@ spec:
               properties:
                 uid:
                   type: integer
+                email:
+                  type: string
   scope: Namespaced
   names:
     plural: users
     singular: user
     kind: User
     shortNames:
-    - u
+      - u

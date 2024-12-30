@@ -1,3 +1,4 @@
+{{- if .Values.active }}
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -67,3 +68,4 @@ spec:
           persistentVolumeClaim:
             claimName: {{ .claim_name }}
         {{- end }}
+{{- end }}

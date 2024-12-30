@@ -1,3 +1,4 @@
+{{- if .Values.active }}
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -49,7 +50,7 @@ spec:
             failureThreshold: 2
           env:
             - name: HOST
-              value: "{{ .Values.kuiper.host }}"
+              value: "{{ .Values.host }}"
             - name: SHOW
               value: "{{ .Values.show }}"
           resources:
@@ -59,3 +60,4 @@ spec:
           ports:
             - containerPort: 8000
               name: endpoint
+{{- end }}
