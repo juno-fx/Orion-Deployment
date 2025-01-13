@@ -92,6 +92,7 @@ hubble:
       max_replicas: 3                 # Maximum number of replicas to run
 
 luna:
+  enabled: true                       # Enable Luna
   image: luna:v0.0.6                  # Image to pull for Luna
   mongo: mongo:8.0.1                  # Be sure to include the registry if needed
   persistent_volume_claim:            # Persistent volume claim to mount to the Luna server

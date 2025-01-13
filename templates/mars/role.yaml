@@ -1,4 +1,4 @@
-{{- if .Values.active }}
+{{- if and (eq .Values.active) (eq .Values.luna.enabled) }}
 apiVersion: rbac.authorization.k8s.io/v1
 kind: Role
 metadata:

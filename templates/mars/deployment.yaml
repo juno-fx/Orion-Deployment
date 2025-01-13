@@ -1,4 +1,4 @@
-{{- if .Values.active }}
+{{- if and (eq .Values.active) (eq .Values.luna.enabled) }}
 apiVersion: apps/v1
 kind: Deployment
 metadata:
