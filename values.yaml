@@ -5,6 +5,13 @@ guid:                                 # GUID of the project
 host:                                 # Hostname of the project
 active: true                          # Whether the project is active
 
+volumes:
+#    - name:                          # Name of the mount
+#      share:                         # Share path on the network mount. Not needed for block storage
+#      claim_name:                    # Name of the persistent volume claim to mount
+#      mount_path:                    # Where to mount the persistent volume into the Mars server
+#      sub_path:                      # Sub path on the persistent volume to mount
+
 cache:
   image: redis:alpine
   node_selector:                      # Node selector to deploy the Redis server to
@@ -53,11 +60,6 @@ mars:
   autoscaling:
     min_replicas: 1                   # Minimum number of replicas to run
     max_replicas: 4                   # Maximum number of replicas to run
-  mounts: []                          # Mounts to attach to the Mars server
-#    - name:                          # Name of the mount
-#      claim_name:                    # Name of the persistent volume claim to mount
-#      mount_path:                    # Where to mount the persistent volume into the Mars server
-#      sub_path:                      # Sub path on the persistent volume to mount
 
 kuiper:
   image: kuiper:v0.0.8                # Image to pull for Kuiper
