@@ -1,4 +1,4 @@
-{{- if and (eq .Values.active) (eq .Values.luna.enabled) }}
+{{- if and (eq .Values.active "true") (eq .Values.luna.enabled "true") }}
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
