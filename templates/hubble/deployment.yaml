@@ -37,7 +37,7 @@ spec:
               value: "true"
             - name: NEXTAUTH_URL
               value: "https://{{ .Values.host }}/api/auth"
-          {{- if eq .Values.luna.enabled "false"}}
+          {{- if not .Values.luna.enabled}}
             - name: LUNA
               value: "deactivated"
           {{- end }}
