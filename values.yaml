@@ -81,7 +81,6 @@ webb:
     autoscaling:
       min_replicas: 1                 # Minimum number of replicas to run
       max_replicas: 3                 # Maximum number of replicas to run
-    mounts: []                        # Mounts to attach to the Webb server
 
 hubble:
     image: hubble:v0.0.3              # Image to pull for Hubble
