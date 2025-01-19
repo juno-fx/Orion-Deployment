@@ -1,3 +1,4 @@
+{{- if .Values.active }}
 {{- if or .Values.kuiper.enabled .Values.luna.enabled }}
 apiVersion: apps/v1
 kind: Deployment
@@ -37,3 +38,4 @@ spec:
             - containerPort: 6379
               name: endpoint
 {{- end }}
+{{- end}}
