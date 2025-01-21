@@ -18,11 +18,11 @@
   - **Multi-Config Versioning** - There is now a v2 for the Workstation CRD so you can include workstation resource limits dynamically. (UI coming soon)
   - **Custom Workstation Names** - You can request a custom name for your workstation use the API. (UI coming soon)
 - **Hubble** - Hubble overall improvements.
-  - **Significant Performance Improvements** - Thanks to the hard work by @Anthonygen1, Hubble now has significant performance improvements and optimizations.
+  - **Significant Performance Improvements** - Thanks to the hard work by @Anthonygen1 , Hubble now has significant performance improvements and optimizations.
   - **Dropped Support for Dynamic Workstation Creation** - The workstation catalog can now only be modified via crd definitions in kubernetes. This is in preparation for global definition sharing in Genesis in the future.
   - **Service Status** - Hubble will now detect what products are enabled and only show those services in the UI. This includes hiding certain parts of the UI that are not relevant based on Orion's configuration.
 - **Polaris** - Polaris overall improvements.
-  - **Boot Times** - Thanks to the awesome work being done by @ddesmond, Polaris now boots significantly faster.
+  - **Boot Times** - Thanks to the awesome work being done by @ddesmond , Polaris now boots significantly faster.
   - **Healthcheck** - Polaris now has a healthcheck endpoint that can be used to determine if the service is running. Before this would cause hubble to say the workstation was ready when it really wasn't
 - **API Support** - API Tokens are now respected and ready for general use.
   - **API Token Generation** - You can now generate API tokens using the UI. Read about how to get started [here](https://juno-fx.github.io/Orion-Documentation/api/getting_started/)!
