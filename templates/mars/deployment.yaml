@@ -1,4 +1,4 @@
-{{- if .Values.active }}
+{{- if and .Values.active .Values.luna.enabled }}
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -57,13 +57,13 @@ spec:
             - containerPort: 8000
               name: endpoint
           volumeMounts:
-            {{- range .Values.mars.mounts }}
+            {{- range .Values.volumes }}
             - mountPath: {{ .mount_path }}
               name: {{ .name }}
               subPath: {{ .sub_path }}
             {{- end }}
       volumes:
-        {{- range .Values.mars.mounts }}
+        {{- range .Values.volumes }}
         - name: {{ .name }}
           persistentVolumeClaim:
             claimName: {{ .claim_name }}

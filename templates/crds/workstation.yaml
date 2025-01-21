@@ -5,7 +5,7 @@ metadata:
 spec:
   group: junovfx.com
   versions:
-    - name: v1
+    - name: v2
       served: true
       storage: true
       schema:
@@ -23,8 +23,71 @@ spec:
                 - group
                 - repo
                 - cpu
+                - memory
+              properties:
+                deploy:
+                  type: string
+                  default: "v2"
+                mode:
+                  type: string
+                  default: "interactive"
+                label:
+                  type: string
+                registry:
+                  type: string
+                tag:
+                  type: string
+                group:
+                  type: string
+                repo:
+                  type: string
+                icon:
+                  type: string
+                  default: "https://junovfx.com/dog.png"
+                gpu:
+                  type: boolean
+                cpu:
+                  type: string
+                cpuLimit:
+                  default: null
+                  type: string
+                memory:
+                  type: string
+                memoryLimit:
+                  default: null
+                  type: string
+                env:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      name:
+                        type: string
+                      value:
+                        type: string
+    - name: v1
+      served: true
+      storage: false
+      schema:
+        openAPIV3Schema:
+          type: object
+          properties:
+            spec:
+              type: object
+              x-kubernetes-validations:
+                - rule: "self.mode == 'interactive' || self.mode == 'headless'"
+                  message: "Mode needs to be either interactive or headless"
+              required:
+                - label
+                - tag
+                - group
+                - repo
+                - cpu
                 - ram
               properties:
+                deploy:
+                  type: string
+                  default: "v1"
                 mode:
                   type: string
                   default: "interactive"

@@ -1,4 +1,4 @@
-{{- if .Values.active }}
+{{- if and .Values.active .Values.luna.enabled }}
 apiVersion: v1
 kind: Service
 metadata:
