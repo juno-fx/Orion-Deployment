@@ -12,3 +12,9 @@ nodes:
       - containerPort: 80
         hostPort: 80
         protocol: TCP
+      - containerPort: 433
+        hostPort: 433
+        protocol: TCP
+  - role: worker
+    labels:
+      junovfx/node: workstation
