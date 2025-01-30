@@ -52,6 +52,7 @@ This is for demo purposes only. Please do not use this in production.
 
 - [devbox](https://www.jetify.com/docs/devbox/installing_devbox/)
 - [helm](https://helm.sh/docs/intro/quickstart/)
+- [docker](https://github.com/docker/docker-install?tab=readme-ov-file#dockerdocker-install)
 
 ### Setup
 
@@ -82,7 +83,7 @@ cp values.yaml .values.yaml
 
 6. Fill out the .values.yaml file with the appropriate values
 
-7. Launch Orion
+7. Launch Orion (Sometime there is a race condition with NGINX. If this fails, just try again)
 ```bash
 make orion
 ```
