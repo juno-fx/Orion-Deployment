@@ -34,7 +34,7 @@ titan:
 
 terra:
   enabled: true                       # Enable Terra
-  image: terra:v0.0.2                 # Image to pull for Terra
+  image: terra:v0.0.3                 # Image to pull for Terra
   node_selector:                      # Node selector to deploy the Terra server to
     enable: true                      # Enable node selector
     labels:                           # Node selector to deploy the Terra server to
