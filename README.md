@@ -44,3 +44,55 @@
 
 This describes a full deployment of Orion. For a more detailed guide, please see the [setup documentation](https://juno-fx.github.io/Orion-Documentation/installation/deployments/).
 
+## Demo Setup
+
+This is for demo purposes only. Please do not use this in production.
+
+### Prerequisites
+
+- [devbox](https://www.jetify.com/docs/devbox/installing_devbox/)
+- [helm](https://helm.sh/docs/intro/quickstart/)
+
+### Setup
+
+1. Clone the Orion-Deployment repository
+```bash
+git clone https://github.com/juno-fx/Orion-Deployment.git
+```
+
+2. Change into the directory
+```bash
+cd Orion-Deployment
+```
+
+3. Change to the branch you want to deploy
+```bash
+git checkout v1.1
+```
+
+4. Activate devbox
+```bash
+devbox shell
+```
+
+5. Copy the values.yaml file
+```bash
+cp values.yaml .values.yaml
+```
+
+6. Fill out the .values.yaml file with the appropriate values
+
+7. Launch Orion
+```bash
+make orion
+```
+
+8. Access Orion at `https://<what ever you filled in the "host" value with in the values file>`
+
+### Clean Up
+
+1. Delete the Orion deployment
+```bash
+make down
+```
+
