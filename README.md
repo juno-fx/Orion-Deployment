@@ -53,6 +53,7 @@ This is for demo purposes only. Please do not use this in production.
 - [devbox](https://www.jetify.com/docs/devbox/installing_devbox/)
 - [helm](https://helm.sh/docs/intro/quickstart/)
 - [docker](https://github.com/docker/docker-install?tab=readme-ov-file#dockerdocker-install)
+  - On linux, make sure to follow the post-installation steps [here](https://docs.docker.com/engine/install/linux-postinstall/).
 
 ### Setup
 
