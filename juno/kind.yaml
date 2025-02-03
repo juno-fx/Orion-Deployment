@@ -2,19 +2,20 @@ kind: Cluster
 apiVersion: kind.x-k8s.io/v1alpha4
 nodes:
   - role: control-plane
-    labels:
-      junovfx/node: service
-      ingress-ready: "true"
     extraPortMappings:
-      - containerPort: 30900
-        hostPort: 30900
+      - containerPort: 32000
+        hostPort: 32000
         protocol: TCP
       - containerPort: 80
         hostPort: 80
         protocol: TCP
-      - containerPort: 433
-        hostPort: 433
+      - containerPort: 443
+        hostPort: 443
         protocol: TCP
-  - role: worker
     labels:
+      ingress-ready: "true"
       junovfx/node: workstation
+      topology.kubernetes.io/region: us-east-1
+      node.kubernetes.io/instance-type: t3.xlarge
+      topology.kubernetes.io/zone: us-east-1a
+      eks.amazonaws.com/capacityType: SPOT
