@@ -17,6 +17,7 @@
   - **Dynamic Environment Variables** - You can now request workstations to use certain environment variables adhoc via the API only. (UI coming soon)
   - **Multi-Config Versioning** - There is now a v2 for the Workstation CRD so you can include workstation resource limits dynamically. (UI coming soon)
   - **Custom Workstation Names** - You can request a custom name for your workstation use the API. (UI coming soon)
+  - **Support Image Pull Secrets** - Now you can specify the image pull secret for the workstation pods via the deployment chart.
 - **Hubble** - Hubble overall improvements.
   - **Significant Performance Improvements** - Thanks to the hard work by @Anthonygen1, Hubble now has significant performance improvements and optimizations.
   - **Dropped Support for Dynamic Workstation Creation** - The workstation catalog can now only be modified via crd definitions in kubernetes. This is in preparation for global definition sharing in Genesis in the future.

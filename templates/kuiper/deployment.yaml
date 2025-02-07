@@ -56,6 +56,10 @@ spec:
               value: "{{ .Values.host }}"
             - name: SHOW
               value: "{{ .Values.show }}"
+            {{- if .Values.image_pull_secret }}
+            - name: PULL_SECRET
+              value: "{{ .Values.image_pull_secret }}"
+            {{- end }}
           resources:
             requests:
               cpu: 750m
