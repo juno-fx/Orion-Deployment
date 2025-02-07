@@ -22,9 +22,9 @@ spec:
         app: hubble
 
     spec:
-      {{- if .Values.imagePullSecret }}
+      {{- if .Values.image_pull_secret }}
       imagePullSecrets:
-        - name: {{ .Values.imagePullSecret }}
+        - name: {{ .Values.image_pull_secret }}
       {{- end }}
       {{- if .Values.hubble.node_selector.enable }}
       nodeSelector:

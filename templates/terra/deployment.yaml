@@ -21,9 +21,9 @@ spec:
       labels:
         app: terra
     spec:
-      {{- if .Values.imagePullSecret }}
+      {{- if .Values.image_pull_secret }}
       imagePullSecrets:
-        - name: {{ .Values.imagePullSecret }}
+        - name: {{ .Values.image_pull_secret }}
       {{- end }}
       serviceAccountName: terra
       {{- if .Values.terra.node_selector.enable }}
