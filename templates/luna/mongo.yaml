@@ -18,7 +18,10 @@ spec:
         app: shows-db
 
     spec:
-
+      {{- if .Values.imagePullSecret }}
+      imagePullSecrets:
+        - name: {{ .Values.imagePullSecret }}
+      {{- end }}
       {{- if .Values.luna.node_selector.enable }}
       nodeSelector:
         {{- range $key, $value := .Values.luna.node_selector.labels }}

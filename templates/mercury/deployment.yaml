@@ -30,7 +30,10 @@ spec:
         {{ $key }}: {{ $value }}
         {{- end }}
       {{- end }}
-
+      {{- if .Values.imagePullSecret }}
+      imagePullSecrets:
+        - name: {{ .Values.imagePullSecret }}
+      {{- end }}
       containers:
         - name: mercury
           image: {{.Values.registry}}/{{ .Values.mercury.image }}

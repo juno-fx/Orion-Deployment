@@ -20,7 +20,10 @@ spec:
         {{ $key }}: {{ $value }}
         {{- end }}
       {{- end }}
-
+      {{- if .Values.imagePullSecret }}
+      imagePullSecrets:
+        - name: {{ .Values.imagePullSecret }}
+      {{- end }}
       containers:
         - name: webb
           imagePullPolicy: Always

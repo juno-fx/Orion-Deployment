@@ -23,7 +23,10 @@ spec:
         app: cache
 
     spec:
-
+      {{- if .Values.imagePullSecret }}
+      imagePullSecrets:
+        - name: {{ .Values.imagePullSecret }}
+      {{- end }}
       {{- if .Values.cache.node_selector.enable }}
       nodeSelector:
         {{- range $key, $value := .Values.cache.node_selector.labels }}

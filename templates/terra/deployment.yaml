@@ -21,6 +21,10 @@ spec:
       labels:
         app: terra
     spec:
+      {{- if .Values.imagePullSecret }}
+      imagePullSecrets:
+        - name: {{ .Values.imagePullSecret }}
+      {{- end }}
       serviceAccountName: terra
       {{- if .Values.terra.node_selector.enable }}
       nodeSelector:
@@ -28,7 +32,6 @@ spec:
         {{ $key }}: {{ $value }}
         {{- end }}
       {{- end }}
-
       containers:
         - name: terra
           image: {{.Values.registry}}/{{ .Values.terra.image }}
