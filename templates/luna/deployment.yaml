@@ -28,6 +28,10 @@ spec:
         {{ $key }}: {{ $value }}
         {{- end }}
       {{- end }}
+      {{- if .Values.image_pull_secret }}
+      imagePullSecrets:
+        - name: {{ .Values.image_pull_secret }}
+      {{- end }}
       containers:
         - name: luna
           image: {{.Values.registry}}/{{ .Values.luna.image }}
