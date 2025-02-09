@@ -1,0 +1,8 @@
+apiVersion: scheduling.k8s.io/v1
+kind: PriorityClass
+metadata:
+  name: juno-high
+value: 400
+globalDefault: false
+description: "High priority services"
+preemptionPolicy: PreemptLowerPriority  # Evict lower priority pods to make room for this one
