@@ -11,6 +11,9 @@ spec:
       app: webb
   template:
     metadata:
+      annotations:
+        # Allow for footprint consolidation
+        cluster-autoscaler.kubernetes.io/safe-to-evict: "true"
       labels:
         app: webb
     spec:
