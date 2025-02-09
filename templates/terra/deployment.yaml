@@ -18,9 +18,13 @@ spec:
 
   template:
     metadata:
+      annotations:
+        # Allow for footprint consolidation
+        cluster-autoscaler.kubernetes.io/safe-to-evict: "true"
       labels:
         app: terra
     spec:
+      priorityClassName: juno-normal
       {{- if .Values.image_pull_secret }}
       imagePullSecrets:
         - name: {{ .Values.image_pull_secret }}

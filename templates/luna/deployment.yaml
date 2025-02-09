@@ -18,10 +18,14 @@ spec:
 
   template:
     metadata:
+      annotations:
+        # Allow for footprint consolidation
+        cluster-autoscaler.kubernetes.io/safe-to-evict: "true"
       labels:
         app: luna
 
     spec:
+      priorityClassName: juno-normal
       {{- if .Values.luna.node_selector.enable }}
       nodeSelector:
         {{- range $key, $value := .Values.luna.node_selector.labels }}

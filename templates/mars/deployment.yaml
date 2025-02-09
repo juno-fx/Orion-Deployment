@@ -18,10 +18,14 @@ spec:
 
   template:
     metadata:
+      annotations:
+        # Allow for footprint consolidation
+        cluster-autoscaler.kubernetes.io/safe-to-evict: "true"
       labels:
         app: mars
 
     spec:
+      priorityClassName: juno-normal
       serviceAccountName: mars
       {{- if .Values.mars.node_selector.enable }}
       nodeSelector:

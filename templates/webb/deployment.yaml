@@ -11,9 +11,13 @@ spec:
       app: webb
   template:
     metadata:
+      annotations:
+        # Allow for footprint consolidation
+        cluster-autoscaler.kubernetes.io/safe-to-evict: "true"
       labels:
         app: webb
     spec:
+      priorityClassName: juno-low
       {{- if .Values.webb.node_selector.enable }}
       nodeSelector:
         {{- range $key, $value := .Values.webb.node_selector.labels }}
