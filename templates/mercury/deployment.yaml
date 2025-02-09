@@ -25,8 +25,8 @@ spec:
         app: mercury
 
     spec:
+      priorityClassName: juno-normal
       serviceAccountName: mercury
-
       {{- if .Values.mercury.node_selector.enable }}
       nodeSelector:
         {{- range $key, $value := .Values.mercury.node_selector.labels }}

@@ -25,7 +25,7 @@ spec:
         app: titan
 
     spec:
-{{/*      priorityClassName: juno-critical*/}}
+      priorityClassName: juno-critical
       serviceAccountName: titan
       {{- if .Values.titan.node_selector.enable }}
       nodeSelector:

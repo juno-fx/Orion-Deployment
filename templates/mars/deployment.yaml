@@ -25,6 +25,7 @@ spec:
         app: mars
 
     spec:
+      priorityClassName: juno-normal
       serviceAccountName: mars
       {{- if .Values.mars.node_selector.enable }}
       nodeSelector:
