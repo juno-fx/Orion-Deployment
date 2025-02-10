@@ -25,7 +25,6 @@ spec:
         app: luna
 
     spec:
-      priorityClassName: juno-normal
       {{- if .Values.luna.node_selector.enable }}
       nodeSelector:
         {{- range $key, $value := .Values.luna.node_selector.labels }}

@@ -25,7 +25,6 @@ spec:
         app: kuiper
 
     spec:
-      priorityClassName: juno-normal
       serviceAccountName: kuiper
       {{- if .Values.image_pull_secret }}
       imagePullSecrets:

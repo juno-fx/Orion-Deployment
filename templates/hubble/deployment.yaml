@@ -25,7 +25,6 @@ spec:
         app: hubble
 
     spec:
-      priorityClassName: juno-high
       {{- if .Values.image_pull_secret }}
       imagePullSecrets:
         - name: {{ .Values.image_pull_secret }}

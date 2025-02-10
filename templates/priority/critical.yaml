@@ -1,8 +1,0 @@
-apiVersion: scheduling.k8s.io/v1
-kind: PriorityClass
-metadata:
-  name: juno-critical
-value: 500
-globalDefault: false
-description: "Critical services that must be running at all times"
-preemptionPolicy: PreemptLowerPriority  # Evict lower priority pods to make room for this one
