@@ -18,19 +18,24 @@ spec:
 
   template:
     metadata:
+      annotations:
+        # Allow for footprint consolidation
+        cluster-autoscaler.kubernetes.io/safe-to-evict: "true"
       labels:
         app: titan
 
     spec:
       serviceAccountName: titan
-
       {{- if .Values.titan.node_selector.enable }}
       nodeSelector:
         {{- range $key, $value := .Values.titan.node_selector.labels }}
         {{ $key }}: {{ $value }}
         {{- end }}
       {{- end }}
-
+      {{- if .Values.image_pull_secret }}
+      imagePullSecrets:
+        - name: {{ .Values.image_pull_secret }}
+      {{- end }}
       containers:
         - name: titan
           imagePullPolicy: Always
@@ -40,6 +45,8 @@ spec:
               value: {{ .Values.titan.owner }}
             - name: ORION_EMAIL
               value: {{ .Values.titan.email }}
+            - name: ORION_OWNER_UID
+              value: "{{ .Values.titan.uid }}"
             - name: PROJECT
               value: {{lower .Values.show }}
             - name: PROJECT_GUID

@@ -1,4 +1,4 @@
-{{- if .Values.active }}
+{{- if and .Values.active .Values.terra.enabled }}
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -18,9 +18,16 @@ spec:
 
   template:
     metadata:
+      annotations:
+        # Allow for footprint consolidation
+        cluster-autoscaler.kubernetes.io/safe-to-evict: "true"
       labels:
         app: terra
     spec:
+      {{- if .Values.image_pull_secret }}
+      imagePullSecrets:
+        - name: {{ .Values.image_pull_secret }}
+      {{- end }}
       serviceAccountName: terra
       {{- if .Values.terra.node_selector.enable }}
       nodeSelector:
@@ -28,7 +35,6 @@ spec:
         {{ $key }}: {{ $value }}
         {{- end }}
       {{- end }}
-
       containers:
         - name: terra
           image: {{.Values.registry}}/{{ .Values.terra.image }}
@@ -58,13 +64,13 @@ spec:
             - containerPort: 8000
               name: endpoint
           volumeMounts:
-            {{- range .Values.mars.mounts }}
+            {{- range .Values.volumes }}
             - mountPath: {{ .mount_path }}
               name: {{ .name }}
               subPath: {{ .sub_path }}
             {{- end }}
       volumes:
-        {{- range .Values.mars.mounts }}
+        {{- range .Values.volumes }}
         - name: {{ .name }}
           persistentVolumeClaim:
             claimName: {{ .claim_name }}

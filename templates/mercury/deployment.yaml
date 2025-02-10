@@ -1,4 +1,4 @@
-{{- if .Values.active }}
+{{- if and .Values.active .Values.luna.enabled }}
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -18,19 +18,24 @@ spec:
 
   template:
     metadata:
+      annotations:
+        # Allow for footprint consolidation
+        cluster-autoscaler.kubernetes.io/safe-to-evict: "true"
       labels:
         app: mercury
 
     spec:
       serviceAccountName: mercury
-
       {{- if .Values.mercury.node_selector.enable }}
       nodeSelector:
         {{- range $key, $value := .Values.mercury.node_selector.labels }}
         {{ $key }}: {{ $value }}
         {{- end }}
       {{- end }}
-
+      {{- if .Values.image_pull_secret }}
+      imagePullSecrets:
+        - name: {{ .Values.image_pull_secret }}
+      {{- end }}
       containers:
         - name: mercury
           image: {{.Values.registry}}/{{ .Values.mercury.image }}

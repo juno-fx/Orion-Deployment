@@ -1,4 +1,4 @@
-{{- if .Values.active }}
+{{- if and .Values.active .Values.kuiper.enabled }}
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -18,12 +18,18 @@ spec:
 
   template:
     metadata:
+      annotations:
+        # Allow for footprint consolidation
+        cluster-autoscaler.kubernetes.io/safe-to-evict: "true"
       labels:
         app: kuiper
 
     spec:
       serviceAccountName: kuiper
-
+      {{- if .Values.image_pull_secret }}
+      imagePullSecrets:
+        - name: {{ .Values.image_pull_secret }}
+      {{- end }}
       {{- if .Values.kuiper.node_selector.enable }}
       nodeSelector:
         {{- range $key, $value := .Values.kuiper.node_selector.labels }}
@@ -53,6 +59,10 @@ spec:
               value: "{{ .Values.host }}"
             - name: SHOW
               value: "{{ .Values.show }}"
+            {{- if .Values.image_pull_secret }}
+            - name: PULL_SECRET
+              value: "{{ .Values.image_pull_secret }}"
+            {{- end }}
           resources:
             requests:
               cpu: 750m
