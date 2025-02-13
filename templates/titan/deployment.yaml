@@ -51,6 +51,8 @@ spec:
               value: {{lower .Values.show }}
             - name: PROJECT_GUID
               value: "{{ .Values.guid }}"
+            - name: JUNO_LICENSE_TOKEN
+              value: "{{ .Values.juno_license_token }}"
           resources:
             requests:
               cpu: 500m
