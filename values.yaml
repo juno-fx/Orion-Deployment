@@ -18,7 +18,7 @@ cache:
   node_selector:                      # Node selector to deploy the Redis server to
     enable: true                      # Enable node selector
     labels:                           # Node selector to deploy the Redis server to
-      kubernetes.io/arch: amd64
+      juno-innovations.com/service: "true"
 
 titan:
   image: titan:v0.0.8                 # Image to pull for Titan
@@ -28,7 +28,7 @@ titan:
   node_selector:                      # Node selector to deploy the Titan server to
     enable: true                      # Enable node selector
     labels:                           # Node selector to deploy the Titan server to
-      kubernetes.io/arch: amd64
+      juno-innovations.com/service: "true"
   autoscaling:
     min_replicas: 1                   # Minimum number of replicas to run
     max_replicas: 3                   # Maximum number of replicas to run
@@ -39,7 +39,7 @@ terra:
   node_selector:                      # Node selector to deploy the Terra server to
     enable: true                      # Enable node selector
     labels:                           # Node selector to deploy the Terra server to
-      kubernetes.io/arch: amd64
+      juno-innovations.com/service: "true"
   autoscaling:
     min_replicas: 1                   # Minimum number of replicas to run
     max_replicas: 4                   # Maximum number of replicas to run
@@ -49,7 +49,7 @@ mercury:
   node_selector:                      # Node selector to deploy the Terra server to
     enable: true                      # Enable node selector
     labels:                           # Node selector to deploy the Terra server to
-      kubernetes.io/arch: amd64
+      juno-innovations.com/service: "true"
   autoscaling:
     min_replicas: 1                   # Minimum number of replicas to run
     max_replicas: 4                   # Maximum number of replicas to run
@@ -59,7 +59,7 @@ mars:
   node_selector:                      # Node selector to deploy the Mars server to
     enable: true                      # Enable node selector
     labels:                           # Node selector to deploy the Mars server to
-      kubernetes.io/arch: amd64
+      juno-innovations.com/service: "true"
   autoscaling:
     min_replicas: 1                   # Minimum number of replicas to run
     max_replicas: 4                   # Maximum number of replicas to run
@@ -70,7 +70,7 @@ kuiper:
   node_selector:                      # Node selector to deploy the Kuiper server to
     enable: true                      # Enable node selector
     labels:                           # Node selector to deploy the Kuiper server to
-      kubernetes.io/arch: amd64
+      juno-innovations.com/service: "true"
   autoscaling:
     min_replicas: 1                   # Minimum number of replicas to run
     max_replicas: 3                   # Maximum number of replicas to run
@@ -80,7 +80,7 @@ webb:
     node_selector:                    # Node selector to deploy the Hubble server to
       enable: true                    # Enable node selector
       labels:                         # Node selector to deploy the Hubble server to
-        kubernetes.io/arch: amd64
+        juno-innovations.com/service: "true"
     autoscaling:
       min_replicas: 1                 # Minimum number of replicas to run
       max_replicas: 3                 # Maximum number of replicas to run
@@ -91,7 +91,7 @@ hubble:
     node_selector:                    # Node selector to deploy the Hubble server to
       enable: true                    # Enable node selector
       labels:                         # Node selector to deploy the Hubble server to
-        kubernetes.io/arch: amd64
+        juno-innovations.com/service: "true"
     autoscaling:
       min_replicas: 1                 # Minimum number of replicas to run
       max_replicas: 3                 # Maximum number of replicas to run
@@ -104,7 +104,7 @@ luna:
   node_selector:                      # Node selector to deploy the Hubble server to
     enable: true                      # Enable node selector
     labels:                           # Node selector to deploy the Hubble server to
-      kubernetes.io/arch: amd64
+      juno-innovations.com/service: "true"
   autoscaling:
     min_replicas: 1                   # Minimum number of replicas to run
     max_replicas: 3                   # Maximum number of replicas to run
