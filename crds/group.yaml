@@ -1,0 +1,32 @@
+apiVersion: apiextensions.k8s.io/v1
+kind: CustomResourceDefinition
+metadata:
+  name: groups.juno-innovations.com
+spec:
+  group: juno-innovations.com
+  versions:
+    - name: v1
+      served: true
+      storage: true
+      schema:
+        openAPIV3Schema:
+          type: object
+          properties:
+            spec:
+              type: object
+              required:
+                - members
+              properties:
+                uid:
+                  type: integer
+                members:
+                  type: array
+                  items:
+                    type: string
+  scope: Cluster
+  names:
+    plural: groups
+    singular: group
+    kind: Group
+    shortNames:
+    - g
