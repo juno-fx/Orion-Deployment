@@ -29,7 +29,7 @@ spec:
       {{- if .Values.mars.node_selector.enable }}
       nodeSelector:
         {{- range $key, $value := .Values.mars.node_selector.labels }}
-        {{ $key }}: {{ $value }}
+        {{ $key }}: "{{ $value }}"
         {{- end }}
       {{- end }}
 
