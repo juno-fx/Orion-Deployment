@@ -16,7 +16,7 @@ volumes:
 cache:
   image: redis:alpine
   node_selector:                      # Node selector to deploy the Redis server to
-    enable: "true"                    # Enable node selector
+    enable: true                      # Enable node selector
     labels:                           # Node selector to deploy the Redis server to
       juno-innovations.com/service: "true"
 
@@ -26,7 +26,7 @@ titan:
   email: test@email.com               # Email for the owner of the cluster
   uid: 1005                           # UID of the owner of the cluster
   node_selector:                      # Node selector to deploy the Titan server to
-    enable: "true"                    # Enable node selector
+    enable: true                      # Enable node selector
     labels:                           # Node selector to deploy the Titan server to
       juno-innovations.com/service: "true"
   autoscaling:
@@ -37,7 +37,7 @@ terra:
   enabled: true                       # Enable Terra
   image: terra:v0.0.3                 # Image to pull for Terra
   node_selector:                      # Node selector to deploy the Terra server to
-    enable: "true"                    # Enable node selector
+    enable: true                      # Enable node selector
     labels:                           # Node selector to deploy the Terra server to
       juno-innovations.com/service: "true"
   autoscaling:
@@ -47,7 +47,7 @@ terra:
 mercury:
   image: mercury:v0.0.3               # Image to pull for Terra
   node_selector:                      # Node selector to deploy the Terra server to
-    enable: "true"                    # Enable node selector
+    enable: true                      # Enable node selector
     labels:                           # Node selector to deploy the Terra server to
       juno-innovations.com/service: "true"
   autoscaling:
@@ -57,7 +57,7 @@ mercury:
 mars:
   image: mars:v0.0.3                  # Image to pull for Mars
   node_selector:                      # Node selector to deploy the Mars server to
-    enable: "true"                    # Enable node selector
+    enable: true                      # Enable node selector
     labels:                           # Node selector to deploy the Mars server to
       juno-innovations.com/service: "true"
   autoscaling:
@@ -68,7 +68,7 @@ kuiper:
   enabled: true                       # Enable Kuiper
   image: kuiper:v0.0.11               # Image to pull for Kuiper
   node_selector:                      # Node selector to deploy the Kuiper server to
-    enable: "true"                    # Enable node selector
+    enable: true                      # Enable node selector
     labels:                           # Node selector to deploy the Kuiper server to
       juno-innovations.com/service: "true"
   autoscaling:
@@ -78,7 +78,7 @@ kuiper:
 webb:
     image: webb:v0.0.4                # Image to pull for Webb
     node_selector:                    # Node selector to deploy the Hubble server to
-      enable: "true"                  # Enable node selector
+      enable: true                    # Enable node selector
       labels:                         # Node selector to deploy the Hubble server to
         juno-innovations.com/service: "true"
     autoscaling:
@@ -89,7 +89,7 @@ hubble:
     image: hubble:v0.0.6              # Image to pull for Hubble
     env: []                           # Environment variables to set for the Hubble server
     node_selector:                    # Node selector to deploy the Hubble server to
-      enable: "true"                  # Enable node selector
+      enable: true                    # Enable node selector
       labels:                         # Node selector to deploy the Hubble server to
         juno-innovations.com/service: "true"
     autoscaling:
@@ -102,7 +102,7 @@ luna:
   mongo: mongo:8.0.1                  # Be sure to include the registry if needed
   persistent_volume_claim:            # Persistent volume claim to mount to the Luna server
   node_selector:                      # Node selector to deploy the Hubble server to
-    enable: "true"                    # Enable node selector
+    enable: true                      # Enable node selector
     labels:                           # Node selector to deploy the Hubble server to
       juno-innovations.com/service: "true"
   autoscaling:
