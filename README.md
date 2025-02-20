@@ -7,17 +7,29 @@
 
 ### New Features
 
-- **Product Selection** - Using the chart, you can now dynamically select which products you want to deploy.
-  - **Terra** - You can now control deployment of Terra using the `terra.enabled` flag in the values.yaml file.
-  - **Kuiper** - You can now control deployment of Kuiper using the `kuiper.enabled` flag in the values.yaml file.
-  - **Luna** - You can now control deployment of Luna using the `luna.enabled` flag in the values.yaml file.
+- **New Multi-Role Node Support** - You can now define multiple roles for a node. This allows you to have a node that is both a workstation and a headless node.
+  - **`juno-innovations.com/workstation: "true"`** - This label is used to define that a Node can support workstation deployments.
+  - **`juno-innovations.com/headless: "true"`** - This label is used to define that a Node can support headless deployments.
+  - **Backwards Compatibility** - The older `junovfx.com/node: "workstation"` and `junovfx.com/node: "render"` labels are still supported, but will be deprecated soon.
+- **Service Label Migration** - All services now use the `juno-innovations.com/service` label to protect critical services from being overloaded with workstation/headless workloads.
+- **Major Kuiper Scheduling Updates** - Kuiper now supports new scheduling preferences.
+  - **Headless Scheduling Compression** - If a headless service is launched, it will first check if there are any nodes tagged as headless. If there is a node tagged as both a workstation and a headless node, it will prefer another node that is exclusively a headless node. If none is available, it will use the workstation node assuming there is room.
+- **`juno-innovations.com/v1` CRD's** - To better match the Juno brand, we have migrated all CRD's to use the `juno-innovations.com/v{1,2}` API groups.
+  - **Kuiper Global CRD's** - Workstation definitions have been promoted to the cluster level so they can be globally available to other Orion installs.
+  - **Titan Global CRD's** - User and Group definitions have been promoted to the cluster level so they can be globally available to other Orion installs.
+- **Hubble Updates** - Hubble has received minor updates.
+  - **Remote Control** - Remote control other users machines if you have been granted the admin group.
+- **Genesis Deployment Manager** - This deployment is now configured to prefer deployment with Genesis.
+  - **Genesis Deployment** - Genesis is a new deployment manager that is designed to be a more robust deployment manager for Orion.
 
 ### Breaking Changes
 
-- **Volume Mounting** - Volumes are now defined at the root of the values.yaml file. This means that you will need to move your volume definitions that were in Webb and Mars to the new volumes definition location at the root of the values.yaml file.
+- **CRD Migration** - All existing CRD's will need to be migrated to the new `juno-innovations.com/v{1,2}` API groups from the older `junovfx.com/v1` API Groups. If this is not done, existing CRD's will not be able to be used. In the future we intend to provide migration methods for these kinds of changes.
 
 
 ### Related Tickets
+
+- **CRD Migration** - [https://github.com/juno-fx/titan/issues/44](https://github.com/juno-fx/titan/issues/44), [https://github.com/juno-fx/kuiper/issues/112](https://github.com/juno-fx/kuiper/issues/112)
 
 ## Usage
 
