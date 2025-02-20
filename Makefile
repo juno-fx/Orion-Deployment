@@ -18,6 +18,8 @@ ingress:
 		--timeout=90s
 
 orion: cluster ingress
+	@echo "Installing CRD's..."
+	@kubectl apply -f juno/crds/
 	@echo "Installing Orion..."
 	@helm upgrade -i -f .values.yaml $(PROJECT) ./
 	@echo "Waiting for Orion to settle..."

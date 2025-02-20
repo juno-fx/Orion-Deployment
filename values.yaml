@@ -18,17 +18,17 @@ cache:
   node_selector:                      # Node selector to deploy the Redis server to
     enable: true                      # Enable node selector
     labels:                           # Node selector to deploy the Redis server to
-      kubernetes.io/arch: amd64
+      juno-innovations.com/service: "true"
 
 titan:
-  image: titan:v0.0.8                 # Image to pull for Titan
+  image: titan:v0.0.9                 # Image to pull for Titan
   owner: bob                          # Owner of the cluster
   email: test@email.com               # Email for the owner of the cluster
   uid: 1005                           # UID of the owner of the cluster
   node_selector:                      # Node selector to deploy the Titan server to
     enable: true                      # Enable node selector
     labels:                           # Node selector to deploy the Titan server to
-      kubernetes.io/arch: amd64
+      juno-innovations.com/service: "true"
   autoscaling:
     min_replicas: 1                   # Minimum number of replicas to run
     max_replicas: 3                   # Maximum number of replicas to run
@@ -39,17 +39,17 @@ terra:
   node_selector:                      # Node selector to deploy the Terra server to
     enable: true                      # Enable node selector
     labels:                           # Node selector to deploy the Terra server to
-      kubernetes.io/arch: amd64
+      juno-innovations.com/service: "true"
   autoscaling:
     min_replicas: 1                   # Minimum number of replicas to run
     max_replicas: 4                   # Maximum number of replicas to run
 
 mercury:
-  image: mercury:v0.0.3               # Image to pull for Terra
+  image: mercury:v0.0.4               # Image to pull for Terra
   node_selector:                      # Node selector to deploy the Terra server to
     enable: true                      # Enable node selector
     labels:                           # Node selector to deploy the Terra server to
-      kubernetes.io/arch: amd64
+      juno-innovations.com/service: "true"
   autoscaling:
     min_replicas: 1                   # Minimum number of replicas to run
     max_replicas: 4                   # Maximum number of replicas to run
@@ -59,18 +59,18 @@ mars:
   node_selector:                      # Node selector to deploy the Mars server to
     enable: true                      # Enable node selector
     labels:                           # Node selector to deploy the Mars server to
-      kubernetes.io/arch: amd64
+      juno-innovations.com/service: "true"
   autoscaling:
     min_replicas: 1                   # Minimum number of replicas to run
     max_replicas: 4                   # Maximum number of replicas to run
 
 kuiper:
   enabled: true                       # Enable Kuiper
-  image: kuiper:v0.0.11               # Image to pull for Kuiper
+  image: kuiper:v0.0.12               # Image to pull for Kuiper
   node_selector:                      # Node selector to deploy the Kuiper server to
     enable: true                      # Enable node selector
     labels:                           # Node selector to deploy the Kuiper server to
-      kubernetes.io/arch: amd64
+      juno-innovations.com/service: "true"
   autoscaling:
     min_replicas: 1                   # Minimum number of replicas to run
     max_replicas: 3                   # Maximum number of replicas to run
@@ -80,31 +80,31 @@ webb:
     node_selector:                    # Node selector to deploy the Hubble server to
       enable: true                    # Enable node selector
       labels:                         # Node selector to deploy the Hubble server to
-        kubernetes.io/arch: amd64
+        juno-innovations.com/service: "true"
     autoscaling:
       min_replicas: 1                 # Minimum number of replicas to run
       max_replicas: 3                 # Maximum number of replicas to run
 
 hubble:
-    image: hubble:v0.0.6              # Image to pull for Hubble
+    image: hubble:v0.0.7              # Image to pull for Hubble
     env: []                           # Environment variables to set for the Hubble server
     node_selector:                    # Node selector to deploy the Hubble server to
       enable: true                    # Enable node selector
       labels:                         # Node selector to deploy the Hubble server to
-        kubernetes.io/arch: amd64
+        juno-innovations.com/service: "true"
     autoscaling:
       min_replicas: 1                 # Minimum number of replicas to run
       max_replicas: 3                 # Maximum number of replicas to run
 
 luna:
   enabled: true                       # Enable Luna
-  image: luna:v0.0.6                  # Image to pull for Luna
+  image: luna:v0.0.8                  # Image to pull for Luna
   mongo: mongo:8.0.1                  # Be sure to include the registry if needed
   persistent_volume_claim:            # Persistent volume claim to mount to the Luna server
   node_selector:                      # Node selector to deploy the Hubble server to
     enable: true                      # Enable node selector
     labels:                           # Node selector to deploy the Hubble server to
-      kubernetes.io/arch: amd64
+      juno-innovations.com/service: "true"
   autoscaling:
     min_replicas: 1                   # Minimum number of replicas to run
     max_replicas: 3                   # Maximum number of replicas to run

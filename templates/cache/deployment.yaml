@@ -33,7 +33,7 @@ spec:
       {{- if .Values.cache.node_selector.enable }}
       nodeSelector:
         {{- range $key, $value := .Values.cache.node_selector.labels }}
-        {{ $key }}: {{ $value }}
+        {{ $key }}: "{{ $value }}"
         {{- end }}
       {{- end }}
 
