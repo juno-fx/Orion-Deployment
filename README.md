@@ -75,7 +75,7 @@ cp .values.yaml.example .values.yaml
 
 6. Fill out the .values.yaml file with the appropriate values
     * Add the registry you uploaded your juno images to.
-    * If it requires credentials, you will need to add an imagePullSecret manually and then add it here.
+    * If the registry requires credentials, the demo will create an imagePullSecret based on your own docker credentials called `juno-credentials`. To enable this, uncomment out the `imagePullSecrets` in the `.values.yaml` file. 
 
 7. Launch Orion (Sometime there is a race condition with NGINX. If this fails, just try again)
 ```bash
@@ -83,6 +83,39 @@ make orion
 ```
 
 8. Access Orion at `https://dmo.localhost/`
+
+### Launch Our First Workstation
+
+Now that Orion is up and running, we can launch our first workstation.
+
+1. Modify the `juno/workstation.yaml` file and update the tag, registry and repo that points to your Polaris image.
+   ```yaml
+   apiVersion: juno-innovations.com/v2
+   kind: Workstation
+   metadata:
+      name: user
+   spec:
+      registry: <YOUR REGISTRY>
+      tag: <YOUR IMAGE TAG>
+      repo: <YOUR IMAGE REPOSITORY>
+      icon: "https://junovfx.com/dog.png"
+      label: "User Workstation"
+      group: "Production"
+      cpu: "1"
+      memory: "1Gi"
+      mode: "interactive"
+   ```
+
+2. Apply the workstation template.
+   ```shell
+    kubectl apply -f juno/workstation.yaml
+   ```
+
+3. Access the kuiper dashboard at `https://dmo.localhost/workstations`
+4. Click "Request" at the top left of the page.
+5. If everything worked properly, you should see a workstation appear in the list of workstations.
+6. Click "Launch" to start the workstation.
+7. Wait for the workstation to show a Connect button.
 
 ### Clean Up
 
