@@ -68,19 +68,21 @@ git checkout v1.2
 devbox shell
 ```
 
-5. Copy the values.yaml file
+5. Copy the .values.yaml.example file
 ```bash
-cp values.yaml .values.yaml
+cp .values.yaml.example .values.yaml
 ```
 
 6. Fill out the .values.yaml file with the appropriate values
+    * Add the registry you uploaded your juno images to.
+    * If it requires credentials, you will need to add an imagePullSecret manually and then add it here.
 
 7. Launch Orion (Sometime there is a race condition with NGINX. If this fails, just try again)
 ```bash
 make orion
 ```
 
-8. Access Orion at `https://<what ever you filled in the "host" value with in the values file>`
+8. Access Orion at `https://dmo.localhost/`
 
 ### Clean Up
 
