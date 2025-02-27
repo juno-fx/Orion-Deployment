@@ -83,6 +83,7 @@ make orion
 ```
 
 8. Access Orion at `https://dmo.localhost/`
+9. The default credentials are email: `juno@juno-innovations.com` and password: `juno`.
 
 ### Launch Our First Workstation
 
