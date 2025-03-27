@@ -5,6 +5,7 @@ guid:                                 # GUID of the project
 host:                                 # Hostname of the project
 active: true                          # Whether the project is active
 image_pull_secret:                    # Image pull secret to use for the project. This is the name of the secret in the namespace
+genesis_proxy: true                   # Whether to use the Genesis proxy
 
 volumes:
 #    - name:                          # Name of the mount
