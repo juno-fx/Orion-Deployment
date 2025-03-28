@@ -1,7 +1,0 @@
-{{- if .Values.active }}
-kind: ServiceAccount
-apiVersion: v1
-metadata:
-  name: titan
-  namespace: {{ .Values.namespace }}
-{{- end }}

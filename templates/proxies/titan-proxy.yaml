@@ -1,15 +1,13 @@
-{{- if .Values.active }}
+{{- if .Values.genesis_proxy }}
 apiVersion: v1
 kind: Service
 metadata:
-  name: titan
+  name: genesis
   namespace: {{ .Values.namespace }}
 spec:
-  selector:
-    app: titan
+  type: ExternalName
+  externalName: titan.argocd.svc.cluster.local
   ports:
     - port: 8000
       targetPort: 8000
-      protocol: TCP
-      name: endpoint
-{{- end}}
+{{- end }}
