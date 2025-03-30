@@ -33,7 +33,7 @@ spec:
       {{- if .Values.kuiper.node_selector.enable }}
       nodeSelector:
         {{- range $key, $value := .Values.kuiper.node_selector.labels }}
-        {{ $key }}: {{ $value }}
+        {{ $key }}: "{{ $value }}"
         {{- end }}
       {{- end }}
       containers:
