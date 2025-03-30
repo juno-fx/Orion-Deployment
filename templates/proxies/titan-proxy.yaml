@@ -6,7 +6,7 @@ metadata:
   namespace: {{ .Values.namespace }}
 spec:
   type: ExternalName
-  externalName: titan.argocd.svc.cluster.local
+  externalName: titan.{{ .Values.genesis_namespace }}.svc.cluster.local
   ports:
     - port: 8000
       targetPort: 8000
