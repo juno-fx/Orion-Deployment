@@ -6,7 +6,7 @@ metadata:
   namespace: {{ .Values.namespace }}
 spec:
   type: ExternalName
-  externalName: genesis.argocd.svc.cluster.local
+  externalName: genesis.{{ .Values.genesis_namespace }}.svc.cluster.local
   ports:
     - port: 8000
       targetPort: 8000
