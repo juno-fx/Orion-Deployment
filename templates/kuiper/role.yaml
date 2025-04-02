@@ -15,6 +15,6 @@ rules:
     verbs: ["list", "create", "delete", "get", "patch", "update"]
   # target CRD's.
   - apiGroups: ["juno-innovations.com"]
-    resources: ["workstations"]
+    resources: ["workstations", "workstation-logs"]
     verbs: ["list", "create", "delete", "get", "patch", "update"]
 {{- end }}
