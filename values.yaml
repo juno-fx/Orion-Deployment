@@ -1,5 +1,5 @@
 show:                                 # Show code
-namespace: default                    # Namespace to deploy the Titan server to
+namespace: default                    # Namespace to deploy the services to
 registry: empty.com                   # Registry to pull the Orion images from
 guid:                                 # GUID of the project
 host:                                 # Hostname of the project
@@ -21,17 +21,6 @@ cache:
     enable: true                      # Enable node selector
     labels:                           # Node selector to deploy the Redis server to
       juno-innovations.com/service: "true"
-
-terra:
-  enabled: true                       # Enable Terra
-  image: terra:v0.0.3                 # Image to pull for Terra
-  node_selector:                      # Node selector to deploy the Terra server to
-    enable: true                      # Enable node selector
-    labels:                           # Node selector to deploy the Terra server to
-      juno-innovations.com/service: "true"
-  autoscaling:
-    min_replicas: 1                   # Minimum number of replicas to run
-    max_replicas: 4                   # Maximum number of replicas to run
 
 mars:
   image: mars:v0.0.3                  # Image to pull for Mars
