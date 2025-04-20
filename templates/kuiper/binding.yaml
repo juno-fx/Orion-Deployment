@@ -15,12 +15,12 @@ subjects:
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding
 metadata:
-  name: "kuiper-{{lower .Values.show }}"
+  name: kuiper-{{ .Values.namespace }}
   namespace: {{ .Values.namespace }}
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: ClusterRole
-  name: "kuiper-{{lower .Values.show }}"
+  name: kuiper-{{ .Values.namespace }}
 subjects:
   - kind: ServiceAccount
     name: kuiper
