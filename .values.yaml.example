@@ -1,0 +1,23 @@
+registry:             # Registry to pull the Orion images from
+
+# If you are pulling from a private registry, you can uncomment out this
+# value. This is injected from the dependencies target in the Makefile.
+# image_pull_secret: juno-credentials
+
+show: DMO
+guid: 5000
+host: dmo.localhost
+active: true
+
+titan:
+  owner: juno
+  email: juno@juno-innovations.com
+  uid: 1005
+
+hubble:
+    env:
+      BASIC_AUTH_EMAIL: "juno@juno-innovations.com"
+      BASIC_AUTH_PASSWORD: "juno"
+
+luna:
+  enabled: false

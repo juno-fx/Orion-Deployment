@@ -8,6 +8,10 @@ cluster:
 down:
 	@kind delete cluster --name $(PROJECT)
 
+dependencies:
+	@echo "Running dependencies..."
+	@kubectl create secret docker-registry juno-credentials --from-file=.dockerconfigjson=$(HOME)/.docker/config.json || echo "Failed to create imagePullSecret. This may cause image pull issues."
+
 ingress:
 	@echo "Installing NGINX Ingress..."
 	@kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/main/deploy/static/provider/kind/deploy.yaml
@@ -17,7 +21,9 @@ ingress:
 		--selector=app.kubernetes.io/component=controller \
 		--timeout=90s
 
-orion: cluster ingress
+orion: cluster ingress dependencies
+	@echo "Installing CRD's..."
+	@kubectl apply -f juno/crds/
 	@echo "Installing Orion..."
 	@helm upgrade -i -f .values.yaml $(PROJECT) ./
 	@echo "Waiting for Orion to settle..."

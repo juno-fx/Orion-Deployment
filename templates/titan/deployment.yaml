@@ -29,7 +29,7 @@ spec:
       {{- if .Values.titan.node_selector.enable }}
       nodeSelector:
         {{- range $key, $value := .Values.titan.node_selector.labels }}
-        {{ $key }}: {{ $value }}
+        {{ $key }}: "{{ $value }}"
         {{- end }}
       {{- end }}
       {{- if .Values.image_pull_secret }}
@@ -42,13 +42,13 @@ spec:
           image: {{.Values.registry}}/{{ .Values.titan.image }}
           env:
             - name: ORION_OWNER
-              value: {{ .Values.titan.owner }}
+              value: "{{ .Values.titan.owner }}"
             - name: ORION_EMAIL
-              value: {{ .Values.titan.email }}
+              value: "{{ .Values.titan.email }}"
             - name: ORION_OWNER_UID
               value: "{{ .Values.titan.uid }}"
             - name: PROJECT
-              value: {{lower .Values.show }}
+              value: "{{lower .Values.show }}"
             - name: PROJECT_GUID
               value: "{{ .Values.guid }}"
           resources:

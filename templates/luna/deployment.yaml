@@ -28,7 +28,7 @@ spec:
       {{- if .Values.luna.node_selector.enable }}
       nodeSelector:
         {{- range $key, $value := .Values.luna.node_selector.labels }}
-        {{ $key }}: {{ $value }}
+        {{ $key }}: "{{ $value }}"
         {{- end }}
       {{- end }}
       {{- if .Values.image_pull_secret }}

@@ -32,7 +32,7 @@ spec:
       {{- if .Values.terra.node_selector.enable }}
       nodeSelector:
         {{- range $key, $value := .Values.terra.node_selector.labels }}
-        {{ $key }}: {{ $value }}
+        {{ $key }}: "{{ $value }}"
         {{- end }}
       {{- end }}
       containers:
