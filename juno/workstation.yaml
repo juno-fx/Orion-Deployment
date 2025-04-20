@@ -1,0 +1,14 @@
+apiVersion: juno-innovations.com/v2
+kind: Workstation
+metadata:
+  name: user
+spec:
+  registry: <YOUR REGISTRY>
+  tag: <YOUR IMAGE TAG>
+  repo: <YOUR IMAGE REPOSITORY>
+  icon: "https://junovfx.com/dog.png"
+  label: "User Workstation"
+  group: "Production"
+  cpu: "1"
+  memory: "1Gi"
+  mode: "interactive"

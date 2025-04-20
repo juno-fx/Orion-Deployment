@@ -1,9 +1,9 @@
 apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
-  name: groups.junovfx.com
+  name: users.juno-innovations.com
 spec:
-  group: junovfx.com
+  group: juno-innovations.com
   versions:
     - name: v1
       served: true
@@ -14,20 +14,15 @@ spec:
           properties:
             spec:
               type: object
-              required:
-                - members
               properties:
                 uid:
                   type: integer
-                members:
-                  type: array
-                  items:
-                    type: string
-
-  scope: Namespaced
+                email:
+                  type: string
+  scope: Cluster
   names:
-    plural: groups
-    singular: group
-    kind: Group
+    plural: users
+    singular: user
+    kind: User
     shortNames:
-      - g
+    - u

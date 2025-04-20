@@ -2,8 +2,7 @@
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
 metadata:
-  name: "kuiper-{{lower .Values.show }}"
-  namespace: {{ .Values.namespace }}
+  name: kuiper-{{ .Values.namespace }}
 rules:
   # Kuiper is now allowed to create its own CRD's as to fix delivery issues for them.
   - apiGroups: ["apiextensions.k8s.io"]

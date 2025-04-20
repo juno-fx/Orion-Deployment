@@ -40,25 +40,25 @@ spec:
           image: {{.Values.registry}}/{{ .Values.hubble.image }}
           imagePullPolicy: Always
           env:
-            - name: AUTH_TRUST_HOST
+            - name: "AUTH_TRUST_HOST"
               value: "true"
-            - name: NEXTAUTH_URL
+            - name: "NEXTAUTH_URL"
               value: "https://{{ .Values.host }}/api/auth"
           {{- if not .Values.luna.enabled}}
-            - name: LUNA
+            - name: "LUNA"
               value: "deactivated"
           {{- end }}
           {{- if not .Values.terra.enabled}}
-            - name: TERRA
+            - name: "TERRA"
               value: "deactivated"
           {{- end }}
           {{- if not .Values.kuiper.enabled}}
-            - name: KUIPER
+            - name: "KUIPER"
               value: "deactivated"
           {{- end }}
           {{- range $key, $value := .Values.hubble.env }}
-            - name: {{ $key }}
-              value: {{ $value }}
+            - name: "{{ $key }}"
+              value: "{{ $value }}"
           {{- end }}
           resources:
             requests:
