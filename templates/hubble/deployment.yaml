@@ -60,6 +60,10 @@ spec:
             - name: "{{ $key }}"
               value: "{{ $value }}"
           {{- end }}
+          - name: JUNO_PROJECT
+            valueFrom:
+              fieldRef:
+                fieldPath: metadata.namespace
           resources:
             requests:
               cpu: 200m
