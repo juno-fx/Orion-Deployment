@@ -1,7 +1,0 @@
-{{- if and .Values.active .Values.luna.enabled }}
-kind: ServiceAccount
-apiVersion: v1
-metadata:
-  name: mercury
-  namespace: {{ .Values.namespace }}
-{{- end}}

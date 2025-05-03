@@ -1,0 +1,13 @@
+{{- if .Values.genesis_proxy }}
+apiVersion: v1
+kind: Service
+metadata:
+  name: genesis
+  namespace: {{ .Values.namespace }}
+spec:
+  type: ExternalName
+  externalName: genesis.{{ .Values.genesis_namespace }}.svc.cluster.local
+  ports:
+    - port: 8000
+      targetPort: 8000
+{{- end }}

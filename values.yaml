@@ -1,10 +1,12 @@
 show:                                 # Show code
-namespace: default                    # Namespace to deploy the Titan server to
+namespace: default                    # Namespace to deploy the services to
 registry: empty.com                   # Registry to pull the Orion images from
 guid:                                 # GUID of the project
 host:                                 # Hostname of the project
 active: true                          # Whether the project is active
 image_pull_secret:                    # Image pull secret to use for the project. This is the name of the secret in the namespace
+genesis_proxy: true                   # Whether to use the Genesis proxy
+genesis_namespace: argocd             # Namespace where Genesis is deployed
 
 volumes:
 #    - name:                          # Name of the mount
@@ -20,42 +22,8 @@ cache:
     labels:                           # Node selector to deploy the Redis server to
       juno-innovations.com/service: "true"
 
-titan:
-  image: titan:v0.0.9                 # Image to pull for Titan
-  owner: bob                          # Owner of the cluster
-  email: test@email.com               # Email for the owner of the cluster
-  uid: 1005                           # UID of the owner of the cluster
-  node_selector:                      # Node selector to deploy the Titan server to
-    enable: true                      # Enable node selector
-    labels:                           # Node selector to deploy the Titan server to
-      juno-innovations.com/service: "true"
-  autoscaling:
-    min_replicas: 1                   # Minimum number of replicas to run
-    max_replicas: 3                   # Maximum number of replicas to run
-
-terra:
-  enabled: true                       # Enable Terra
-  image: terra:v0.0.3                 # Image to pull for Terra
-  node_selector:                      # Node selector to deploy the Terra server to
-    enable: true                      # Enable node selector
-    labels:                           # Node selector to deploy the Terra server to
-      juno-innovations.com/service: "true"
-  autoscaling:
-    min_replicas: 1                   # Minimum number of replicas to run
-    max_replicas: 4                   # Maximum number of replicas to run
-
-mercury:
-  image: mercury:v0.0.4               # Image to pull for Terra
-  node_selector:                      # Node selector to deploy the Terra server to
-    enable: true                      # Enable node selector
-    labels:                           # Node selector to deploy the Terra server to
-      juno-innovations.com/service: "true"
-  autoscaling:
-    min_replicas: 1                   # Minimum number of replicas to run
-    max_replicas: 4                   # Maximum number of replicas to run
-
 mars:
-  image: mars:v0.0.3                  # Image to pull for Mars
+  image: mars:v1.0.0                  # Image to pull for Mars
   node_selector:                      # Node selector to deploy the Mars server to
     enable: true                      # Enable node selector
     labels:                           # Node selector to deploy the Mars server to
@@ -66,7 +34,7 @@ mars:
 
 kuiper:
   enabled: true                       # Enable Kuiper
-  image: kuiper:v0.0.12               # Image to pull for Kuiper
+  image: kuiper:v1.0.0               # Image to pull for Kuiper
   node_selector:                      # Node selector to deploy the Kuiper server to
     enable: true                      # Enable node selector
     labels:                           # Node selector to deploy the Kuiper server to
@@ -76,7 +44,7 @@ kuiper:
     max_replicas: 3                   # Maximum number of replicas to run
 
 webb:
-    image: webb:v0.0.4                # Image to pull for Webb
+    image: webb:v1.0.0                # Image to pull for Webb
     node_selector:                    # Node selector to deploy the Hubble server to
       enable: true                    # Enable node selector
       labels:                         # Node selector to deploy the Hubble server to
@@ -86,7 +54,7 @@ webb:
       max_replicas: 3                 # Maximum number of replicas to run
 
 hubble:
-    image: hubble:v0.0.10             # Image to pull for Hubble
+    image: hubble:v1.0.0             # Image to pull for Hubble
     env: {}                           # Environment variables to set for the Hubble server
     node_selector:                    # Node selector to deploy the Hubble server to
       enable: true                    # Enable node selector
@@ -98,7 +66,7 @@ hubble:
 
 luna:
   enabled: true                       # Enable Luna
-  image: luna:v0.0.8                  # Image to pull for Luna
+  image: luna:v1.0.0                  # Image to pull for Luna
   mongo: mongo:8.0.1                  # Be sure to include the registry if needed
   persistent_volume_claim:            # Persistent volume claim to mount to the Luna server
   node_selector:                      # Node selector to deploy the Hubble server to

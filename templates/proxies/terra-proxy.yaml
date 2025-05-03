@@ -1,15 +1,13 @@
-{{- if and .Values.active .Values.luna.enabled }}
+{{- if .Values.genesis_proxy }}
 apiVersion: v1
 kind: Service
 metadata:
-  name: mercury
+  name: terra
   namespace: {{ .Values.namespace }}
 spec:
-  selector:
-    app: mercury
+  type: ExternalName
+  externalName: terra.{{ .Values.genesis_namespace }}.svc.cluster.local
   ports:
     - port: 8000
       targetPort: 8000
-      protocol: TCP
-      name: endpoint
 {{- end }}

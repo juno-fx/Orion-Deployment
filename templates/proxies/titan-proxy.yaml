@@ -1,15 +1,13 @@
-{{- if and .Values.active .Values.terra.enabled }}
+{{- if .Values.genesis_proxy }}
 apiVersion: v1
 kind: Service
 metadata:
-  name: terra
+  name: titan
   namespace: {{ .Values.namespace }}
 spec:
-  selector:
-    app: terra
+  type: ExternalName
+  externalName: titan.{{ .Values.genesis_namespace }}.svc.cluster.local
   ports:
     - port: 8000
       targetPort: 8000
-      protocol: TCP
-      name: endpoint
 {{- end }}

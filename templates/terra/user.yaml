@@ -1,6 +1,0 @@
-{{- if and .Values.active .Values.terra.enabled }}
-kind: ServiceAccount
-apiVersion: v1
-metadata:
-  name: terra
-{{- end }}
