@@ -1,0 +1,14 @@
+on:
+  create:
+
+permissions:
+  contents: write
+  issues: write
+  pull-requests: write
+  repository-projects: read # github's current permission scheme makes this necessary: https://github.com/cli/cli/issues/6274
+
+jobs:
+  PR:
+    if: github.event.ref_type == 'branch'
+    uses: juno-fx/ci/.github/workflows/auto-branch.yml@main
+    secrets: inherit

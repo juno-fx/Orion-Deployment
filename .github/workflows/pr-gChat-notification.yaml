@@ -1,0 +1,11 @@
+name: PR Message
+
+on:
+  pull_request:
+    types:
+      - review_requested
+
+jobs:
+  google-chat-action:
+    uses: juno-fx/ci/.github/workflows/ref-pr-gChat-notification.yaml@main
+    secrets: inherit

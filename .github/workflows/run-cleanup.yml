@@ -1,0 +1,23 @@
+name: Delete old workflow runs
+on:
+  push:
+    paths:
+      - '.github/workflows/run-cleanup.yml'
+  workflow_dispatch:
+  schedule:
+    - cron: '0 0 * * 1'
+jobs:
+  del_runs:
+    runs-on:
+      - self-hosted
+    permissions:
+      actions: write
+      contents: read
+    steps:
+      - name: Delete workflow runs
+        uses: Mattraks/delete-workflow-runs@v2
+        with:
+          token: ${{ secrets.CLEANUP_TOKEN }}
+          repository: ${{ github.repository }}
+          retain_days: 7
+          keep_minimum_runs: 6

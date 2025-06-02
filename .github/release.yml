@@ -1,0 +1,27 @@
+runs-on: self-hosted
+
+changelog:
+  exclude:
+    labels:
+      - ignore-for-release
+    authors:
+      - octocat
+  categories:
+    - title: '🚀 Features'
+      labels:
+        - 'feature'
+        - 'feature request'
+        - 'enhancement'
+        - 'add'
+    - title: '🐛 Bug Fixes'
+      labels:
+        - 'fix'
+        - 'bugfix'
+        - 'bug'
+        - 'broke'
+    - title: '🧰 Maintenance'
+      labels:
+        - 'chore'
+    - title: Other Changes
+      labels:
+        - "*"

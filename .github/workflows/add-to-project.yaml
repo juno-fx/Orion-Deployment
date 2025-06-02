@@ -1,0 +1,17 @@
+name: Add Issue to Project
+
+on:
+  issues:
+    types:
+      - opened
+
+
+jobs:
+  add-to-project:
+    name: Add Issue to Project
+    runs-on: self-hosted
+    steps:
+      - uses: actions/add-to-project@main
+        with:
+          project-url: https://github.com/orgs/juno-fx/projects/12
+          github-token: ${{ secrets.GIT_PASS }}
