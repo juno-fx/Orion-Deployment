@@ -7,5 +7,13 @@ on:
 
 jobs:
   google-chat-action:
-    uses: juno-fx/ci/.github/workflows/ref-pr-gChat-notification.yaml@main
-    secrets: inherit
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout CI repository
+        uses: actions/checkout@v4
+        with:
+          repository: juno-fx/ci
+          path: .juno-ci
+          token: ${{ secrets.RO_CI_REPO_TOKEN }}
+      - name: Run Google Chat notification
+        uses: ./.juno-ci/.github/actions/pr-gChat-notification
