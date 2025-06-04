@@ -19,7 +19,7 @@ jobs:
           ref: 204-public-repo-access-failure
           path: .juno-ci
           token: ${{ secrets.RO_CI_REPO_TOKEN }}
-      - name: Run Google Chat notification
+      - name: Run PR on branch creation
         uses: ./.juno-ci/actions/workflow/pr-on-branch-creation
         with:
           gh_token: ${{ secrets.GIT_PASS }}
