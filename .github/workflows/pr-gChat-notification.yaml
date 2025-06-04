@@ -17,7 +17,7 @@ jobs:
           path: .juno-ci
           token: ${{ secrets.RO_CI_REPO_TOKEN }}
       - name: Run Google Chat notification
-        uses: ./.juno-ci/.github/actions/workflow/pr-gChat-notification
+        uses: ./.juno-ci/actions/workflow/pr-gChat-notification
         with:
           webhookUrl: ${{ secrets.GCHAT_PR_SPACE }}
           title: ${{ github.repository }}
