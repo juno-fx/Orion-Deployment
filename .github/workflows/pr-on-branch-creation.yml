@@ -9,6 +9,17 @@ permissions:
 
 jobs:
   PR:
+    runs-on: X64
     if: github.event.ref_type == 'branch'
-    uses: juno-fx/ci/.github/workflows/auto-branch.yml@main
-    secrets: inherit
+    steps:
+      - name: Checkout CI repository
+        uses: actions/checkout@v4
+        with:
+          repository: juno-fx/ci
+          ref: main
+          path: .juno-ci
+          token: ${{ secrets.RO_CI_REPO_TOKEN }}
+      - name: Run PR on branch creation
+        uses: ./.juno-ci/actions/workflow/pr-on-branch-creation
+        with:
+          gh_token: ${{ secrets.GIT_PASS }}

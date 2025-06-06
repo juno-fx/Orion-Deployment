@@ -7,5 +7,19 @@ on:
 
 jobs:
   google-chat-action:
-    uses: juno-fx/ci/.github/workflows/ref-pr-gChat-notification.yaml@main
-    secrets: inherit
+    runs-on: self-hosted
+    steps:
+      - name: Checkout CI repository
+        uses: actions/checkout@v4
+        with:
+          repository: juno-fx/ci
+          ref: main
+          path: .juno-ci
+          token: ${{ secrets.RO_CI_REPO_TOKEN }}
+      - name: Run Google Chat notification
+        uses: ./.juno-ci/actions/workflow/pr-gChat-notification
+        with:
+          webhookUrl: ${{ secrets.GCHAT_PR_SPACE }}
+          title: ${{ github.repository }}
+          subtitle: ${{ github.head_ref }}
+          additionalSections: '[{"header": "Requested Reviewer", "widgets": [{"decoratedText": {"text": "${{ github.event.requested_reviewer.login }}", "icon": {"knownIcon": "PERSON"}}}]}]'
