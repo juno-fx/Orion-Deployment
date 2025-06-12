@@ -39,7 +39,7 @@ spec:
 
       containers:
         - name: cache
-          image: redis:alpine  # need to switch this to use the registry in the future
+          image: {{ .Values.cache.image }}
           ports:
             - containerPort: 6379
               name: endpoint
