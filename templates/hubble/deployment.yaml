@@ -44,14 +44,10 @@ spec:
               value: "true"
             - name: "NEXTAUTH_URL"
               value: "https://{{ .Values.host }}/api/auth"
-          {{- if not .Values.luna.enabled}}
             - name: "LUNA"
               value: "deactivated"
-          {{- end }}
-          {{- if not .Values.terra.enabled}}
             - name: "TERRA"
               value: "deactivated"
-          {{- end }}
           {{- if not .Values.kuiper.enabled}}
             - name: "KUIPER"
               value: "deactivated"
