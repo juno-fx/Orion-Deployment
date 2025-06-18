@@ -7,6 +7,9 @@
 
 ###  🚀 New Features 
 
+- Kuiper Microservice upgraded to v1.0.1
+- Hubble Frontend Service upgraded to v1.1.0
+
 #### Kuiper
 - Workstation endpoint has been updated. Kuberenetes Pod and Statefulset events will now be included with our workstation objects. Helping provide debugging information for each instance.
 - Workstation logs endpoint added. Kubernetes logs now accessible via new endpoint for each individual instance. Helping provide debugging information for each instance.
