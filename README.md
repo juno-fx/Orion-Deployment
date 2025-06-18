@@ -1,35 +1,39 @@
 
-![Orion Logo](https://juno-fx.github.io/Orion-Documentation/assets/orion.png)
+![Orion Logo](https://juno-fx.github.io/Orion-Documentation/assets/logos/orion.png)
 
 [Read the full documentation here](https://juno-fx.github.io/Orion-Documentation/)
 
-## Deployment Chart v1.2
+## Deployment Chart v1.3
 
-### New Features
+###  🚀 New Features 
 
-- **New Multi-Role Node Support** - You can now define multiple roles for a node. This allows you to have a node that is both a workstation and a headless node.
-  - **`juno-innovations.com/workstation: "true"`** - This label is used to define that a Node can support workstation deployments.
-  - **`juno-innovations.com/headless: "true"`** - This label is used to define that a Node can support headless deployments.
-  - **Backwards Compatibility** - The older `junovfx.com/node: "workstation"` and `junovfx.com/node: "render"` labels are still supported, but will be deprecated soon.
-- **Service Label Migration** - All services now use the `juno-innovations.com/service` label to protect critical services from being overloaded with workstation/headless workloads.
-- **Major Kuiper Scheduling Updates** - Kuiper now supports new scheduling preferences.
-  - **Headless Scheduling Compression** - If a headless service is launched, it will first check if there are any nodes tagged as headless. If there is a node tagged as both a workstation and a headless node, it will prefer another node that is exclusively a headless node. If none is available, it will use the workstation node assuming there is room.
-- **`juno-innovations.com/v1` CRD's** - To better match the Juno brand, we have migrated all CRD's to use the `juno-innovations.com/v{1,2}` API groups.
-  - **Kuiper Global CRD's** - Workstation definitions have been promoted to the cluster level so they can be globally available to other Orion installs.
-  - **Titan Global CRD's** - User and Group definitions have been promoted to the cluster level so they can be globally available to other Orion installs.
-- **Hubble Updates** - Hubble has received minor updates.
-  - **Remote Control** - Remote control other users machines if you have been granted the admin group.
-- **Genesis Deployment Manager** - This deployment is now configured to prefer deployment with Genesis.
-  - **Genesis Deployment** - Genesis is a new deployment manager that is designed to be a more robust deployment manager for Orion.
+#### Kuiper
+- Workstation endpoint has been updated. Kuberenetes Pod and Statefulset events will now be included with our workstation objects. Helping provide debugging information for each instance.
+- Workstation logs endpoint added. Kubernetes logs now accessible via new endpoint for each individual instance. Helping provide debugging information for each instance.
+- PREFIX path added to support [Helios](https://github.com/juno-fx/Helios)
 
-### Breaking Changes
-
-- **CRD Migration** - All existing CRD's will need to be migrated to the new `juno-innovations.com/v{1,2}` API groups from the older `junovfx.com/v1` API Groups. If this is not done, existing CRD's will not be able to be used. In the future we intend to provide migration methods for these kinds of changes.
+#### Hubble
+- Auto workstation catalog filtering based on user group assignment added
+- Admin workstation catalog Filter components added for specific filtering
+- LDAP nextauth provider support added
+- Workstation details dropdown added. Providing tabs for Events and Logs for each active instance. Admins also have the ability to see events/logs for all active instances. While non-admin users can only see theirs.
 
 
-### Related Tickets
+### 🐛 Bug Fixes
 
-- **CRD Migration** - [https://github.com/juno-fx/titan/issues/44](https://github.com/juno-fx/titan/issues/44), [https://github.com/juno-fx/kuiper/issues/112](https://github.com/juno-fx/kuiper/issues/112)
+#### Hubble
+
+- Fixed an error with the main monitor attempting to go full screen
+- Fixed an issue where locking the workstation resolution was reverting back on reconnect
+- Fixed a webRTC upd bug
+
+### 🧰  Maintenance
+
+#### Hubble
+
+- Adjusted workstation catalog card sizing
+- Cleaned up console errors
+- Updated to latest Juno branding
 
 ## Usage
 
