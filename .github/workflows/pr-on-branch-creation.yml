@@ -10,7 +10,7 @@ permissions:
 jobs:
   PR:
     runs-on: X64
-    if: ${{ github.event.ref_type == 'branch' && !contains(fromJson('["juno-bootstrap", "genesis-deployment", "orion-deployment"]'), toLower(github.event.repository.name)) }}
+    if: ${{ github.event.ref_type == 'branch' && !contains(fromJson('["Juno-Bootstrap", "Genesis-Deployment", "Orion-Deployment"]'), github.event.repository.name) }}
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
