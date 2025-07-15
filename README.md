@@ -3,40 +3,50 @@
 
 [Read the full documentation here](https://juno-fx.github.io/Orion-Documentation/)
 
-## Deployment Chart v1.3
+## Deployment Chart v1.3.1
 
 ###  🚀 New Features 
 
-- Kuiper Microservice upgraded to v1.0.1
-- Hubble Frontend Service upgraded to v1.1.0
+- Kuiper Microservice upgraded to v2.0.0 (Major)
+- Hubble Frontend Service upgraded to v2.0.0 (Major)
 
 #### Kuiper
-- Workstation endpoint has been updated. Kuberenetes Pod and Statefulset events will now be included with our workstation objects. Helping provide debugging information for each instance.
-- Workstation logs endpoint added. Kubernetes logs now accessible via new endpoint for each individual instance. Helping provide debugging information for each instance.
-- PREFIX path added to support [Helios](https://github.com/juno-fx/Helios)
+- Add plugin support via configmap
+- Added edit endpoints to requested more resources for running instance
+- Dynamic chart loading for workstations
+- Handling user control requests updates
 
 #### Hubble
-- Auto workstation catalog filtering based on user group assignment added
-- Admin workstation catalog Filter components added for specific filtering
-- LDAP nextauth provider support added
-- Workstation details dropdown added. Providing tabs for Events and Logs for each active instance. Admins also have the ability to see events/logs for all active instances. While non-admin users can only see theirs.
-
+- Share workstation UI updates
+- Events table columns now adjustabled, events message no wraps.
+- Kuiper permissions updated. Users assigned to the Kuiper role will now have the admin controls for workstation launching/controlling. They will also have access to the API.
+Previously users had to be in the Kuiper role to access the workstations table and launch workstations. This is no longer the case. All users with access to the project can now launch workstations. Kuiper users have the expanding permissions.
 
 ### 🐛 Bug Fixes
 
 #### Hubble
 
-- Fixed an error with the main monitor attempting to go full screen
-- Fixed an issue where locking the workstation resolution was reverting back on reconnect
-- Fixed a webRTC upd bug
+- Admin and Kuiper users will have the ability to connect workstations
+- LDAP support with self-signed CAs
+
+#### Kuiper
+- Helm install workaround for upstream Helm issue with larger UIDs
+- Proper threading for our workstation data fetching
+- Scope down ingress allowing hubble to handle the auth
 
 ### 🧰  Maintenance
 
 #### Hubble
 
-- Adjusted workstation catalog card sizing
-- Cleaned up console errors
-- Updated to latest Juno branding
+- Removed inactive users from admin workstation request options
+- Capability added for hubble to act as basic auth proxy
+- custom Kasm settings have been removed.
+- Proper error handling for bad data fetches
+- Metrics widget removed
+- Delete conditional added to ensure users cannot try to connect to a workstation while it's deleting
+- Cleaned up data fetching techniques
+- Removed share and control options for headless workstations
+- Provide a clear error message when a users license limit is reached
 
 ## Usage
 
