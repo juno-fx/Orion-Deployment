@@ -1,5 +1,5 @@
 
-![Orion Logo](https://juno-fx.github.io/Orion-Documentation/assets/logos/orion.png)
+![Orion Logo](https://juno-fx.github.io/Orion-Documentation/assets/logos/orion/orion-dark.png)
 
 [Read the full documentation here](https://juno-fx.github.io/Orion-Documentation/)
 
