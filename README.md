@@ -27,10 +27,10 @@ Previously users had to be in the Kuiper role to access the workstations table a
 #### Hubble
 
 - Admin and Kuiper users will have the ability to connect workstations
-- LDAP support with self-signed CA's
+- LDAP support with self-signed CAs
 
 #### Kuiper
-- Helm install workaround for upstream Helm issue with larger UID's
+- Helm install workaround for upstream Helm issue with larger UIDs
 - Proper threading for our workstation data fetching
 - Scope down ingress allowing hubble to handle the auth
 
@@ -43,9 +43,9 @@ Previously users had to be in the Kuiper role to access the workstations table a
 - custom Kasm settings have been removed.
 - Proper error handling for bad data fetches
 - Metrics widget removed
-- delete conditional added to ensure users cannot try to connect to a workstation while it's deleting
+- Delete conditional added to ensure users cannot try to connect to a workstation while it's deleting
 - Cleaned up data fetching techniques
-- removed share and control options for headless workstations
+- Removed share and control options for headless workstations
 - Provide a clear error message when a users license limit is reached
 
 ## Usage
