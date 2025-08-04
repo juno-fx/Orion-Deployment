@@ -43,7 +43,7 @@ spec:
             - name: "AUTH_TRUST_HOST"
               value: "true"
             - name: "NEXTAUTH_URL"
-              value: "https://{{ .Values.host }}/api/auth"
+              value: "{{ tpl .Values.nextauth_url_tpl . }}"
             - name: "LUNA"
               value: "deactivated"
             - name: "TERRA"

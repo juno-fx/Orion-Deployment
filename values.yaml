@@ -7,6 +7,10 @@ active: true                          # Whether the project is active
 image_pull_secret:                    # Image pull secret to use for the project. This is the name of the secret in the namespace
 genesis_proxy: true                   # Whether to use the Genesis proxy
 genesis_namespace: argocd             # Namespace where Genesis is deployed
+http_scheme: https
+nextauth_url_tpl: "{{ .Values.http_scheme }}://{{ .Values.host }}/api/auth"
+
+cert_manager_issuer: letsencrypt-prod
 
 volumes:
 #    - name:                          # Name of the mount
