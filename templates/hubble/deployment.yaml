@@ -35,6 +35,7 @@ spec:
         {{ $key }}: "{{ $value }}"
         {{- end }}
       {{- end }}
+      serviceAccountName: orion-hubble
       containers:
         - name: hubble
           image: {{.Values.registry}}/{{ .Values.hubble.image }}
