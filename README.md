@@ -3,50 +3,29 @@
 
 [Read the full documentation here](https://juno-fx.github.io/Orion-Documentation/)
 
-## Deployment Chart v1.3.1
+## Deployment Chart v1.4.0
 
 ###  🚀 New Features 
 
-- Kuiper Microservice upgraded to v2.0.0 (Major)
-- Hubble Frontend Service upgraded to v2.0.0 (Major)
-
-#### Kuiper
-- Add plugin support via configmap
-- Added edit endpoints to requested more resources for running instance
-- Dynamic chart loading for workstations
-- Handling user control requests updates
+- Hubble Frontend Service upgraded to v3.0.0 (Major)
 
 #### Hubble
-- Share workstation UI updates
-- Events table columns now adjustabled, events message no wraps.
-- Kuiper permissions updated. Users assigned to the Kuiper role will now have the admin controls for workstation launching/controlling. They will also have access to the API.
-Previously users had to be in the Kuiper role to access the workstations table and launch workstations. This is no longer the case. All users with access to the project can now launch workstations. Kuiper users have the expanding permissions.
-
-### 🐛 Bug Fixes
-
-#### Hubble
-
-- Admin and Kuiper users will have the ability to connect workstations
-- LDAP support with self-signed CAs
-
-#### Kuiper
-- Helm install workaround for upstream Helm issue with larger UIDs
-- Proper threading for our workstation data fetching
-- Scope down ingress allowing hubble to handle the auth
+- Added http support with http/https scheme setting configurability
 
 ### 🧰  Maintenance
 
 #### Hubble
 
-- Removed inactive users from admin workstation request options
-- Capability added for hubble to act as basic auth proxy
-- custom Kasm settings have been removed.
-- Proper error handling for bad data fetches
-- Metrics widget removed
-- Delete conditional added to ensure users cannot try to connect to a workstation while it's deleting
-- Cleaned up data fetching techniques
-- Removed share and control options for headless workstations
-- Provide a clear error message when a users license limit is reached
+- Added favicon to browser tab title
+- Removed Legacy Luna project management support
+- Updated error log handling
+
+### 🔒 Security Update
+
+#### Hubble
+
+-  We have improved upon how session secrets are generated. This better protects you against attackers attempting request forgery. While no direct attack vectors on public instances were found by our team, we still recommend updating Genesis&Hubble shortly after release. 
+
 
 ## Usage
 
