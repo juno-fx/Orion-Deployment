@@ -38,7 +38,7 @@ kuiper:
     max_replicas: 3                   # Maximum number of replicas to run
 
 hubble:
-    image: hubble:v2.0.0             # Image to pull for Hubble
+    image: hubble:v3.0.0             # Image to pull for Hubble
     env: {}                           # Environment variables to set for the Hubble server
     node_selector:                    # Node selector to deploy the Hubble server to
       enable: true                    # Enable node selector
