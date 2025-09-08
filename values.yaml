@@ -1,12 +1,12 @@
-show:                                 # Show code
-namespace: default                    # Namespace to deploy the services to
-registry: junoinnovations             # Registry to pull the Orion images from
-guid:                                 # GUID of the project
-host:                                 # Hostname of the project
-active: true                          # Whether the project is active
-image_pull_secret:                    # Image pull secret to use for the project. This is the name of the secret in the namespace
-genesis_proxy: true                   # Whether to use the Genesis proxy
-genesis_namespace: argocd             # Namespace where Genesis is deployed
+show: # Show code
+namespace: default # Namespace to deploy the services to
+registry: junoinnovations # Registry to pull the Orion images from
+guid: # GUID of the project
+host: # Hostname of the project
+active: true # Whether the project is active
+image_pull_secret: # Image pull secret to use for the project. This is the name of the secret in the namespace
+genesis_proxy: true # Whether to use the Genesis proxy
+genesis_namespace: argocd # Namespace where Genesis is deployed
 http_scheme: https
 nextauth_url_tpl: "{{ .Values.http_scheme }}://{{ .Values.host }}/api/auth"
 
@@ -20,30 +20,34 @@ volumes:
 #      sub_path:                      # Sub path on the persistent volume to mount
 
 cache:
-  image: redis:alpine
-  node_selector:                      # Node selector to deploy the Redis server to
-    enable: true                      # Enable node selector
-    labels:                           # Node selector to deploy the Redis server to
+  image: "{{ .Values._release_redis_image }}" # Image to pull for Redis
+  node_selector: # Node selector to deploy the Redis server to
+    enable: true # Enable node selector
+    labels: # Node selector to deploy the Redis server to
       juno-innovations.com/service: "true"
 
 kuiper:
-  enabled: true                       # Enable Kuiper
-  image: kuiper:v2.0.0               # Image to pull for Kuiper
-  node_selector:                      # Node selector to deploy the Kuiper server to
-    enable: true                      # Enable node selector
-    labels:                           # Node selector to deploy the Kuiper server to
+  enabled: true # Enable Kuiper
+  image: "{{ .Values._release_kuiper_image }}" # Image to pull for Kuiper
+  node_selector: # Node selector to deploy the Kuiper server to
+    enable: true # Enable node selector
+    labels: # Node selector to deploy the Kuiper server to
       juno-innovations.com/service: "true"
   autoscaling:
-    min_replicas: 1                   # Minimum number of replicas to run
-    max_replicas: 3                   # Maximum number of replicas to run
+    min_replicas: 1 # Minimum number of replicas to run
+    max_replicas: 3 # Maximum number of replicas to run
 
 hubble:
-    image: hubble:v3.0.0             # Image to pull for Hubble
-    env: {}                           # Environment variables to set for the Hubble server
-    node_selector:                    # Node selector to deploy the Hubble server to
-      enable: true                    # Enable node selector
-      labels:                         # Node selector to deploy the Hubble server to
-        juno-innovations.com/service: "true"
-    autoscaling:
-      min_replicas: 1                 # Minimum number of replicas to run
-      max_replicas: 3                 # Maximum number of replicas to run
+  image: "{{ .Values._release_hubble_image }}" # Image to pull for Hubble
+  env: {} # Environment variables to set for the Hubble server
+  node_selector: # Node selector to deploy the Hubble server to
+    enable: true # Enable node selector
+    labels: # Node selector to deploy the Hubble server to
+      juno-innovations.com/service: "true"
+  autoscaling:
+    min_replicas: 1 # Minimum number of replicas to run
+    max_replicas: 3 # Maximum number of replicas to run
+
+_release_kuiper_image: kuiper:v2.0.0
+_release_hubble_image: hubble:v3.0.0
+_release_redis_image: redis:alpine

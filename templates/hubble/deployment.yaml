@@ -38,7 +38,7 @@ spec:
       serviceAccountName: orion-hubble
       containers:
         - name: hubble
-          image: {{.Values.registry}}/{{ .Values.hubble.image }}
+          image: {{ .Values.registry }}/{{ tpl .Values.hubble.image . }}
           imagePullPolicy: Always
           env:
             - name: "AUTH_TRUST_HOST"

@@ -1,0 +1,11 @@
+---
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: orion-project-metadata
+  namespace: {{ .Values.namespace }}
+data:
+    # Those track what version should be used for this release. We can query the CM when performing a rollback/resetting to defaults
+    deployment_kuiper_image: "{{ .Values._release_kuiper_image }}"
+    deployment_hubble_image: "{{ .Values._release_hubble_image }}"
+    deployment_redis_image: "{{ .Values._release_redis_image }}"

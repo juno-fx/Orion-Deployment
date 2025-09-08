@@ -39,7 +39,7 @@ spec:
 
       containers:
         - name: cache
-          image: {{ .Values.cache.image }}
+          image: {{ tpl .Values.cache.image . }}
           ports:
             - containerPort: 6379
               name: endpoint

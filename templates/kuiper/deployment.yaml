@@ -38,7 +38,7 @@ spec:
       {{- end }}
       containers:
         - name: kuiper
-          image: {{.Values.registry}}/{{ .Values.kuiper.image }}
+          image: {{ .Values.registry }}/{{ tpl .Values.kuiper.image . }}
           imagePullPolicy: Always
           livenessProbe:
             httpGet:
