@@ -1,0 +1,8 @@
+---
+apiVersion: traefik.io/v1alpha1
+kind: Middleware
+metadata:
+  name: hubble-auth-service
+spec:
+  forwardAuth:
+    address: http://hubble.{{ .Release.Namespace }}.svc.cluster.local:3000/api/auth-service/

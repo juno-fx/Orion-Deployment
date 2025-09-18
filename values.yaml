@@ -7,10 +7,12 @@ ingressClassName: nginx
 active: true                          # Whether the project is active
 image_pull_secret:                    # Image pull secret to use for the project. This is the name of the secret in the namespace
 genesis_proxy: true                   # Whether to use the Genesis proxy
-genesis_namespace: argocd             # Namespace where Genesis is deployed
+genesis_namespace: argocd             # Namespace where Genesis is deployedshow: # Show code
 http_scheme: https
 nextauth_url_tpl: "{{ .Values.http_scheme }}://{{ .Values.host }}/api/auth"
 
+gateway_name: orion
+gateway_namespace: argocd
 cert_manager_issuer: letsencrypt-prod
 
 volumes:
@@ -26,10 +28,17 @@ cache:
     enable: true                      # Enable node selector
     labels:                           # Node selector to deploy the Redis server to
       juno-innovations.com/service: "true"
+  resources:
+    requests:
+      cpu: 200m
+      memory: 500Mi
+    limits:
+      cpu: 500m
+      memory: 1536Mi
 
 kuiper:
   enabled: true                       # Enable Kuiper
-  image: kuiper:v2.0.0               # Image to pull for Kuiper
+  image: kuiper:v2.0.0                # Image to pull for Kuiper
   node_selector:                      # Node selector to deploy the Kuiper server to
     enable: true                      # Enable node selector
     labels:                           # Node selector to deploy the Kuiper server to
@@ -37,14 +46,28 @@ kuiper:
   autoscaling:
     min_replicas: 1                   # Minimum number of replicas to run
     max_replicas: 3                   # Maximum number of replicas to run
+  resources:
+    requests:
+      cpu: 200m
+      memory: 500Mi
+    limits:
+      cpu: 1000m
+      memory: 1536Mi
 
 hubble:
-    image: hubble:v3.0.0             # Image to pull for Hubble
-    env: {}                           # Environment variables to set for the Hubble server
-    node_selector:                    # Node selector to deploy the Hubble server to
-      enable: true                    # Enable node selector
-      labels:                         # Node selector to deploy the Hubble server to
-        juno-innovations.com/service: "true"
-    autoscaling:
-      min_replicas: 1                 # Minimum number of replicas to run
-      max_replicas: 3                 # Maximum number of replicas to run
+  image: hubble:v3.0.0             # Image to pull for Hubble
+  env: {}                           # Environment variables to set for the Hubble server
+  node_selector:                    # Node selector to deploy the Hubble server to
+    enable: true                    # Enable node selector
+    labels:                         # Node selector to deploy the Hubble server to
+      juno-innovations.com/service: "true"
+  autoscaling:
+    min_replicas: 1                 # Minimum number of replicas to run
+    max_replicas: 3                 # Maximum number of replicas to run
+  resources:
+    requests:
+      cpu: 200m
+      memory: 500Mi
+    limits:
+      cpu: 1000m
+      memory: 1536Mi
