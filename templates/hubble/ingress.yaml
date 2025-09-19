@@ -6,7 +6,7 @@ metadata:
   name: hubble-ingress
   annotations:
     cert-manager.io/issuer: "{{ .Values.cert_manager_issuer }}"
-    kubernetes.io/ingress.class: nginx
+    kubernetes.io/ingress.class: "{{ .Values.ingressClassName }}"
     nginx.ingress.kubernetes.io/use-regex: "true"
     nginx.ingress.kubernetes.io/proxy-body-size: "0"
     nginx.ingress.kubernetes.io/proxy-connect-timeout: "30"
@@ -17,7 +17,7 @@ metadata:
     nginx.ingress.kubernetes.io/session-cookie-path: "/"
 
 spec:
-  ingressClassName: nginx
+  ingressClassName: "{{ .Values.ingressClassName }}"
   rules:
     - host: {{ .Values.host }}
       http:
