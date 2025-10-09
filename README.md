@@ -3,29 +3,11 @@
 
 [Read the full documentation here](https://juno-fx.github.io/Orion-Documentation/)
 
-## Deployment Chart v1.4.0
+## Deployment Chart v1.5.0
 
-###  🚀 New Features 
-
-- Hubble Frontend Service upgraded to v3.0.0 (Major)
-
-#### Hubble
-- Added http support with http/https scheme setting configurability
-
-### 🧰  Maintenance
-
-#### Hubble
-
-- Added favicon to browser tab title
-- Removed Legacy Luna project management support
-- Updated error log handling
-
-### 🔒 Security Update
-
-#### Hubble
-
--  We have improved upon how session secrets are generated. This better protects you against attackers attempting request forgery. While no direct attack vectors on public instances were found by our team, we still recommend updating Genesis&Hubble shortly after release. 
-
+See all the latest feature changes via our Changelogs [here](https://juno-fx.github.io/Orion-Documentation/changelogs/feature/#2025-10-09)
+<br>
+See all the latest Technical changes via our changelogs [here](https://juno-fx.github.io/Orion-Documentation/changelogs/technical/#2025-10-09-genesis-v150-orion-projects-v150)
 
 ## Usage
 
