@@ -4,6 +4,7 @@
 [Read the full documentation here](https://juno-fx.github.io/Orion-Documentation/)
 
 ## Deployment Chart v1.5.0
+This deployment chart includes the release images for Hubble (v3.1.0) and Kuiper (v2.1.0)
 
 See all the latest feature changes via our Changelogs [here](https://juno-fx.github.io/Orion-Documentation/changelogs/feature/#2025-10-09)
 <br>
