@@ -25,6 +25,10 @@ spec:
         app: hubble
 
     spec:
+      {{- if .Values.hubble.tolerations }}
+      tolerations:
+        {{- toYaml .Values.hubble.tolerations | nindent 8 }}
+      {{- end }}
       {{- if .Values.image_pull_secret }}
       imagePullSecrets:
         - name: {{ .Values.image_pull_secret }}
