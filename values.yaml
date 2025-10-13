@@ -21,6 +21,7 @@ volumes:
 #      sub_path:                      # Sub path on the persistent volume to mount
 
 cache:
+  tolerations: []
   image: redis:alpine
   node_selector:                      # Node selector to deploy the Redis server to
     enable: true                      # Enable node selector
@@ -28,6 +29,7 @@ cache:
       juno-innovations.com/service: "true"
 
 kuiper:
+  tolerations: []
   enabled: true                       # Enable Kuiper
   image: kuiper:v2.1.0               # Image to pull for Kuiper
   node_selector:                      # Node selector to deploy the Kuiper server to
@@ -40,6 +42,7 @@ kuiper:
 
 hubble:
     image: hubble:v3.2.1             # Image to pull for Hubble
+    tolerations: []
     env: {}                           # Environment variables to set for the Hubble server
     node_selector:                    # Node selector to deploy the Hubble server to
       enable: true                    # Enable node selector
