@@ -25,6 +25,10 @@ spec:
         app: kuiper
 
     spec:
+      {{- if .Values.kuiper.tolerations }}
+      tolerations:
+        {{- toYaml .Values.kuiper.tolerations | nindent 8 }}
+      {{- end }}
       serviceAccountName: kuiper
       {{- if .Values.image_pull_secret }}
       imagePullSecrets:
