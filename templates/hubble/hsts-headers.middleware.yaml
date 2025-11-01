@@ -1,0 +1,9 @@
+apiVersion: traefik.io/v1alpha1
+kind: Middleware
+metadata:
+  name: hsts-headers
+spec:
+  headers:
+    forceSTSHeader: true
+    stsIncludeSubdomains: true
+    stsSeconds: 3600

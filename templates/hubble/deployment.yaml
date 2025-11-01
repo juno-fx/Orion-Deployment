@@ -63,8 +63,11 @@ spec:
                   fieldPath: metadata.namespace
           resources:
             requests:
-              cpu: 200m
-              memory: 500Mi
+              cpu: {{ .Values.hubble.resources.requests.cpu }}
+              memory: {{ .Values.hubble.resources.requests.memory }}
+            limits:
+              cpu: {{ .Values.hubble.resources.limits.cpu }}
+              memory: {{ .Values.hubble.resources.limits.memory }}
           ports:
             - containerPort: 3000
               name: endpoint
