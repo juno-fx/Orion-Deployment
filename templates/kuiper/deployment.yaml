@@ -69,11 +69,8 @@ spec:
                   fieldPath: metadata.namespace
           resources:
             requests:
-              cpu: {{ .Values.kuiper.resources.requests.cpu }}
-              memory: {{ .Values.kuiper.resources.requests.memory }}
-            limits:
-              cpu: {{ .Values.kuiper.resources.limits.cpu }}
-              memory: {{ .Values.kuiper.resources.limits.memory }}
+              cpu: 750m
+              memory: 200Mi
           ports:
             - containerPort: 8000
               name: endpoint
