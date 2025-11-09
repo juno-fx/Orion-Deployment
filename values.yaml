@@ -48,3 +48,6 @@ hubble:
     autoscaling:
       min_replicas: 1                 # Minimum number of replicas to run
       max_replicas: 3                 # Maximum number of replicas to run
+
+rhea:
+  image: rhea:unstable               # Image to pull for Rhea

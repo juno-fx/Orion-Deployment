@@ -74,4 +74,17 @@ spec:
           ports:
             - containerPort: 8000
               name: endpoint
+        - name: rhea
+          image: {{ .Values.registry }}/{{ .Values.rhea.image }}
+          ports:
+            - containerPort: 13000
+              name: auth
+          volumeMounts:
+            - name: policies
+              mountPath: /etc/rhea/policies
+              readOnly: true
+      volumes:
+        - name: policies
+          configMap:
+            name: orion-environment-systempolicy
 {{- end }}
