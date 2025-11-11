@@ -9,7 +9,7 @@ This deployment chart includes the release images for Hubble (v3.2.0) and Kuiper
 See all the latest feature changes via our Changelogs [here](https://juno-fx.github.io/Orion-Documentation/changelogs/feature/#2025-11-11)
 <br>
 
-A summary of all deprecations, migration steps between major versions and addressed security vulnerabilities is kept [in our technical changelog here](https://juno-fx.github.io/Orion-Documentation/changelogs/technical/#2025-11-11-genesis-v160-orion-projects-v160).
+A summary of all deprecations, migration steps between major versions and addressed security vulnerabilities is kept [in our technical changelog here](https://juno-fx.github.io/Orion-Documentation/changelogs/technical/#2025-11-11-genesis-v170-orion-projects-v160).
 
 ## Usage
 
