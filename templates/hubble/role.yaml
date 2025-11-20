@@ -9,3 +9,6 @@ rules:
   resources: ["secrets"]
   verbs: ["get"]
   resourceNames: ["juno-auth-secret"]
+- apiGroups: [""]
+  resources: ["serviceaccounts/token"]
+  verbs: ["create"]
