@@ -1,11 +1,21 @@
-permit(
+permit (
   principal,
-  action in [Action::"GET", Action::"POST", Action::"PUT", Action::"DELETE", Action::"PATCH"],
+  action in
+    [Action::"GET",
+     Action::"POST",
+     Action::"PUT",
+     Action::"DELETE",
+     Action::"PATCH"],
   resource == argocd::Service::"hubble"
 );
 
-permit(
+permit (
   principal,
-  action in [Action::"GET", Action::"POST", Action::"PUT", Action::"DELETE", Action::"PATCH"],
+  action in
+    [Action::"GET",
+     Action::"POST",
+     Action::"PUT",
+     Action::"DELETE",
+     Action::"PATCH"],
   resource == argocd::Service::"kuiper"
 );
