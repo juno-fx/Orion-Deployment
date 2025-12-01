@@ -6,7 +6,7 @@ permit (
      Action::"PUT",
      Action::"DELETE",
      Action::"PATCH"],
-  resource == argocd::Service::"hubble"
+  resource == {{ .Values.namespace }}::Service::"hubble"
 );
 
 permit (
@@ -17,5 +17,5 @@ permit (
      Action::"PUT",
      Action::"DELETE",
      Action::"PATCH"],
-  resource == argocd::Service::"kuiper"
+  resource == {{ .Values.namespace }}::Service::"kuiper"
 );
