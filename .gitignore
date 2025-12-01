@@ -5,3 +5,5 @@
 .hack/.crates2.json
 .hack/.crates.toml
 
+.tmp-*
+
