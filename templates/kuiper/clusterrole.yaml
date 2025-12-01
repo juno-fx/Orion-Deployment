@@ -1,0 +1,8 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: kuiper-{{ .Values.namespace }}
+rules:
+  - apiGroups: ["juno-innovations.com"]
+    resources: ["workstation-logs"]
+    verbs: ["list", "create", "delete", "get", "patch", "update"]
