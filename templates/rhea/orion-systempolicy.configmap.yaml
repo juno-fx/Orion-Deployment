@@ -5,4 +5,4 @@ metadata:
   namespace: {{ .Values.namespace }}
 data:
   policies.cedar: |-
-{{ .Files.Get "files/rhea/policies.cedar" | indent 4 }}
+{{ tpl (.Files.Get "files/rhea/policies.cedar") . | indent 4 }}

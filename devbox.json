@@ -5,7 +5,8 @@
     "docker@latest",
     "kubectl@latest",
     "gnumake@latest",
-    "cargo@latest"
+    "cargo@latest",
+    "kubernetes-helm@3.16.4"
   ],
   "shell": {
     "init_hook": [
