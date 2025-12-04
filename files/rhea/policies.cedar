@@ -7,7 +7,15 @@ permit (
      Action::"DELETE",
      Action::"PATCH"],
   resource == {{ .Values.namespace }}::Service::"hubble"
-);
+)
+when
+{
+  principal.serviceAccountName == "genesis" ||
+  principal.serviceAccountName == "hubble" ||
+  principal.serviceAccountName == "kuiper" ||
+  principal.serviceAccountName == "titan" ||
+  principal.serviceAccountName == "terra"
+};
 
 permit (
   principal,
@@ -18,4 +26,12 @@ permit (
      Action::"DELETE",
      Action::"PATCH"],
   resource == {{ .Values.namespace }}::Service::"kuiper"
-);
+)
+when
+{
+  principal.serviceAccountName == "genesis" ||
+  principal.serviceAccountName == "hubble" ||
+  principal.serviceAccountName == "kuiper" ||
+  principal.serviceAccountName == "titan" ||
+  principal.serviceAccountName == "terra"
+};
