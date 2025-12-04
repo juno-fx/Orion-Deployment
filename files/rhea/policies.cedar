@@ -11,7 +11,7 @@ permit (
 when
 {
   principal.serviceAccountName == "genesis" ||
-  principal.serviceAccountName == "hubble" ||
+  principal.serviceAccountName == "orion-hubble" ||
   principal.serviceAccountName == "kuiper" ||
   principal.serviceAccountName == "titan" ||
   principal.serviceAccountName == "terra"
@@ -30,7 +30,7 @@ permit (
 when
 {
   principal.serviceAccountName == "genesis" ||
-  principal.serviceAccountName == "hubble" ||
+  principal.serviceAccountName == "orion-hubble" ||
   principal.serviceAccountName == "kuiper" ||
   principal.serviceAccountName == "titan" ||
   principal.serviceAccountName == "terra"
