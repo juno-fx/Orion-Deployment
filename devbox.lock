@@ -323,6 +323,54 @@
           "store_path": "/nix/store/3vkf0406s1i6l89hk5wrakh4bbn0p1p2-kubectl-1.30.2"
         }
       }
+    },
+    "kubernetes-helm@3.16.4": {
+      "last_modified": "2025-01-19T08:16:51Z",
+      "resolved": "github:NixOS/nixpkgs/50165c4f7eb48ce82bd063e1fb8047a0f515f8ce#kubernetes-helm",
+      "source": "devbox-search",
+      "version": "3.16.4",
+      "systems": {
+        "aarch64-darwin": {
+          "outputs": [
+            {
+              "name": "out",
+              "path": "/nix/store/2lvby5gkkv0bfaq9vvzql8gs7a151zf0-kubernetes-helm-3.16.4",
+              "default": true
+            }
+          ],
+          "store_path": "/nix/store/2lvby5gkkv0bfaq9vvzql8gs7a151zf0-kubernetes-helm-3.16.4"
+        },
+        "aarch64-linux": {
+          "outputs": [
+            {
+              "name": "out",
+              "path": "/nix/store/fi048xvgic3l5aaqf8i9l60mdp9xxfr3-kubernetes-helm-3.16.4",
+              "default": true
+            }
+          ],
+          "store_path": "/nix/store/fi048xvgic3l5aaqf8i9l60mdp9xxfr3-kubernetes-helm-3.16.4"
+        },
+        "x86_64-darwin": {
+          "outputs": [
+            {
+              "name": "out",
+              "path": "/nix/store/m70il2ms96vjynm1hv6saisbzc5xyzp9-kubernetes-helm-3.16.4",
+              "default": true
+            }
+          ],
+          "store_path": "/nix/store/m70il2ms96vjynm1hv6saisbzc5xyzp9-kubernetes-helm-3.16.4"
+        },
+        "x86_64-linux": {
+          "outputs": [
+            {
+              "name": "out",
+              "path": "/nix/store/ykhg41hvf1v8zdf9fyldfkdxazhjpfz5-kubernetes-helm-3.16.4",
+              "default": true
+            }
+          ],
+          "store_path": "/nix/store/ykhg41hvf1v8zdf9fyldfkdxazhjpfz5-kubernetes-helm-3.16.4"
+        }
+      }
     }
   }
 }

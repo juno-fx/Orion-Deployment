@@ -6,8 +6,16 @@ permit (
      Action::"PUT",
      Action::"DELETE",
      Action::"PATCH"],
-  resource == argocd::Service::"hubble"
-);
+  resource == {{ .Values.namespace }}::Service::"hubble"
+)
+when
+{
+  principal.serviceAccountName == "genesis" ||
+  principal.serviceAccountName == "hubble" ||
+  principal.serviceAccountName == "kuiper" ||
+  principal.serviceAccountName == "titan" ||
+  principal.serviceAccountName == "terra"
+};
 
 permit (
   principal,
@@ -17,5 +25,13 @@ permit (
      Action::"PUT",
      Action::"DELETE",
      Action::"PATCH"],
-  resource == argocd::Service::"kuiper"
-);
+  resource == {{ .Values.namespace }}::Service::"kuiper"
+)
+when
+{
+  principal.serviceAccountName == "genesis" ||
+  principal.serviceAccountName == "hubble" ||
+  principal.serviceAccountName == "kuiper" ||
+  principal.serviceAccountName == "titan" ||
+  principal.serviceAccountName == "terra"
+};
