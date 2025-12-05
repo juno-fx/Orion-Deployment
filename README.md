@@ -1,15 +1,15 @@
 
 ![Orion Logo](https://juno-fx.github.io/Orion-Documentation/assets/logos/orion/orion-dark.png)
 
-[Read the full documentation here](https://juno-fx.github.io/Orion-Documentation/)
+[Read the full documentation here](https://juno-fx.github.io/Orion-Documentation/latest)
 
-## Deployment Chart v1.6.1
-This deployment chart includes the release images for Hubble (v3.2.1) and Kuiper (v2.1.0)
+## Deployment Chart v1.6.2
+This deployment chart includes the release images for Hubble (v3.2.3) and Kuiper (v2.1.0)
 
-See all the latest feature changes via our Changelogs [here](https://juno-fx.github.io/Orion-Documentation/changelogs/feature/#2025-11-17)
+See all the latest feature changes via our Changelogs [here](https://juno-fx.github.io/Orion-Documentation/latest/changelogs/feature/#2025-12-05)
 <br>
 
-A summary of all deprecations, migration steps between major versions and addressed security vulnerabilities is kept [in our technical changelog here](https://juno-fx.github.io/Orion-Documentation/changelogs/technical/#2025-11-17-orion-projects-v161).
+A summary of all deprecations, migration steps between major versions and addressed security vulnerabilities is kept [in our technical changelog here](https://juno-fx.github.io/Orion-Documentation/latest/changelogs/technical/#2025-12-05-genesis-v171-orion-projects-v162).
 
 ## Usage
 
