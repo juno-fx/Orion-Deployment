@@ -51,3 +51,10 @@ hubble:
 
 rhea:
   image: rhea:unstable               # Image to pull for Rhea
+  resources:
+    requests:
+      cpu: 200m
+      memory: 100Mi
+    limits:
+      cpu: 350m
+      memory: 250Mi
