@@ -51,6 +51,7 @@ hubble:
 
 rhea:
   image: rhea:unstable               # Image to pull for Rhea
+  env: {}                            # Environment variables to set for the Rhea server
   resources:
     requests:
       cpu: 200m
