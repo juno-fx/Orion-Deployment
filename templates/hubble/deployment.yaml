@@ -76,6 +76,20 @@ spec:
           ports:
             - containerPort: 13000
               name: auth
+          livenessProbe:
+            httpGet:
+              path: /.health
+              port: 13000
+            initialDelaySeconds: 5
+            periodSeconds: 10
+          readinessProbe:
+            httpGet:
+              path: /.health
+              port: 13000
+            initialDelaySeconds: 5
+            periodSeconds: 10
+          resources:
+            {{- toYaml .Values.rhea.resources | nindent 12 }}
           volumeMounts:
             - name: policies
               mountPath: /etc/rhea/policies
