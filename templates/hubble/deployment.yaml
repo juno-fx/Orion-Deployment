@@ -42,7 +42,7 @@ spec:
       serviceAccountName: orion-hubble
       containers:
         - name: hubble
-          image: {{.Values.registry}}/{{ .Values.hubble.image }}
+          image: "{{ .Values.global.registry }}/{{ .Values.hubble.image.repository }}:{{ .Values.hubble.image.tag }}"
           imagePullPolicy: Always
           env:
             - name: "AUTH_TRUST_HOST"
@@ -75,7 +75,7 @@ spec:
             - containerPort: 8000
               name: socket
         - name: rhea
-          image: {{ .Values.registry }}/{{ .Values.rhea.image }}
+          image: "{{ .Values.global.registry }}/{{ .Values.rhea.image.repository }}:{{ .Values.rhea.image.tag }}"
           imagePullPolicy: Always
           {{- with .Values.rhea.env }}
           env:

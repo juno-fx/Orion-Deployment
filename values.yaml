@@ -1,6 +1,7 @@
 show:                                 # Show code
 namespace: default                    # Namespace to deploy the services to
-registry: junoinnovations             # Registry to pull the Orion images from
+global:
+  registry: "junoinnovations"         # Registry to pull the Orion images from
 guid:                                 # GUID of the project
 host:                                 # Hostname of the project
 ingressClassName: nginx
@@ -31,7 +32,9 @@ cache:
 kuiper:
   tolerations: []
   enabled: true                       # Enable Kuiper
-  image: kuiper:v2.1.0               # Image to pull for Kuiper
+  image:
+    repository: "kuiper"              # image tag to pull kuiper from
+    tag: "v2.1.0"                     # image tag to pull kuiper from
   node_selector:                      # Node selector to deploy the Kuiper server to
     enable: true                      # Enable node selector
     labels:                           # Node selector to deploy the Kuiper server to
@@ -41,7 +44,9 @@ kuiper:
     max_replicas: 3                   # Maximum number of replicas to run
 
 hubble:
-    image: hubble:v3.2.1             # Image to pull for Hubble
+  image:
+    repository: "hubble"              # image repo to pull hubble from
+    tag: "v3.2.1"                     # image tag to pull hubble from
     tolerations: []
     env: {}                           # Environment variables to set for the Hubble server
     node_selector:                    # Node selector to deploy the Hubble server to
@@ -53,7 +58,8 @@ hubble:
       max_replicas: 3                 # Maximum number of replicas to run
 
 rhea:
-  image: rhea:unstable               # Image to pull for Rhea
+  repository: "rhea"                 # image repo to pull rhea from
+  tag: "unstable"                    # image tag to pull rhea from
   env: {}                            # Environment variables to set for the Rhea server
   resources:
     requests:

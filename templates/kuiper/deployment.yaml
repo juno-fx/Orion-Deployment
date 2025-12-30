@@ -42,7 +42,7 @@ spec:
       {{- end }}
       containers:
         - name: kuiper
-          image: {{.Values.registry}}/{{ .Values.kuiper.image }}
+          image: "{{ .Values.global.registry }}/{{ .Values.kuiper.image.repository }}:{{ .Values.kuiper.image.tag }}"
           imagePullPolicy: Always
           livenessProbe:
             httpGet:
@@ -79,7 +79,7 @@ spec:
             - containerPort: 8000
               name: endpoint
         - name: rhea
-          image: {{ .Values.registry }}/{{ .Values.rhea.image }}
+          image: "{{ .Values.global.registry }}/{{ .Values.rhea.image.repository }}:{{ .Values.rhea.image.tag }}"
           imagePullPolicy: Always
           {{- with .Values.rhea.env }}
           env:
