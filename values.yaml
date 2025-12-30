@@ -47,15 +47,15 @@ hubble:
   image:
     repository: "hubble"              # image repo to pull hubble from
     tag: "v3.2.1"                     # image tag to pull hubble from
-    tolerations: []
-    env: {}                           # Environment variables to set for the Hubble server
-    node_selector:                    # Node selector to deploy the Hubble server to
-      enable: true                    # Enable node selector
-      labels:                         # Node selector to deploy the Hubble server to
-        juno-innovations.com/service: "true"
-    autoscaling:
-      min_replicas: 1                 # Minimum number of replicas to run
-      max_replicas: 3                 # Maximum number of replicas to run
+  tolerations: []
+  env: {}                             # Environment variables to set for the Hubble server
+  node_selector:                      # Node selector to deploy the Hubble server to
+    enable: true                      # Enable node selector
+    labels:                           # Node selector to deploy the Hubble server to
+      juno-innovations.com/service: "true"
+  autoscaling:
+    min_replicas: 1                   # Minimum number of replicas to run
+    max_replicas: 3                   # Maximum number of replicas to run
 
 rhea:
   image:
