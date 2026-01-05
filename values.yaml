@@ -53,7 +53,7 @@ hubble:
       max_replicas: 3                 # Maximum number of replicas to run
 
 rhea:
-  image: rhea:unstable               # Image to pull for Rhea
+  image: rhea:v1.0.0                 # Image to pull for Rhea
   env: {}                            # Environment variables to set for the Rhea server
   resources:
     requests:
