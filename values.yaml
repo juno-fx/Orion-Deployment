@@ -20,14 +20,6 @@ volumes:
 #      mount_path:                    # Where to mount the persistent volume into the Mars server
 #      sub_path:                      # Sub path on the persistent volume to mount
 
-cache:
-  tolerations: []
-  image: redis:alpine
-  node_selector:                      # Node selector to deploy the Redis server to
-    enable: true                      # Enable node selector
-    labels:                           # Node selector to deploy the Redis server to
-      juno-innovations.com/service: "true"
-
 kuiper:
   tolerations: []
   enabled: true                       # Enable Kuiper
