@@ -25,6 +25,10 @@ spec:
         app: hubble
 
     spec:
+      {{- if .Values.hubble.tolerations }}
+      tolerations:
+        {{- toYaml .Values.hubble.tolerations | nindent 8 }}
+      {{- end }}
       {{- if .Values.image_pull_secret }}
       imagePullSecrets:
         - name: {{ .Values.image_pull_secret }}
@@ -70,4 +74,36 @@ spec:
               name: endpoint
             - containerPort: 8000
               name: socket
+        - name: rhea
+          image: {{ .Values.registry }}/{{ .Values.rhea.image }}
+          imagePullPolicy: Always
+          {{- with .Values.rhea.env }}
+          env:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+          ports:
+            - containerPort: 13000
+              name: auth
+          livenessProbe:
+            httpGet:
+              path: /.health
+              port: 13000
+            initialDelaySeconds: 5
+            periodSeconds: 10
+          readinessProbe:
+            httpGet:
+              path: /.health
+              port: 13000
+            initialDelaySeconds: 5
+            periodSeconds: 10
+          resources:
+            {{- toYaml .Values.rhea.resources | nindent 12 }}
+          volumeMounts:
+            - name: policies
+              mountPath: /etc/rhea/policies
+              readOnly: true
+      volumes:
+        - name: policies
+          configMap:
+            name: orion-environment-systempolicy
 {{- end }}

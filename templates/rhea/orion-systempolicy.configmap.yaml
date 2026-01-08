@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: orion-environment-systempolicy
+  namespace: {{ .Values.namespace }}
+data:
+  policies.cedar: |-
+{{ tpl (.Files.Get "files/rhea/policies.cedar") . | indent 4 }}

@@ -1,6 +1,16 @@
 # vars
 PROJECT="orion"
 
+.hack/bin/cedar:
+	@cargo install cedar-policy-cli --root .hack
+
+format: .hack/bin/cedar
+	@.hack/bin/cedar format --write -p files/rhea/policies.cedar
+
+lint: .hack/bin/cedar
+	@sed 's/{{ .Values.namespace }}/default/g' files/rhea/policies.cedar > .tmp-policies.cedar
+	@.hack/bin/cedar format --check -p .tmp-policies.cedar
+
 # targets
 cluster:
 	@kind create cluster --image kindest/node:v1.30.0 --name $(PROJECT) --config juno/kind.yaml || echo "Cluster already exists..."

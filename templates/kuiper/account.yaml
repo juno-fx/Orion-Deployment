@@ -1,4 +1,4 @@
-{{- if and .Values.active .Values.kuiper.enabled }}
+{{- if .Values.active }}
 kind: ServiceAccount
 apiVersion: v1
 metadata:

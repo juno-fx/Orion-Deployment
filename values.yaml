@@ -20,16 +20,10 @@ volumes:
 #      mount_path:                    # Where to mount the persistent volume into the Mars server
 #      sub_path:                      # Sub path on the persistent volume to mount
 
-cache:
-  image: redis:alpine
-  node_selector:                      # Node selector to deploy the Redis server to
-    enable: true                      # Enable node selector
-    labels:                           # Node selector to deploy the Redis server to
-      juno-innovations.com/service: "true"
-
 kuiper:
+  tolerations: []
   enabled: true                       # Enable Kuiper
-  image: kuiper:v2.1.0               # Image to pull for Kuiper
+  image: kuiper:v3.0.0               # Image to pull for Kuiper
   node_selector:                      # Node selector to deploy the Kuiper server to
     enable: true                      # Enable node selector
     labels:                           # Node selector to deploy the Kuiper server to
@@ -39,7 +33,8 @@ kuiper:
     max_replicas: 3                   # Maximum number of replicas to run
 
 hubble:
-    image: hubble:v3.2.5             # Image to pull for Hubble
+    image: hubble:v4.0.0             # Image to pull for Hubble
+    tolerations: []
     env: {}                           # Environment variables to set for the Hubble server
     node_selector:                    # Node selector to deploy the Hubble server to
       enable: true                    # Enable node selector
@@ -48,3 +43,14 @@ hubble:
     autoscaling:
       min_replicas: 1                 # Minimum number of replicas to run
       max_replicas: 3                 # Maximum number of replicas to run
+
+rhea:
+  image: rhea:v1.0.0                 # Image to pull for Rhea
+  env: {}                            # Environment variables to set for the Rhea server
+  resources:
+    requests:
+      cpu: 200m
+      memory: 100Mi
+    limits:
+      cpu: 350m
+      memory: 250Mi

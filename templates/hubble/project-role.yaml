@@ -2,13 +2,9 @@
 apiVersion: rbac.authorization.k8s.io/v1
 kind: Role
 metadata:
-  namespace: argocd
   name: orion-hubble-{{ .Values.show }}
+  namespace: {{ .Values.namespace }}
 rules:
-- apiGroups: [""]
-  resources: ["secrets"]
-  verbs: ["get"]
-  resourceNames: ["juno-auth-secret"]
 - apiGroups: [""]
   resources: ["serviceaccounts/token"]
   verbs: ["create"]

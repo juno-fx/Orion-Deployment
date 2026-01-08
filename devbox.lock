@@ -1,6 +1,54 @@
 {
   "lockfile_version": "1",
   "packages": {
+    "cargo@latest": {
+      "last_modified": "2025-10-22T20:59:19Z",
+      "resolved": "github:NixOS/nixpkgs/01b6809f7f9d1183a2b3e081f0a1e6f8f415cb09#cargo",
+      "source": "devbox-search",
+      "version": "1.89.0",
+      "systems": {
+        "aarch64-darwin": {
+          "outputs": [
+            {
+              "name": "out",
+              "path": "/nix/store/f61dvjzzqj7c9xv07naqx6ga84vj10ip-cargo-1.89.0",
+              "default": true
+            }
+          ],
+          "store_path": "/nix/store/f61dvjzzqj7c9xv07naqx6ga84vj10ip-cargo-1.89.0"
+        },
+        "aarch64-linux": {
+          "outputs": [
+            {
+              "name": "out",
+              "path": "/nix/store/cp19l4m09lp45cm86ilvqpl1n1bwf5fz-cargo-1.89.0",
+              "default": true
+            }
+          ],
+          "store_path": "/nix/store/cp19l4m09lp45cm86ilvqpl1n1bwf5fz-cargo-1.89.0"
+        },
+        "x86_64-darwin": {
+          "outputs": [
+            {
+              "name": "out",
+              "path": "/nix/store/mdrdfm4q2076c8pp3gk798nzd6g0b5jn-cargo-1.89.0",
+              "default": true
+            }
+          ],
+          "store_path": "/nix/store/mdrdfm4q2076c8pp3gk798nzd6g0b5jn-cargo-1.89.0"
+        },
+        "x86_64-linux": {
+          "outputs": [
+            {
+              "name": "out",
+              "path": "/nix/store/ynhfvh8h1da3l2hnm15ab2fh3h8a6lf4-cargo-1.89.0",
+              "default": true
+            }
+          ],
+          "store_path": "/nix/store/ynhfvh8h1da3l2hnm15ab2fh3h8a6lf4-cargo-1.89.0"
+        }
+      }
+    },
     "docker@latest": {
       "last_modified": "2024-07-31T08:48:38Z",
       "resolved": "github:NixOS/nixpkgs/c3392ad349a5227f4a3464dce87bcc5046692fce#docker",
@@ -273,6 +321,54 @@
             }
           ],
           "store_path": "/nix/store/3vkf0406s1i6l89hk5wrakh4bbn0p1p2-kubectl-1.30.2"
+        }
+      }
+    },
+    "kubernetes-helm@3.16.4": {
+      "last_modified": "2025-01-19T08:16:51Z",
+      "resolved": "github:NixOS/nixpkgs/50165c4f7eb48ce82bd063e1fb8047a0f515f8ce#kubernetes-helm",
+      "source": "devbox-search",
+      "version": "3.16.4",
+      "systems": {
+        "aarch64-darwin": {
+          "outputs": [
+            {
+              "name": "out",
+              "path": "/nix/store/2lvby5gkkv0bfaq9vvzql8gs7a151zf0-kubernetes-helm-3.16.4",
+              "default": true
+            }
+          ],
+          "store_path": "/nix/store/2lvby5gkkv0bfaq9vvzql8gs7a151zf0-kubernetes-helm-3.16.4"
+        },
+        "aarch64-linux": {
+          "outputs": [
+            {
+              "name": "out",
+              "path": "/nix/store/fi048xvgic3l5aaqf8i9l60mdp9xxfr3-kubernetes-helm-3.16.4",
+              "default": true
+            }
+          ],
+          "store_path": "/nix/store/fi048xvgic3l5aaqf8i9l60mdp9xxfr3-kubernetes-helm-3.16.4"
+        },
+        "x86_64-darwin": {
+          "outputs": [
+            {
+              "name": "out",
+              "path": "/nix/store/m70il2ms96vjynm1hv6saisbzc5xyzp9-kubernetes-helm-3.16.4",
+              "default": true
+            }
+          ],
+          "store_path": "/nix/store/m70il2ms96vjynm1hv6saisbzc5xyzp9-kubernetes-helm-3.16.4"
+        },
+        "x86_64-linux": {
+          "outputs": [
+            {
+              "name": "out",
+              "path": "/nix/store/ykhg41hvf1v8zdf9fyldfkdxazhjpfz5-kubernetes-helm-3.16.4",
+              "default": true
+            }
+          ],
+          "store_path": "/nix/store/ykhg41hvf1v8zdf9fyldfkdxazhjpfz5-kubernetes-helm-3.16.4"
         }
       }
     }
