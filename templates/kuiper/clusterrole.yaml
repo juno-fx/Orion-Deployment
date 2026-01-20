@@ -3,6 +3,6 @@ kind: ClusterRole
 metadata:
   name: kuiper-{{ .Values.namespace }}
 rules:
-  - apiGroups: ["juno-innovations.com"]
-    resources: ["workstation-logs"]
-    verbs: ["list", "create", "delete", "get", "patch", "update"]
+  - apiGroups: ["cdi.kubevirt.io"]
+    resources: ["datavolumes"]
+    verbs: ["get", "list", "create", "watch"]
