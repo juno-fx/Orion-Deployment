@@ -42,7 +42,7 @@ hubble:
         juno-innovations.com/service: "true"
     autoscaling:
       min_replicas: 2                 # Minimum number of replicas to run
-      max_replicas: 4                 # Maximum number of replicas to run
+      max_replicas: 5                 # Maximum number of replicas to run
 
 rhea:
   image: rhea:v1.0.0                 # Image to pull for Rhea
