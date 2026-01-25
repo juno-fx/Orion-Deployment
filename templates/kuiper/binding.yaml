@@ -24,7 +24,7 @@ subjects:
     namespace: {{ .Values.namespace }}
 ---
 apiVersion: rbac.authorization.k8s.io/v1
-kind: RoleBinding
+kind: ClusterRoleBinding
 metadata:
   name: kuiper-cluster-admin
   namespace: {{ .Values.namespace }}
