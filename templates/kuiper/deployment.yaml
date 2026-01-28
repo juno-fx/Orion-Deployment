@@ -65,9 +65,6 @@ spec:
             requests:
               cpu: 500m
               memory: 400Mi
-            limits:
-              cpu: 1000m
-              memory: 800Mi
           env:
             - name: HOST
               value: "{{ .Values.host }}"
