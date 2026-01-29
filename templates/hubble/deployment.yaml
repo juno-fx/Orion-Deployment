@@ -23,7 +23,7 @@ spec:
       annotations:
         # Allow for footprint consolidation
         cluster-autoscaler.kubernetes.io/safe-to-evict: "true"
-        linkerd.io/inject: enabled
+{{/*        linkerd.io/inject: enabled*/}}
       labels:
         app: hubble
 

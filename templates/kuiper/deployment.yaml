@@ -4,8 +4,8 @@ kind: Deployment
 metadata:
   name: kuiper
   namespace: {{ .Values.namespace }}
-  annotations:
-    linkerd.io/inject: enabled
+{{/*  annotations:*/}}
+{{/*    linkerd.io/inject: enabled*/}}
 spec:
   revisionHistoryLimit: 0
   selector:
@@ -21,7 +21,7 @@ spec:
   template:
     metadata:
       annotations:
-        linkerd.io/inject: enabled
+{{/*        linkerd.io/inject: enabled*/}}
         # Allow for footprint consolidation
         cluster-autoscaler.kubernetes.io/safe-to-evict: "true"
       labels:

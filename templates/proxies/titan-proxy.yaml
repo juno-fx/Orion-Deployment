@@ -4,8 +4,8 @@ kind: Service
 metadata:
   name: titan
   namespace: {{ .Values.namespace }}
-  annotations:
-    linkerd.io/inject: enabled
+{{/*  annotations:*/}}
+{{/*    linkerd.io/inject: enabled*/}}
 spec:
   type: ExternalName
   externalName: titan.{{ .Values.genesis_namespace }}.svc.cluster.local
