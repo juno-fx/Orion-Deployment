@@ -66,7 +66,7 @@ spec:
             failureThreshold: 2
           resources:
             requests:
-              cpu: 1000m
+              cpu: 500m
               memory: 400Mi
           env:
             - name: HOST
