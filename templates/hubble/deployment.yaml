@@ -70,8 +70,11 @@ spec:
                   fieldPath: metadata.namespace
           resources:
             requests:
-              cpu: 250m
+              cpu: 500m
               memory: 400Mi
+            limits:
+              cpu: 1000m
+              memory: 800Mi
           ports:
             - containerPort: 3000
               name: endpoint
