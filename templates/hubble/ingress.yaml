@@ -17,6 +17,9 @@ metadata:
     nginx.ingress.kubernetes.io/proxy-next-upstream-timeout: "30"
     nginx.ingress.kubernetes.io/affinity: "cookie"
     nginx.ingress.kubernetes.io/session-cookie-path: "/"
+    nginx.ingress.kubernetes.io/session-cookie-name: "juno-hubble-session"
+    nginx.ingress.kubernetes.io/session-cookie-expires: "172800"
+    nginx.ingress.kubernetes.io/session-cookie-max-age: "172800"
 
 spec:
   ingressClassName: "{{ .Values.ingressClassName }}"
