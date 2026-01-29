@@ -7,6 +7,7 @@ metadata:
 {{/*  annotations:*/}}
 {{/*    linkerd.io/inject: enabled*/}}
 spec:
+  clusterIP: None
   sessionAffinity: ClientIP
   sessionAffinityConfig:
     clientIP:
