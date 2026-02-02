@@ -1,4 +1,3 @@
-show:                                 # Show code
 namespace: default                    # Namespace to deploy the services to
 registry: junoinnovations             # Registry to pull the Orion images from
 guid:                                 # GUID of the project

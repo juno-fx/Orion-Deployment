@@ -52,14 +52,6 @@ spec:
               value: "true"
             - name: "NEXTAUTH_URL"
               value: "{{ tpl .Values.nextauth_url_tpl . }}"
-            - name: "LUNA"
-              value: "deactivated"
-            - name: "TERRA"
-              value: "deactivated"
-          {{- if not .Values.kuiper.enabled}}
-            - name: "KUIPER"
-              value: "deactivated"
-          {{- end }}
           {{- range $key, $value := .Values.hubble.env }}
             - name: "{{ $key }}"
               value: "{{ $value }}"
