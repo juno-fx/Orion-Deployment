@@ -4,6 +4,8 @@ kind: Deployment
 metadata:
   name: hubble
   namespace: {{ .Values.namespace }}
+  annotations:
+    linkerd.io/inject: enabled
 spec:
   revisionHistoryLimit: 0
   selector:
@@ -21,6 +23,7 @@ spec:
       annotations:
         # Allow for footprint consolidation
         cluster-autoscaler.kubernetes.io/safe-to-evict: "true"
+        linkerd.io/inject: enabled
       labels:
         app: hubble
 
@@ -49,14 +52,6 @@ spec:
               value: "true"
             - name: "NEXTAUTH_URL"
               value: "{{ tpl .Values.nextauth_url_tpl . }}"
-            - name: "LUNA"
-              value: "deactivated"
-            - name: "TERRA"
-              value: "deactivated"
-          {{- if not .Values.kuiper.enabled}}
-            - name: "KUIPER"
-              value: "deactivated"
-          {{- end }}
           {{- range $key, $value := .Values.hubble.env }}
             - name: "{{ $key }}"
               value: "{{ $value }}"
@@ -67,8 +62,11 @@ spec:
                   fieldPath: metadata.namespace
           resources:
             requests:
-              cpu: 200m
-              memory: 500Mi
+              cpu: 500m
+              memory: 400Mi
+            limits:
+              cpu: 1000m
+              memory: 800Mi
           ports:
             - containerPort: 3000
               name: endpoint

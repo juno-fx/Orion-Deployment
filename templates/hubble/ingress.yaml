@@ -5,6 +5,7 @@ metadata:
   namespace: {{ .Values.namespace }}
   name: hubble-ingress
   annotations:
+    linkerd.io/inject: enabled
     cert-manager.io/issuer: "{{ .Values.cert_manager_issuer }}"
     kubernetes.io/ingress.class: "{{ .Values.ingressClassName }}"
     nginx.ingress.kubernetes.io/auth-url: "http://hubble.{{ .Release.Namespace }}.svc.cluster.local:3000/api/socket-auth/"
@@ -16,6 +17,9 @@ metadata:
     nginx.ingress.kubernetes.io/proxy-next-upstream-timeout: "30"
     nginx.ingress.kubernetes.io/affinity: "cookie"
     nginx.ingress.kubernetes.io/session-cookie-path: "/"
+    nginx.ingress.kubernetes.io/session-cookie-name: "juno-hubble-session"
+    nginx.ingress.kubernetes.io/session-cookie-expires: "172800"
+    nginx.ingress.kubernetes.io/session-cookie-max-age: "172800"
 
 spec:
   ingressClassName: "{{ .Values.ingressClassName }}"

@@ -4,6 +4,8 @@ kind: Service
 metadata:
   name: genesis
   namespace: {{ .Values.namespace }}
+  annotations:
+    linkerd.io/inject: enabled
 spec:
   type: ExternalName
   externalName: genesis.{{ .Values.genesis_namespace }}.svc.cluster.local
