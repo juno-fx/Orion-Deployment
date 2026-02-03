@@ -22,7 +22,7 @@ volumes:
 kuiper:
   tolerations: []
   enabled: true                       # Enable Kuiper
-  image: kuiper:v3.0.0               # Image to pull for Kuiper
+  image: kuiper:432-feat-alpha-test   # Image to pull for Kuiper
   node_selector:                      # Node selector to deploy the Kuiper server to
     enable: true                      # Enable node selector
     labels:                           # Node selector to deploy the Kuiper server to
@@ -32,7 +32,7 @@ kuiper:
     max_replicas: 5                   # Maximum number of replicas to run
 
 hubble:
-    image: hubble:v4.0.0             # Image to pull for Hubble
+    image: hubble:937-feat-alpha-test # Image to pull for Hubble
     tolerations: []
     env: {}                           # Environment variables to set for the Hubble server
     node_selector:                    # Node selector to deploy the Hubble server to
