@@ -3,7 +3,7 @@
 
 [Read the full documentation here](https://juno-fx.github.io/Orion-Documentation/genesis2.0.3-orion2.0.1)
 
-## Deployment Chart v2.0.0
+## Deployment Chart v2.0.1
 This deployment chart includes the release images for Hubble (v4.0.1), Kuiper (v3.0.1), and Rhea (v1.0.0)
 
 See all the latest feature changes via our Changelogs [here](https://juno-fx.github.io/Orion-Documentation/genesis2.0.3-orion2.0.1/changelogs/feature/#2026-02-07)
