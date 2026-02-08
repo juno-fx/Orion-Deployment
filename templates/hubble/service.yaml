@@ -4,7 +4,10 @@ kind: Service
 metadata:
   name: hubble
   namespace: {{ .Values.namespace }}
+  annotations:
+    linkerd.io/inject: enabled
 spec:
+  clusterIP: None
   sessionAffinity: ClientIP
   selector:
     app: hubble

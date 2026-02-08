@@ -4,6 +4,8 @@ kind: Deployment
 metadata:
   name: hubble
   namespace: {{ .Values.namespace }}
+  annotations:
+    linkerd.io/inject: enabled
 spec:
   revisionHistoryLimit: 0
   selector:
@@ -21,6 +23,7 @@ spec:
       annotations:
         # Allow for footprint consolidation
         cluster-autoscaler.kubernetes.io/safe-to-evict: "true"
+        linkerd.io/inject: enabled
       labels:
         app: hubble
 
