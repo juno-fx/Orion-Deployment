@@ -4,10 +4,7 @@ kind: Service
 metadata:
   name: kuiper
   namespace: {{ .Values.namespace }}
-  annotations:
-    linkerd.io/inject: enabled
 spec:
-  clusterIP: None
   sessionAffinity: ClientIP
   selector:
     app: kuiper
