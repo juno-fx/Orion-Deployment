@@ -1,0 +1,77 @@
+{{ if eq .Values.ingressController "traefik" }}
+{{- if .Values.active}}
+apiVersion: traefik.io/v1alpha1
+kind: Middleware
+metadata:
+  name: hubble-auth-middleware
+  namespace: {{ .Release.Namespace }}
+spec:
+  forwardAuth:
+    address: "http://hubble.{{ .Release.Namespace }}.svc.cluster.local:3000/api/socket-auth/"
+---
+# Buffering middleware for body size management (1GB limit)
+apiVersion: traefik.io/v1alpha1
+kind: Middleware
+metadata:
+  name: hubble-buffering
+  namespace: {{ .Release.Namespace }}
+spec:
+  buffering:
+    maxRequestBodyBytes: 1073741824  # 1GB limit
+    memRequestBodyBytes: 104857600   # 100MB memory threshold
+---
+# ServersTransport for timeout configurations equivalent to nginx settings
+apiVersion: traefik.io/v1alpha1
+kind: ServersTransport
+metadata:
+  name: hubble-timeouts-transport
+  namespace: {{ .Release.Namespace }}
+spec:
+  forwardingTimeouts:
+    dialTimeout: "30s"           # nginx proxy-connect-timeout equivalent
+    responseHeaderTimeout: "30s" # nginx proxy-send-timeout equivalent
+    idleConnTimeout: "30s"       # nginx proxy-read-timeout equivalent
+---
+# Middleware chain combining auth and buffering
+apiVersion: traefik.io/v1alpha1
+kind: Middleware
+metadata:
+  name: hubble-chain
+  namespace: {{ .Release.Namespace }}
+spec:
+  chain:
+    middlewares:
+      - name: hubble-buffering
+      - name: hubble-auth-middleware
+      - name: hubble-timeouts-transport
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: hubble-ingress
+  namespace: {{ .Release.Namespace }}
+  annotations:
+    cert-manager.io/issuer: "{{ .Values.cert_manager_issuer }}"
+    traefik.ingress.kubernetes.io/router.middlewares: "{{ .Release.Namespace }}-hubble-chain@kubernetescrd"
+spec:
+  ingressClassName: "{{ .Values.ingressController }}"
+  rules:
+    - host: {{ .Values.host }}
+      http:
+        paths:
+          - path: "/"
+            pathType: Prefix
+            backend:
+              service:
+                name: hubble
+                port:
+                  number: 3000
+          - path: "/socket.io"
+            pathType: ImplementationSpecific
+            backend:
+              service:
+                name: hubble
+                port:
+                  number: 8000
+{{ end }}
+{{ end }}
