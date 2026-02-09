@@ -1,7 +1,22 @@
-{{ if eq .Values.ingressController "traefik" }}
+{{- if eq .Values.ingressController "traefik" }}
 {{- if .Values.active}}
 ---
-# ForwardAuth middleware that passes ALL NextAuth headers like NGINX does
+# Cookie-based session affinity middleware (equivalent to nginx affinity)
+apiVersion: traefik.io/v1alpha1
+kind: Middleware
+metadata:
+  name: hubble-sticky-sessions
+  namespace: {{ .Release.Namespace }}
+spec:
+  sticky:
+    cookie:
+      name: "juno-hubble-session"
+      secure: true
+      httpOnly: true
+      sameHost: true
+      maxAge: 172800
+---
+# ForwardAuth middleware for HTTP routes only
 apiVersion: traefik.io/v1alpha1
 kind: Middleware
 metadata:
@@ -10,7 +25,6 @@ metadata:
 spec:
   forwardAuth:
     address: "http://hubble.{{ .Release.Namespace }}.svc.cluster.local:3000/api/socket-auth/"
-    # CRITICAL: Pass ALL original headers (including NextAuth cookies) to auth service
     trustForwardHeader: true
     authResponseHeaders:
       - "X-Forwarded-For"
@@ -19,19 +33,47 @@ spec:
       - "X-Forwarded-Uri"
       - "X-Forwarded-Method"
       - "Cookie"
-      - "X-Real-IP"
-      - "User-Agent"
-      - "Accept"
-      - "Accept-Language"
-      - "Accept-Encoding"
-      - "Cache-Control"
-      - "Pragma"
+      - "Set-Cookie"
+      - "Authorization"
+---
+# WebSocket-specific auth middleware with lighter authentication
+apiVersion: traefik.io/v1alpha1
+kind: Middleware
+metadata:
+  name: hubble-websocket-auth
+  namespace: {{ .Release.Namespace }}
+spec:
+  forwardAuth:
+    address: "http://hubble.{{ .Release.Namespace }}.svc.cluster.local:3000/api/socket-auth/"
+    trustForwardHeader: true
+    authResponseHeaders:
+      - "Cookie"
+      - "Set-Cookie"
       - "Sec-WebSocket-Key"
       - "Sec-WebSocket-Version"
       - "Sec-WebSocket-Extensions"
       - "Origin"
       - "Upgrade"
       - "Connection"
+      - "X-Forwarded-For"
+      - "X-Forwarded-Proto"
+      - "X-Forwarded-Host"
+---
+# WebSocket upgrade headers middleware
+apiVersion: traefik.io/v1alpha1
+kind: Middleware
+metadata:
+  name: hubble-websocket-headers
+  namespace: {{ .Release.Namespace }}
+spec:
+  headers:
+    customRequestHeaders:
+      X-Forwarded-Proto: "https"
+      X-Forwarded-Host: "{{ .Values.host }}"
+    accessControlAllowCredentials: true
+    accessControlAllowOriginList: ["https://{{ .Values.host }}", "http://{{ .Values.host }}"]
+    accessControlAllowMethods: ["GET", "POST", "PUT", "DELETE", "OPTIONS", "PATCH"]
+    accessControlAllowHeaders: ["*"]
 ---
 # Buffering middleware for body size management (1GB limit)
 apiVersion: traefik.io/v1alpha1
@@ -56,28 +98,41 @@ spec:
     responseHeaderTimeout: "30s" # nginx proxy-send-timeout equivalent
     idleConnTimeout: "30s"       # nginx proxy-read-timeout equivalent
 ---
-# Middleware chain with auth BEFORE buffering (critical for WebSockets)
+# HTTP middleware chain (auth + sticky + buffering)
 apiVersion: traefik.io/v1alpha1
 kind: Middleware
 metadata:
-  name: hubble-chain
+  name: hubble-http-chain
   namespace: {{ .Release.Namespace }}
 spec:
   chain:
     middlewares:
       - name: hubble-auth-middleware
+      - name: hubble-sticky-sessions
       - name: hubble-buffering
 ---
-# Single Traefik ingress with all middlewares (like your NGINX setup)
+# WebSocket middleware chain (websocket auth + headers + sticky)
+apiVersion: traefik.io/v1alpha1
+kind: Middleware
+metadata:
+  name: hubble-websocket-chain
+  namespace: {{ .Release.Namespace }}
+spec:
+  chain:
+    middlewares:
+      - name: hubble-websocket-auth
+      - name: hubble-websocket-headers
+      - name: hubble-sticky-sessions
+---
+# HTTP routes Ingress
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: hubble-ingress
+  name: hubble-http-ingress
   namespace: {{ .Release.Namespace }}
   annotations:
     cert-manager.io/issuer: "{{ .Values.cert_manager_issuer }}"
-    # Apply middleware chain that includes auth + buffering + timeouts
-    traefik.ingress.kubernetes.io/router.middlewares: "{{ .Release.Namespace }}-hubble-chain@kubernetescrd"
+    traefik.ingress.kubernetes.io/router.middlewares: "{{ .Release.Namespace }}-hubble-http-chain@kubernetescrd"
 spec:
   ingressClassName: "{{ .Values.ingressController }}"
   rules:
@@ -91,6 +146,22 @@ spec:
                 name: hubble
                 port:
                   number: 3000
+---
+# WebSocket routes Ingress (separate for proper middleware handling)
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: hubble-websocket-ingress
+  namespace: {{ .Release.Namespace }}
+  annotations:
+    cert-manager.io/issuer: "{{ .Values.cert_manager_issuer }}"
+    traefik.ingress.kubernetes.io/router.middlewares: "{{ .Release.Namespace }}-hubble-websocket-chain@kubernetescrd"
+spec:
+  ingressClassName: "{{ .Values.ingressController }}"
+  rules:
+    - host: {{ .Values.host }}
+      http:
+        paths:
           - path: "/socket.io"
             pathType: ImplementationSpecific
             backend:

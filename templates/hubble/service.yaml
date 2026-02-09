@@ -4,16 +4,7 @@ kind: Service
 metadata:
   name: hubble
   namespace: {{ .Values.namespace }}
-  {{- if eq .Values.ingressController "traefik" }}
-  annotations:
-    traefik.ingress.kubernetes.io/affinity: "true"
-    traefik.ingress.kubernetes.io/session-cookie-name: "juno-hubble-session"
-    traefik.ingress.kubernetes.io/session-cookie-expires: "172800"
-    traefik.ingress.kubernetes.io/session-cookie-max-age: "172800"
-    traefik.ingress.kubernetes.io/session-cookie-path: "/"
-  {{- end }}
 spec:
-  sessionAffinity: ClientIP
   selector:
     app: hubble
   ports:
