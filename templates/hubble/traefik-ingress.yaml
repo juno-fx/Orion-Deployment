@@ -8,6 +8,17 @@ metadata:
   name: hubble-auth-middleware
   namespace: {{ .Values.namespace }}
 spec:
+  forwardingTimeouts:
+    dialTimeout: "30s"           # nginx proxy-connect-timeout equivalent
+    responseHeaderTimeout: "30s" # nginx proxy-send-timeout equivalent
+    idleConnTimeout: "30s"       # nginx proxy-read-timeout equivalent
+  buffering:
+    maxRequestBodyBytes: 1073741824  # 1GB limit
+    memRequestBodyBytes: 104857600   # 100MB memory threshold
+  headers:
+    customRequestHeaders:
+      Connection: keep-alive, Upgrade
+      Upgrade: WebSocket
   forwardAuth:
     address: "http://hubble.{{ .Values.namespace }}.svc.cluster.local:3000/api/socket-auth/"
     trustForwardHeader: true
@@ -20,96 +31,12 @@ spec:
       - "Cookie"
       - "Set-Cookie"
       - "Authorization"
----
-# WebSocket-specific auth middleware with lighter authentication
-apiVersion: traefik.io/v1alpha1
-kind: Middleware
-metadata:
-  name: hubble-websocket-auth
-  namespace: {{ .Values.namespace }}
-spec:
-  headers:
-    customRequestHeaders:
-      Connection: keep-alive, Upgrade
-      Upgrade: WebSocket
-  forwardAuth:
-    address: "http://hubble.{{ .Values.namespace }}.svc.cluster.local:3000/api/socket-auth/"
-    trustForwardHeader: true
-    authResponseHeaders:
-      - "Cookie"
-      - "Set-Cookie"
       - "Sec-WebSocket-Key"
       - "Sec-WebSocket-Version"
       - "Sec-WebSocket-Extensions"
       - "Origin"
       - "Upgrade"
       - "Connection"
-      - "X-Forwarded-For"
-      - "X-Forwarded-Proto"
-      - "X-Forwarded-Host"
----
-# WebSocket upgrade headers middleware
-apiVersion: traefik.io/v1alpha1
-kind: Middleware
-metadata:
-  name: hubble-websocket-headers
-  namespace: {{ .Values.namespace }}
-spec:
-  headers:
-    customRequestHeaders:
-      X-Forwarded-Proto: "https"
-      X-Forwarded-Host: "{{ .Values.host }}"
-    accessControlAllowCredentials: true
-    accessControlAllowOriginList: ["*"]
-    accessControlAllowMethods: ["*"]
-    accessControlAllowHeaders: ["*"]
----
-# Buffering middleware for body size management (1GB limit)
-apiVersion: traefik.io/v1alpha1
-kind: Middleware
-metadata:
-  name: hubble-buffering
-  namespace: {{ .Values.namespace }}
-spec:
-  buffering:
-    maxRequestBodyBytes: 1073741824  # 1GB limit
-    memRequestBodyBytes: 104857600   # 100MB memory threshold
----
-# ServersTransport for timeout configurations equivalent to nginx settings
-apiVersion: traefik.io/v1alpha1
-kind: ServersTransport
-metadata:
-  name: hubble-timeouts-transport
-  namespace: {{ .Values.namespace }}
-spec:
-  forwardingTimeouts:
-    dialTimeout: "30s"           # nginx proxy-connect-timeout equivalent
-    responseHeaderTimeout: "30s" # nginx proxy-send-timeout equivalent
-    idleConnTimeout: "30s"       # nginx proxy-read-timeout equivalent
----
-# HTTP middleware chain (auth + buffering)
-apiVersion: traefik.io/v1alpha1
-kind: Middleware
-metadata:
-  name: hubble-http-chain
-  namespace: {{ .Values.namespace }}
-spec:
-  chain:
-    middlewares:
-      - name: hubble-auth-middleware
-      - name: hubble-buffering
----
-# WebSocket middleware chain (websocket auth + headers)
-apiVersion: traefik.io/v1alpha1
-kind: Middleware
-metadata:
-  name: hubble-websocket-chain
-  namespace: {{ .Values.namespace }}
-spec:
-  chain:
-    middlewares:
-      - name: hubble-websocket-auth
-      - name: hubble-websocket-headers
 ---
 # HTTP routes Ingress
 apiVersion: networking.k8s.io/v1
@@ -119,7 +46,7 @@ metadata:
   namespace: {{ .Values.namespace }}
   annotations:
     cert-manager.io/issuer: "{{ .Values.cert_manager_issuer }}"
-    traefik.ingress.kubernetes.io/router.middlewares: "{{ .Values.namespace }}-hubble-http-chain@kubernetescrd"
+    traefik.ingress.kubernetes.io/router.middlewares: "{{ .Values.namespace }}-hubble-auth-middleware@kubernetescrd"
 spec:
   ingressClassName: "{{ .Values.ingressController }}"
   rules:
@@ -133,22 +60,6 @@ spec:
                 name: hubble
                 port:
                   number: 3000
----
-# WebSocket routes Ingress (separate for proper middleware handling)
-apiVersion: networking.k8s.io/v1
-kind: Ingress
-metadata:
-  name: hubble-websocket-ingress
-  namespace: {{ .Values.namespace }}
-  annotations:
-    cert-manager.io/issuer: "{{ .Values.cert_manager_issuer }}"
-    traefik.ingress.kubernetes.io/router.middlewares: "{{ .Values.namespace }}-hubble-websocket-chain@kubernetescrd"
-spec:
-  ingressClassName: "{{ .Values.ingressController }}"
-  rules:
-    - host: {{ .Values.host }}
-      http:
-        paths:
           - path: "/socket.io"
             pathType: ImplementationSpecific
             backend:
