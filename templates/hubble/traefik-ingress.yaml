@@ -71,8 +71,8 @@ spec:
       X-Forwarded-Proto: "https"
       X-Forwarded-Host: "{{ .Values.host }}"
     accessControlAllowCredentials: true
-    accessControlAllowOriginList: ["https://{{ .Values.host }}", "http://{{ .Values.host }}"]
-    accessControlAllowMethods: ["GET", "POST", "PUT", "DELETE", "OPTIONS", "PATCH"]
+    accessControlAllowOriginList: ["*"]
+    accessControlAllowMethods: ["*"]
     accessControlAllowHeaders: ["*"]
 ---
 # Buffering middleware for body size management (1GB limit)
