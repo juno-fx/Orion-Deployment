@@ -21,22 +21,22 @@ spec:
 {{/*      Upgrade: "websocket"*/}}
   forwardAuth:
     address: "http://hubble.{{ .Values.namespace }}.svc.cluster.local:3000/api/socket-auth/"
-    trustForwardHeader: true
-    authResponseHeaders:
-      - "X-Forwarded-For"
-      - "X-Forwarded-Proto"
-      - "X-Forwarded-Host"
-      - "X-Forwarded-Uri"
-      - "X-Forwarded-Method"
-      - "Cookie"
-      - "Set-Cookie"
-      - "Authorization"
-      - "Sec-WebSocket-Key"
-      - "Sec-WebSocket-Version"
-      - "Sec-WebSocket-Extensions"
-      - "Origin"
-      - "Upgrade"
-      - "Connection"
+{{/*    trustForwardHeader: true*/}}
+{{/*    authResponseHeaders:*/}}
+{{/*      - "X-Forwarded-For"*/}}
+{{/*      - "X-Forwarded-Proto"*/}}
+{{/*      - "X-Forwarded-Host"*/}}
+{{/*      - "X-Forwarded-Uri"*/}}
+{{/*      - "X-Forwarded-Method"*/}}
+{{/*      - "Cookie"*/}}
+{{/*      - "Set-Cookie"*/}}
+{{/*      - "Authorization"*/}}
+{{/*      - "Sec-WebSocket-Key"*/}}
+{{/*      - "Sec-WebSocket-Version"*/}}
+{{/*      - "Sec-WebSocket-Extensions"*/}}
+{{/*      - "Origin"*/}}
+{{/*      - "Upgrade"*/}}
+{{/*      - "Connection"*/}}
 ---
 # HTTP routes Ingress
 apiVersion: networking.k8s.io/v1
