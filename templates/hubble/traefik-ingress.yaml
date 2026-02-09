@@ -68,7 +68,7 @@ spec:
                 port:
                   number: 8000
 ---
-apiVersion: traefik.containo.us/v1alpha1
+apiVersion: traefik.io/v1alpha1
 kind: Middleware
 metadata:
   name: websocket-headers
@@ -83,7 +83,7 @@ spec:
     sslRedirect: true
     sslForceHost: true
 ---
-apiVersion: traefik.containo.us/v1alpha1
+apiVersion: traefik.io/v1alpha1
 kind: Middleware
 metadata:
   name: websocket-ratelimit
@@ -94,7 +94,7 @@ spec:
     period: 1m
     burst: 50
 ---
-apiVersion: traefik.containo.us/v1alpha1
+apiVersion: traefik.io/v1alpha1
 kind: Middleware
 metadata:
   name: websocket-circuit-breaker
@@ -103,7 +103,7 @@ spec:
   circuitBreaker:
     expression: ResponseCodeRatio(500, 600, 0, 600) > 0.30
 ---
-apiVersion: traefik.containo.us/v1alpha1
+apiVersion: traefik.io/v1alpha1
 kind: ServersTransport
 metadata:
   name: websocket-transport
@@ -117,7 +117,7 @@ spec:
     responseHeaderTimeout: 3600s
     idleConnTimeout: 3600s
 ---
-apiVersion: traefik.containo.us/v1alpha1
+apiVersion: traefik.io/v1alpha1
 kind: TraefikService
 metadata:
   name: websocket-sticky
