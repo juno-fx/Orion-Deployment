@@ -12,9 +12,9 @@ spec:
 {{/*    dialTimeout: "30s"           # nginx proxy-connect-timeout equivalent*/}}
 {{/*    responseHeaderTimeout: "30s" # nginx proxy-send-timeout equivalent*/}}
 {{/*    idleConnTimeout: "30s"       # nginx proxy-read-timeout equivalent*/}}
-  buffering:
-    maxRequestBodyBytes: 1073741824  # 1GB limit
-    memRequestBodyBytes: 104857600   # 100MB memory threshold
+{{/*  buffering:*/}}
+{{/*    maxRequestBodyBytes: 1073741824  # 1GB limit*/}}
+{{/*    memRequestBodyBytes: 104857600   # 100MB memory threshold*/}}
 {{/*  headers:*/}}
 {{/*    customRequestHeaders:*/}}
 {{/*      Connection: "upgrade"*/}}
