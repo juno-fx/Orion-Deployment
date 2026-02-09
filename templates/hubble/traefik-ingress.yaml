@@ -28,6 +28,10 @@ metadata:
   name: hubble-websocket-auth
   namespace: {{ .Values.namespace }}
 spec:
+  headers:
+    customRequestHeaders:
+      Connection: keep-alive, Upgrade
+      Upgrade: WebSocket
   forwardAuth:
     address: "http://hubble.{{ .Values.namespace }}.svc.cluster.local:3000/api/socket-auth/"
     trustForwardHeader: true
