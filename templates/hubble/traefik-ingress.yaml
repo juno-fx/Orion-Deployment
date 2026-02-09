@@ -42,7 +42,7 @@ spec:
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: hubble-http-ingress
+  name: hubble-ingress
   namespace: {{ .Values.namespace }}
   annotations:
     cert-manager.io/issuer: "{{ .Values.cert_manager_issuer }}"
@@ -67,5 +67,72 @@ spec:
                 name: hubble
                 port:
                   number: 8000
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: Middleware
+metadata:
+  name: websocket-headers
+  namespace: {{ .Values.namespace }}
+spec:
+  headers:
+    customRequestHeaders:
+      X-Forwarded-Proto: https
+    customResponseHeaders:
+      X-Frame-Options: SAMEORIGIN
+      X-Content-Type-Options: nosniff
+    sslRedirect: true
+    sslForceHost: true
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: Middleware
+metadata:
+  name: websocket-ratelimit
+  namespace: {{ .Values.namespace }}
+spec:
+  rateLimit:
+    average: 100
+    period: 1m
+    burst: 50
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: Middleware
+metadata:
+  name: websocket-circuit-breaker
+  namespace: {{ .Values.namespace }}
+spec:
+  circuitBreaker:
+    expression: ResponseCodeRatio(500, 600, 0, 600) > 0.30
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: ServersTransport
+metadata:
+  name: websocket-transport
+  namespace: {{ .Values.namespace }}
+spec:
+  serverName: websocket-backend
+  insecureSkipVerify: true
+  maxIdleConnsPerHost: 100
+  forwardingTimeouts:
+    dialTimeout: 30s
+    responseHeaderTimeout: 3600s
+    idleConnTimeout: 3600s
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: TraefikService
+metadata:
+  name: websocket-sticky
+  namespace: {{ .Values.namespace }}
+spec:
+  weighted:
+    sticky:
+      cookie:
+        name: websocket_server
+        secure: true
+        httpOnly: true
+        sameSite: strict
+    services:
+      - name: hubble
+        port: 8000
+        weight: 1
 {{ end }}
 {{ end }}
