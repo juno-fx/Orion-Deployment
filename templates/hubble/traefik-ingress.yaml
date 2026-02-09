@@ -46,7 +46,7 @@ metadata:
   namespace: {{ .Values.namespace }}
   annotations:
     cert-manager.io/issuer: "{{ .Values.cert_manager_issuer }}"
-    traefik.ingress.kubernetes.io/router.middlewares: "{{ .Values.namespace }}-hubble-auth-middleware@kubernetescrd"
+{{/*    traefik.ingress.kubernetes.io/router.middlewares: "{{ .Values.namespace }}-hubble-auth-middleware@kubernetescrd"*/}}
 spec:
   ingressClassName: "{{ .Values.ingressController }}"
   rules:
