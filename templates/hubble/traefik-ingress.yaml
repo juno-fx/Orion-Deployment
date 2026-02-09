@@ -12,31 +12,31 @@ spec:
 {{/*    dialTimeout: "30s"           # nginx proxy-connect-timeout equivalent*/}}
 {{/*    responseHeaderTimeout: "30s" # nginx proxy-send-timeout equivalent*/}}
 {{/*    idleConnTimeout: "30s"       # nginx proxy-read-timeout equivalent*/}}
-{{/*  buffering:*/}}
-{{/*    maxRequestBodyBytes: 1073741824  # 1GB limit*/}}
-{{/*    memRequestBodyBytes: 104857600   # 100MB memory threshold*/}}
-  headers:
-    customRequestHeaders:
-      Connection: "upgrade"
-      Upgrade: "websocket"
-{{/*  forwardAuth:*/}}
-{{/*    address: "http://hubble.{{ .Values.namespace }}.svc.cluster.local:3000/api/socket-auth/"*/}}
-{{/*    trustForwardHeader: true*/}}
-{{/*    authResponseHeaders:*/}}
-{{/*      - "X-Forwarded-For"*/}}
-{{/*      - "X-Forwarded-Proto" */}}
-{{/*      - "X-Forwarded-Host"*/}}
-{{/*      - "X-Forwarded-Uri"*/}}
-{{/*      - "X-Forwarded-Method"*/}}
-{{/*      - "Cookie"*/}}
-{{/*      - "Set-Cookie"*/}}
-{{/*      - "Authorization"*/}}
-{{/*      - "Sec-WebSocket-Key"*/}}
-{{/*      - "Sec-WebSocket-Version"*/}}
-{{/*      - "Sec-WebSocket-Extensions"*/}}
-{{/*      - "Origin"*/}}
-{{/*      - "Upgrade"*/}}
-{{/*      - "Connection"*/}}
+  buffering:
+    maxRequestBodyBytes: 1073741824  # 1GB limit
+    memRequestBodyBytes: 104857600   # 100MB memory threshold
+{{/*  headers:*/}}
+{{/*    customRequestHeaders:*/}}
+{{/*      Connection: "upgrade"*/}}
+{{/*      Upgrade: "websocket"*/}}
+  forwardAuth:
+    address: "http://hubble.{{ .Values.namespace }}.svc.cluster.local:3000/api/socket-auth/"
+    trustForwardHeader: true
+    authResponseHeaders:
+      - "X-Forwarded-For"
+      - "X-Forwarded-Proto"
+      - "X-Forwarded-Host"
+      - "X-Forwarded-Uri"
+      - "X-Forwarded-Method"
+      - "Cookie"
+      - "Set-Cookie"
+      - "Authorization"
+      - "Sec-WebSocket-Key"
+      - "Sec-WebSocket-Version"
+      - "Sec-WebSocket-Extensions"
+      - "Origin"
+      - "Upgrade"
+      - "Connection"
 ---
 # HTTP routes Ingress
 apiVersion: networking.k8s.io/v1
