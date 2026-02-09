@@ -19,24 +19,24 @@ spec:
     customRequestHeaders:
       Connection: keep-alive, Upgrade
       Upgrade: WebSocket
-  forwardAuth:
-    address: "http://hubble.{{ .Values.namespace }}.svc.cluster.local:3000/api/socket-auth/"
-    trustForwardHeader: true
-    authResponseHeaders:
-      - "X-Forwarded-For"
-      - "X-Forwarded-Proto" 
-      - "X-Forwarded-Host"
-      - "X-Forwarded-Uri"
-      - "X-Forwarded-Method"
-      - "Cookie"
-      - "Set-Cookie"
-      - "Authorization"
-      - "Sec-WebSocket-Key"
-      - "Sec-WebSocket-Version"
-      - "Sec-WebSocket-Extensions"
-      - "Origin"
-      - "Upgrade"
-      - "Connection"
+{{/*  forwardAuth:*/}}
+{{/*    address: "http://hubble.{{ .Values.namespace }}.svc.cluster.local:3000/api/socket-auth/"*/}}
+{{/*    trustForwardHeader: true*/}}
+{{/*    authResponseHeaders:*/}}
+{{/*      - "X-Forwarded-For"*/}}
+{{/*      - "X-Forwarded-Proto" */}}
+{{/*      - "X-Forwarded-Host"*/}}
+{{/*      - "X-Forwarded-Uri"*/}}
+{{/*      - "X-Forwarded-Method"*/}}
+{{/*      - "Cookie"*/}}
+{{/*      - "Set-Cookie"*/}}
+{{/*      - "Authorization"*/}}
+{{/*      - "Sec-WebSocket-Key"*/}}
+{{/*      - "Sec-WebSocket-Version"*/}}
+{{/*      - "Sec-WebSocket-Extensions"*/}}
+{{/*      - "Origin"*/}}
+{{/*      - "Upgrade"*/}}
+{{/*      - "Connection"*/}}
 ---
 # HTTP routes Ingress
 apiVersion: networking.k8s.io/v1
@@ -46,7 +46,7 @@ metadata:
   namespace: {{ .Values.namespace }}
   annotations:
     cert-manager.io/issuer: "{{ .Values.cert_manager_issuer }}"
-{{/*    traefik.ingress.kubernetes.io/router.middlewares: "{{ .Values.namespace }}-hubble-auth-middleware@kubernetescrd"*/}}
+    traefik.ingress.kubernetes.io/router.middlewares: "{{ .Values.namespace }}-hubble-auth-middleware@kubernetescrd"
 spec:
   ingressClassName: "{{ .Values.ingressController }}"
   rules:
