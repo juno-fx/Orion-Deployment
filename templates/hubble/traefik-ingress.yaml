@@ -1,5 +1,7 @@
 {{ if eq .Values.ingressController "traefik" }}
 {{- if .Values.active}}
+---
+# ForwardAuth middleware that passes ALL NextAuth headers like NGINX does
 apiVersion: traefik.io/v1alpha1
 kind: Middleware
 metadata:
@@ -8,6 +10,28 @@ metadata:
 spec:
   forwardAuth:
     address: "http://hubble.{{ .Release.Namespace }}.svc.cluster.local:3000/api/socket-auth/"
+    # CRITICAL: Pass ALL original headers (including NextAuth cookies) to auth service
+    trustForwardHeader: true
+    authResponseHeaders:
+      - "X-Forwarded-For"
+      - "X-Forwarded-Proto" 
+      - "X-Forwarded-Host"
+      - "X-Forwarded-Uri"
+      - "X-Forwarded-Method"
+      - "Cookie"
+      - "X-Real-IP"
+      - "User-Agent"
+      - "Accept"
+      - "Accept-Language"
+      - "Accept-Encoding"
+      - "Cache-Control"
+      - "Pragma"
+      - "Sec-WebSocket-Key"
+      - "Sec-WebSocket-Version"
+      - "Sec-WebSocket-Extensions"
+      - "Origin"
+      - "Upgrade"
+      - "Connection"
 ---
 # Buffering middleware for body size management (1GB limit)
 apiVersion: traefik.io/v1alpha1
@@ -32,7 +56,7 @@ spec:
     responseHeaderTimeout: "30s" # nginx proxy-send-timeout equivalent
     idleConnTimeout: "30s"       # nginx proxy-read-timeout equivalent
 ---
-# Middleware chain combining auth and buffering
+# Middleware chain with auth BEFORE buffering (critical for WebSockets)
 apiVersion: traefik.io/v1alpha1
 kind: Middleware
 metadata:
@@ -41,10 +65,10 @@ metadata:
 spec:
   chain:
     middlewares:
-      - name: hubble-buffering
       - name: hubble-auth-middleware
-      - name: hubble-timeouts-transport
+      - name: hubble-buffering
 ---
+# Single Traefik ingress with all middlewares (like your NGINX setup)
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
@@ -52,6 +76,7 @@ metadata:
   namespace: {{ .Release.Namespace }}
   annotations:
     cert-manager.io/issuer: "{{ .Values.cert_manager_issuer }}"
+    # Apply middleware chain that includes auth + buffering + timeouts
     traefik.ingress.kubernetes.io/router.middlewares: "{{ .Release.Namespace }}-hubble-chain@kubernetescrd"
 spec:
   ingressClassName: "{{ .Values.ingressController }}"
