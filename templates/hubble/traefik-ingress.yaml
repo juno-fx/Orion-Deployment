@@ -1,21 +1,6 @@
 {{- if eq .Values.ingressController "traefik" }}
 {{- if .Values.active}}
 ---
-# Cookie-based session affinity middleware (equivalent to nginx affinity)
-apiVersion: traefik.io/v1alpha1
-kind: Middleware
-metadata:
-  name: hubble-sticky-sessions
-  namespace: {{ .Values.namespace }}
-spec:
-  sticky:
-    cookie:
-      name: "juno-hubble-session"
-      secure: true
-      httpOnly: true
-      sameHost: true
-      maxAge: 172800
----
 # ForwardAuth middleware for HTTP routes only
 apiVersion: traefik.io/v1alpha1
 kind: Middleware
@@ -98,7 +83,7 @@ spec:
     responseHeaderTimeout: "30s" # nginx proxy-send-timeout equivalent
     idleConnTimeout: "30s"       # nginx proxy-read-timeout equivalent
 ---
-# HTTP middleware chain (auth + sticky + buffering)
+# HTTP middleware chain (auth + buffering)
 apiVersion: traefik.io/v1alpha1
 kind: Middleware
 metadata:
@@ -108,10 +93,9 @@ spec:
   chain:
     middlewares:
       - name: hubble-auth-middleware
-      - name: hubble-sticky-sessions
       - name: hubble-buffering
 ---
-# WebSocket middleware chain (websocket auth + headers + sticky)
+# WebSocket middleware chain (websocket auth + headers)
 apiVersion: traefik.io/v1alpha1
 kind: Middleware
 metadata:
@@ -122,7 +106,6 @@ spec:
     middlewares:
       - name: hubble-websocket-auth
       - name: hubble-websocket-headers
-      - name: hubble-sticky-sessions
 ---
 # HTTP routes Ingress
 apiVersion: networking.k8s.io/v1
