@@ -6,7 +6,7 @@ apiVersion: traefik.io/v1alpha1
 kind: Middleware
 metadata:
   name: hubble-sticky-sessions
-  namespace: {{ .Release.Namespace }}
+  namespace: {{ .Values.namespace }}
 spec:
   sticky:
     cookie:
@@ -21,10 +21,10 @@ apiVersion: traefik.io/v1alpha1
 kind: Middleware
 metadata:
   name: hubble-auth-middleware
-  namespace: {{ .Release.Namespace }}
+  namespace: {{ .Values.namespace }}
 spec:
   forwardAuth:
-    address: "http://hubble.{{ .Release.Namespace }}.svc.cluster.local:3000/api/socket-auth/"
+    address: "http://hubble.{{ .Values.namespace }}.svc.cluster.local:3000/api/socket-auth/"
     trustForwardHeader: true
     authResponseHeaders:
       - "X-Forwarded-For"
@@ -41,10 +41,10 @@ apiVersion: traefik.io/v1alpha1
 kind: Middleware
 metadata:
   name: hubble-websocket-auth
-  namespace: {{ .Release.Namespace }}
+  namespace: {{ .Values.namespace }}
 spec:
   forwardAuth:
-    address: "http://hubble.{{ .Release.Namespace }}.svc.cluster.local:3000/api/socket-auth/"
+    address: "http://hubble.{{ .Values.namespace }}.svc.cluster.local:3000/api/socket-auth/"
     trustForwardHeader: true
     authResponseHeaders:
       - "Cookie"
@@ -64,7 +64,7 @@ apiVersion: traefik.io/v1alpha1
 kind: Middleware
 metadata:
   name: hubble-websocket-headers
-  namespace: {{ .Release.Namespace }}
+  namespace: {{ .Values.namespace }}
 spec:
   headers:
     customRequestHeaders:
@@ -80,7 +80,7 @@ apiVersion: traefik.io/v1alpha1
 kind: Middleware
 metadata:
   name: hubble-buffering
-  namespace: {{ .Release.Namespace }}
+  namespace: {{ .Values.namespace }}
 spec:
   buffering:
     maxRequestBodyBytes: 1073741824  # 1GB limit
@@ -91,7 +91,7 @@ apiVersion: traefik.io/v1alpha1
 kind: ServersTransport
 metadata:
   name: hubble-timeouts-transport
-  namespace: {{ .Release.Namespace }}
+  namespace: {{ .Values.namespace }}
 spec:
   forwardingTimeouts:
     dialTimeout: "30s"           # nginx proxy-connect-timeout equivalent
@@ -103,7 +103,7 @@ apiVersion: traefik.io/v1alpha1
 kind: Middleware
 metadata:
   name: hubble-http-chain
-  namespace: {{ .Release.Namespace }}
+  namespace: {{ .Values.namespace }}
 spec:
   chain:
     middlewares:
@@ -116,7 +116,7 @@ apiVersion: traefik.io/v1alpha1
 kind: Middleware
 metadata:
   name: hubble-websocket-chain
-  namespace: {{ .Release.Namespace }}
+  namespace: {{ .Values.namespace }}
 spec:
   chain:
     middlewares:
@@ -129,10 +129,10 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: hubble-http-ingress
-  namespace: {{ .Release.Namespace }}
+  namespace: {{ .Values.namespace }}
   annotations:
     cert-manager.io/issuer: "{{ .Values.cert_manager_issuer }}"
-    traefik.ingress.kubernetes.io/router.middlewares: "{{ .Release.Namespace }}-hubble-http-chain@kubernetescrd"
+    traefik.ingress.kubernetes.io/router.middlewares: "{{ .Values.namespace }}-hubble-http-chain@kubernetescrd"
 spec:
   ingressClassName: "{{ .Values.ingressController }}"
   rules:
@@ -152,10 +152,10 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: hubble-websocket-ingress
-  namespace: {{ .Release.Namespace }}
+  namespace: {{ .Values.namespace }}
   annotations:
     cert-manager.io/issuer: "{{ .Values.cert_manager_issuer }}"
-    traefik.ingress.kubernetes.io/router.middlewares: "{{ .Release.Namespace }}-hubble-websocket-chain@kubernetescrd"
+    traefik.ingress.kubernetes.io/router.middlewares: "{{ .Values.namespace }}-hubble-websocket-chain@kubernetescrd"
 spec:
   ingressClassName: "{{ .Values.ingressController }}"
   rules:
