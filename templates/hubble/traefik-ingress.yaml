@@ -28,8 +28,8 @@ metadata:
 {{/*    traefik.ingress.kubernetes.io/service.sticky.cookie.httponly: "true"*/}}
 {{/*    traefik.ingress.kubernetes.io/service.sticky.cookie.maxage: "172800"*/}}
 
-{{/*    # TLS Support*/}}
-{{/*    traefik.ingress.kubernetes.io/router.tls: "true"*/}}
+    # TLS Support
+    traefik.ingress.kubernetes.io/router.tls: "true"
 spec:
   ingressClassName: "{{ .Values.ingressController }}"
   rules:
