@@ -20,7 +20,7 @@ metadata:
   namespace: {{ .Values.namespace }}
   annotations:
     cert-manager.io/issuer: "{{ .Values.cert_manager_issuer }}"
-    traefik.ingress.kubernetes.io/router.middlewares: "{{ .Values.namespace }}-hubble-auth-middleware@kubernetescrd"
+{{/*    traefik.ingress.kubernetes.io/router.middlewares: "{{ .Values.namespace }}-hubble-auth-middleware@kubernetescrd"*/}}
     # Session Affinity (nginx equivalent)
     traefik.ingress.kubernetes.io/service.sticky.cookie: "true"
     traefik.ingress.kubernetes.io/service.sticky.cookie.name: "juno-hubble-session"
