@@ -4,10 +4,6 @@ kind: Service
 metadata:
   name: hubble
   namespace: {{ .Values.namespace }}
-  annotations:
-    {{- if eq .Values.ingressController "traefik" }}
-    traefik.ingress.kubernetes.io/service.serverstransport: "{{ .Values.namespace }}-hubble-timeout-transport@kubernetescrd"
-    {{- end }}
 spec:
   type: ClusterIP
   sessionAffinity: ClientIP
