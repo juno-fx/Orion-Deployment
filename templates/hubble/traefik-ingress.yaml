@@ -27,10 +27,7 @@ metadata:
     traefik.ingress.kubernetes.io/service.sticky.cookie.secure: "true"
     traefik.ingress.kubernetes.io/service.sticky.cookie.httponly: "true"
     traefik.ingress.kubernetes.io/service.sticky.cookie.maxage: "172800"
-    # Timeouts (nginx equivalent)
-    traefik.ingress.kubernetes.io/service.serversTransport.forwardingTimeouts.dialTimeout: "30s"
-    traefik.ingress.kubernetes.io/service.serversTransport.forwardingTimeouts.responseHeaderTimeout: "30s"
-    traefik.ingress.kubernetes.io/service.serversTransport.forwardingTimeouts.idleConnTimeout: "30s"
+
     # TLS Support
     traefik.ingress.kubernetes.io/router.tls: "true"
 spec:

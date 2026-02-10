@@ -1,0 +1,15 @@
+{{- if eq .Values.ingressController "traefik" }}
+{{- if .Values.active}}
+---
+apiVersion: traefik.io/v1alpha1
+kind: ServersTransport
+metadata:
+  name: hubble-timeout-transport
+  namespace: {{ .Values.namespace }}
+spec:
+  forwardingTimeouts:
+    dialTimeout: 30s
+    responseHeaderTimeout: 30s
+    idleConnTimeout: 30s
+{{- end}}
+{{- end}}
