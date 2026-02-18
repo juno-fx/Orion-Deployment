@@ -1,35 +1,23 @@
-{{- if eq .Values.ingressController "traefik" }}
+{{ if eq .Values.ingressController "traefik" }}
 {{- if .Values.active}}
----
-# ForwardAuth middleware for HTTP routes only
-apiVersion: traefik.io/v1alpha1
-kind: Middleware
-metadata:
-  name: hubble-auth-middleware
-  namespace: {{ .Values.namespace }}
-spec:
-  forwardAuth:
-    address: "http://hubble.{{ .Values.namespace }}.svc.cluster.local:3000/api/socket-auth/"
-
 ---
 # HTTP routes Ingress
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: hubble-ingress
   namespace: {{ .Values.namespace }}
+  name: hubble-ingress
   annotations:
     cert-manager.io/issuer: "{{ .Values.cert_manager_issuer }}"
     traefik.ingress.kubernetes.io/router.middlewares: "{{ .Values.namespace }}-hubble-auth-middleware@kubernetescrd"
-    # Session Affinity (nginx equivalent)
+    # Enhanced Session Affinity for Socket.IO
     traefik.ingress.kubernetes.io/service.sticky.cookie: "true"
     traefik.ingress.kubernetes.io/service.sticky.cookie.name: "juno-hubble-session"
     traefik.ingress.kubernetes.io/service.sticky.cookie.secure: "true"
     traefik.ingress.kubernetes.io/service.sticky.cookie.httponly: "true"
     traefik.ingress.kubernetes.io/service.sticky.cookie.maxage: "172800"
-
-{{/*    # TLS Support*/}}
-{{/*    traefik.ingress.kubernetes.io/router.tls: "true"*/}}
+    traefik.ingress.kubernetes.io/service.sticky.cookie.samesite: "none"
+    traefik.ingress.kubernetes.io/service.sticky.cookie.path: "/"
 spec:
   ingressClassName: "{{ .Values.ingressController }}"
   rules:
@@ -50,5 +38,37 @@ spec:
                 name: hubble
                 port:
                   number: 8000
-{{ end }}
+
+---
+# Separate WebSocket ingress with authentication middleware
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  namespace: {{ .Values.namespace }}
+  name: hubble-websocket-ingress
+  annotations:
+    cert-manager.io/issuer: "{{ .Values.cert_manager_issuer }}"
+    traefik.ingress.kubernetes.io/router.middlewares: "{{ .Values.namespace }}-hubble-websocket-auth-middleware@kubernetescrd"
+    # Enhanced Session Affinity for Socket.IO WebSocket connections
+    traefik.ingress.kubernetes.io/service.sticky.cookie: "true"
+    traefik.ingress.kubernetes.io/service.sticky.cookie.name: "juno-hubble-session"
+    traefik.ingress.kubernetes.io/service.sticky.cookie.secure: "true"
+    traefik.ingress.kubernetes.io/service.sticky.cookie.httponly: "true"
+    traefik.ingress.kubernetes.io/service.sticky.cookie.maxage: "172800"
+    traefik.ingress.kubernetes.io/service.sticky.cookie.samesite: "none"
+    traefik.ingress.kubernetes.io/service.sticky.cookie.path: "/socket.io"
+spec:
+  ingressClassName: "{{ .Values.ingressController }}"
+  rules:
+    - host: {{ .Values.host }}
+      http:
+        paths:
+          - path: "/socket.io"
+            pathType: ImplementationSpecific
+            backend:
+              service:
+                name: hubble
+                port:
+                  number: 8000
+{{- end}}
 {{ end }}
