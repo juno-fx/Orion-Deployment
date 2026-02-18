@@ -15,6 +15,7 @@ jobs:
         with:
           app-id: ${{ secrets.JUNO_CI_APP_ID }}
           private-key: ${{ secrets.JUNO_CI_APP_PRIVATE_KEY }}
+          owner: ${{ github.repository_owner }}
       - name: Checkout CI repository
         uses: actions/checkout@v4
         with:
