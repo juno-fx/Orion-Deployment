@@ -7,5 +7,5 @@ rules:
     resources: ["datavolumes"]
     verbs: ["get", "list", "create", "watch"]
   - apiGroups: ["ec2.aws.crossplane.io"]
-    resources: ["instances"]
+    resources: ["*"]
     verbs: ["get", "list", "create", "update", "delete", "watch", "patch"]
