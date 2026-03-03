@@ -9,3 +9,6 @@ rules:
   - apiGroups: ["ec2.aws.crossplane.io"]
     resources: ["*"]
     verbs: ["get", "list", "create", "update", "delete", "watch", "patch"]
+  - apiGroups: [ "apiextensions.crossplane.io" ]
+    resources: [ "*" ]
+    verbs: [ "get", "list", "create", "update", "delete", "watch", "patch" ]
