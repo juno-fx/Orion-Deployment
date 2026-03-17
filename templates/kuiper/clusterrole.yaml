@@ -3,6 +3,18 @@ kind: ClusterRole
 metadata:
   name: kuiper-{{ .Values.namespace }}
 rules:
-  - apiGroups: ["juno-innovations.com"]
-    resources: ["workstation-logs"]
-    verbs: ["list", "create", "delete", "get", "patch", "update"]
+  - apiGroups: ["cdi.kubevirt.io"]
+    resources: ["datavolumes"]
+    verbs: ["get", "list", "create", "watch"]
+  - apiGroups: [ "events.k8s.io" ]
+    resources: [ "events" ]
+    verbs: [ "get", "list", "watch" ]
+  - apiGroups: ["ec2.aws.crossplane.io"]
+    resources: ["*"]
+    verbs: ["get", "list", "create", "update", "delete", "watch", "patch"]
+  - apiGroups: [ "apiextensions.crossplane.io" ]
+    resources: [ "*" ]
+    verbs: [ "get", "list", "create", "update", "delete", "watch", "patch" ]
+  - apiGroups: [ "crossplane.juno-innovations.com" ]
+    resources: [ "*" ]
+    verbs: [ "get", "list", "create", "update", "delete", "watch", "patch" ]

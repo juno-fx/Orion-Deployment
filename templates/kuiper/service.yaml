@@ -5,6 +5,7 @@ metadata:
   name: kuiper
   namespace: {{ .Values.namespace }}
 spec:
+  sessionAffinity: ClientIP
   selector:
     app: kuiper
   ports:

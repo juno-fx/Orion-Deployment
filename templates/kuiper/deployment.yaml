@@ -45,24 +45,32 @@ spec:
           image: {{.Values.registry}}/{{ .Values.kuiper.image }}
           imagePullPolicy: Always
           livenessProbe:
-            httpGet:
-              path: "/kuiper/.health"
+            tcpSocket:
               port: 8000
-            initialDelaySeconds: 15
-            periodSeconds: 5
-            failureThreshold: 2
+            periodSeconds: 10
+            failureThreshold: 6
           startupProbe:
             httpGet:
               path: "/kuiper/.health"
               port: 8000
-            initialDelaySeconds: 15
+            periodSeconds: 5
+            failureThreshold: 4
+          readinessProbe:
+            httpGet:
+              path: "/kuiper/.health"
+              port: 8000
             periodSeconds: 5
             failureThreshold: 2
+          resources:
+            requests:
+              cpu: 500m
+              memory: 400Mi
+            limits:
+              cpu: 1000m
+              memory: 800Mi
           env:
             - name: HOST
               value: "{{ .Values.host }}"
-            - name: SHOW
-              value: "{{ .Values.show }}"
             {{- if .Values.image_pull_secret }}
             - name: PULL_SECRET
               value: "{{ .Values.image_pull_secret }}"
@@ -71,10 +79,9 @@ spec:
               valueFrom:
                 fieldRef:
                   fieldPath: metadata.namespace
-          resources:
-            requests:
-              cpu: 750m
-              memory: 200Mi
+            - name: GENESIS_NAMESPACE
+              value: "{{ .Values.genesis_namespace }}"
+
           ports:
             - containerPort: 8000
               name: endpoint
