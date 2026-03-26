@@ -9,7 +9,7 @@ permit (
 permit (principal, action, resource)
 when
 {
-  context.url like "*/workloads/" ||
+  context.url like "*/workloads" ||
   context.url like "*/home/" ||
   context.url like "*/settings/"
 };
@@ -20,4 +20,8 @@ permit (
   action,
   resource
 )
-when { context.url like "*/kuiper/*" };
+when 
+{
+  context.url like "*/kuiper/*" ||
+  context.url like "*/development*" ||
+};
