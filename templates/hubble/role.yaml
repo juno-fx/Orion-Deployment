@@ -5,10 +5,26 @@ metadata:
   namespace: argocd
   name: orion-hubble-{{ .Values.show }}
 rules:
+  - apiGroups: [""]
+    resources: ["secrets"]
+    verbs: ["get", "list"]
+    resourceNames: ["juno-auth-secret"]
+  - apiGroups: [""]
+    resources: ["serviceaccounts/token"]
+    verbs: ["create"]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: configmap-reader-global
+rules:
 - apiGroups: [""]
   resources: ["secrets"]
-  verbs: ["get"]
-  resourceNames: ["juno-auth-secret"]
+  verbs: ["get", "list"]
+  resourceNames: ["*"]
 - apiGroups: [""]
-  resources: ["serviceaccounts/token"]
-  verbs: ["create"]
+  resources: ["configmaps"]
+  verbs: ["get", "watch", "list"]
+- apiGroups: ["juno-innovations.com"]
+  resources: ["groups", "users"]
+  verbs: ["get", "list"]
