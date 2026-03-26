@@ -20,8 +20,4 @@ permit (
   action,
   resource
 )
-when 
-{
-  context.url like "*/kuiper/*" ||
-  context.url like "*/development*"
-};
+when { context.url like "*/kuiper/*" || context.url like "*/development*" };
