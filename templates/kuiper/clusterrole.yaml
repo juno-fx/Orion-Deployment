@@ -18,3 +18,6 @@ rules:
   - apiGroups: [ "crossplane.juno-innovations.com" ]
     resources: [ "*" ]
     verbs: [ "get", "list", "create", "update", "delete", "watch", "patch" ]
+  - apiGroups: [""]
+    resources: ["configmaps"]
+    verbs: ["*"]

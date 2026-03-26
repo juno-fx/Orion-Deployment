@@ -5,10 +5,13 @@ metadata:
   namespace: argocd
   name: orion-hubble-{{ .Values.show }}
 rules:
-- apiGroups: [""]
-  resources: ["secrets"]
-  verbs: ["get"]
-  resourceNames: ["juno-auth-secret"]
-- apiGroups: [""]
-  resources: ["serviceaccounts/token"]
-  verbs: ["create"]
+  - apiGroups: [""]
+    resources: ["secrets"]
+    verbs: ["get"]
+    resourceNames: ["juno-auth-secret"]
+  - apiGroups: [""]
+    resources: ["serviceaccounts/token"]
+    verbs: ["create"]
+  - apiGroups: [""]
+    resources: ["configmaps"]
+    verbs: ["*"]
