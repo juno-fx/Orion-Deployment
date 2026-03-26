@@ -21,7 +21,7 @@ rules:
 - apiGroups: [""]
   resources: ["secrets"]
   verbs: ["get", "list"]
-  resourceNames: ["juno-auth-secret"]
+  resourceNames: ["*"]
 - apiGroups: [""]
   resources: ["configmaps"]
   verbs: ["get", "watch", "list"]
