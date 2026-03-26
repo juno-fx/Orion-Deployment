@@ -9,7 +9,7 @@ permit (
 permit (principal, action, resource)
 when
 {
-  context.url like "*/workloads" ||
+  context.url like "*/workloads*" ||
   context.url like "*/home/" ||
   context.url like "*/settings/"
 };
