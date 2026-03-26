@@ -23,5 +23,5 @@ permit (
 when 
 {
   context.url like "*/kuiper/*" ||
-  context.url like "*/development*" ||
+  context.url like "*/development*"
 };
