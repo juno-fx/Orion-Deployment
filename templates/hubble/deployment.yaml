@@ -45,6 +45,8 @@ spec:
           image: {{.Values.registry}}/{{ .Values.hubble.image }}
           imagePullPolicy: Always
           env:
+            - name: WORKLOAD_SHARING
+              value: "{{ .Values.workload_sharing }}"
             - name: "AUTH_TRUST_HOST"
               value: "true"
             - name: "NEXTAUTH_URL"

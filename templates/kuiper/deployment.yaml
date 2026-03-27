@@ -69,6 +69,8 @@ spec:
               cpu: 1000m
               memory: 800Mi
           env:
+            - name: WORKLOAD_SHARING
+              value: "{{ .Values.workload_sharing }}"
             - name: HOST
               value: "{{ .Values.host }}"
             {{- if .Values.image_pull_secret }}
