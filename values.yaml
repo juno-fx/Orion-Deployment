@@ -9,7 +9,7 @@ genesis_proxy: true                   # Whether to use the Genesis proxy
 genesis_namespace: argocd             # Namespace where Genesis is deployed
 http_scheme: https
 nextauth_url_tpl: "{{ .Values.http_scheme }}://{{ .Values.host }}/api/auth"
-
+workload_sharing: false               # Setting True will enable the ability for users to share workloads with other users
 cert_manager_issuer: letsencrypt-prod
 
 volumes:
