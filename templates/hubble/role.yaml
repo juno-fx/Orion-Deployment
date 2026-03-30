@@ -21,7 +21,6 @@ rules:
 - apiGroups: [""]
   resources: ["secrets"]
   verbs: ["get", "list"]
-  resourceNames: ["*"]
 - apiGroups: [""]
   resources: ["configmaps"]
   verbs: ["get", "watch", "list"]
