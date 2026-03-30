@@ -74,9 +74,12 @@ spec:
         - name: rhea
           image: {{ .Values.registry }}/{{ .Values.rhea.image }}
           imagePullPolicy: Always
-          {{- with .Values.rhea.env }}
           env:
-            {{- toYaml . | nindent 12 }}
+            - name: GENESIS_NAMESPACE
+              value: "{{ .Values.genesis_namespace }}"
+          {{- range $key, $value := .Values.rhea.env }}
+            - name: "{{ $key }}"
+              value: "{{ $value }}"
           {{- end }}
           ports:
             - containerPort: 13000
