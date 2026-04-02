@@ -40,10 +40,8 @@ spec:
                 name: hubble
                 port:
                   number: 8000
-{{- if (lookup "v1" "Secret" .Release.Namespace "ingress-certificate") }}
   tls: 
     - hosts:                                                                       
         - {{ .Values.host }}
       secretName: ingress-certificate
-{{- end }}
 {{- end}}
