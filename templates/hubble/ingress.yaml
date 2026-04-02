@@ -44,6 +44,6 @@ spec:
   tls: 
     - hosts:                                                                       
         - {{ .Values.host }}
-      secretName: hubble-tls-certs
+      secretName: ingress-certificate
 {{- end }}
 {{- end}}
