@@ -40,4 +40,12 @@ spec:
                 name: hubble
                 port:
                   number: 8000
+
+
+{{- if (lookup "v1" "Secret" "argocd" "ingress-certificate") }}
+  tls: 
+    - hosts:                                                                       
+        - <PROJECT NAME>.<YOUR DOMAIN>
+      secretName: hubble-tls-certs
+{{- end }}
 {{- end}}
