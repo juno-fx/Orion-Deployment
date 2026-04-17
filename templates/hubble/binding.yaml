@@ -11,3 +11,16 @@ subjects:
   - kind: ServiceAccount
     name: orion-hubble
     namespace: {{ .Values.namespace }}
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: orion-hubble-rhea-{{ .Values.show }}
+subjects:
+- kind: ServiceAccount
+  name: orion-hubble
+  namespace: {{ .Values.namespace }}
+roleRef:
+  kind: ClusterRole
+  name: configmap-reader-global
+  apiGroup: rbac.authorization.k8s.io
