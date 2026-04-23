@@ -22,7 +22,7 @@ volumes:
 kuiper:
   tolerations: []
   enabled: true                       # Enable Kuiper
-  image: kuiper:v4.1.1                # Image to pull for Kuiper
+  image: kuiper:v4.1.2                # Image to pull for Kuiper
   node_selector:                      # Node selector to deploy the Kuiper server to
     enable: true                      # Enable node selector
     labels:                           # Node selector to deploy the Kuiper server to
