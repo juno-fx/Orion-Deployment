@@ -4,7 +4,7 @@ metadata:
   name: orion-environment-systempolicy
   namespace: {{ .Values.namespace }}
   labels:
-    juno.cedar.autoload: "true"
+    juno.cedar.system: "true"
 data:
   policies.cedar: |-
 {{ tpl (.Files.Get "files/rhea/system-policies.cedar") . | indent 4 }}
