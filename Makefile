@@ -8,8 +8,10 @@ format: .hack/bin/cedar
 	@.hack/bin/cedar format --write -p files/rhea/policies.cedar
 
 lint: .hack/bin/cedar
-	@sed 's/{{ .Values.namespace }}/default/g' files/rhea/policies.cedar > .tmp-policies.cedar
-	@.hack/bin/cedar format --check -p .tmp-policies.cedar
+	@sed 's/{{ .Values.namespace }}/default/g' files/rhea/system-policies.cedar > .tmp-system-policies.cedar
+	@sed 's/{{ .Values.namespace }}/default/g' files/rhea/user-policies.cedar > .tmp-user-policies.cedar
+	@.hack/bin/cedar format --check -p .tmp-system-policies.cedar
+	@.hack/bin/cedar format --check -p .tmp-user-policies.cedar
 
 # targets
 cluster:

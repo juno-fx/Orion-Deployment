@@ -44,7 +44,7 @@ hubble:
       max_replicas: 5                 # Maximum number of replicas to run
 
 rhea:
-  image: rhea:v1.0.0                 # Image to pull for Rhea
+  image: rhea:1067-feat-post-backend-permission-fixes                 # Image to pull for Rhea
   env: {}                            # Environment variables to set for the Rhea server
   resources:
     requests:
