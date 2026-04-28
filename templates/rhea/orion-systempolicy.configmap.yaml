@@ -3,6 +3,8 @@ kind: ConfigMap
 metadata:
   name: orion-environment-systempolicy
   namespace: {{ .Values.namespace }}
+  labels:
+    juno.cedar.system: "true"
 data:
   policies.cedar: |-
-{{ tpl (.Files.Get "files/rhea/policies.cedar") . | indent 4 }}
+{{ tpl (.Files.Get "files/rhea/system-policies.cedar") . | indent 4 }}
