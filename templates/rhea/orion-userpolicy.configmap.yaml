@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: orion-environment-userpolicy
+  namespace: {{ .Values.namespace }}
+  labels:
+    juno.cedar.user: "true"
+data:
+  policies.cedar: |-
+{{ tpl (.Files.Get "files/rhea/user-policies.cedar") . | indent 4 }}
