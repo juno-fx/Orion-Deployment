@@ -1,0 +1,12 @@
+{{- if .Values.active }}
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata:
+  name: kuiper
+  namespace: {{ .Values.namespace }}
+spec:
+  minAvailable: 1
+  selector:
+    matchLabels:
+      app: kuiper
+{{- end }}

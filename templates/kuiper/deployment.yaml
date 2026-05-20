@@ -13,7 +13,7 @@ spec:
   strategy:
     rollingUpdate:
       maxSurge: 1
-      maxUnavailable: 50%
+      maxUnavailable: 0
     type: RollingUpdate
 
   template:
@@ -40,6 +40,15 @@ spec:
         {{ $key }}: "{{ $value }}"
         {{- end }}
       {{- end }}
+      affinity:
+        podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+            - weight: 100
+              podAffinityTerm:
+                labelSelector:
+                  matchLabels:
+                    app: kuiper
+                topologyKey: kubernetes.io/hostname
       containers:
         - name: kuiper
           image: {{.Values.registry}}/{{ .Values.kuiper.image }}
@@ -62,12 +71,7 @@ spec:
             periodSeconds: 5
             failureThreshold: 2
           resources:
-            requests:
-              cpu: 500m
-              memory: 400Mi
-            limits:
-              cpu: 1000m
-              memory: 800Mi
+            {{- toYaml .Values.kuiper.resources | nindent 12 }}
           env:
             - name: WORKLOAD_SHARING
               value: "{{ .Values.workload_sharing }}"
