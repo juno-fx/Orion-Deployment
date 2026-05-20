@@ -47,8 +47,15 @@ hubble:
       labels:                         # Node selector to deploy the Hubble server to
         juno-innovations.com/service: "true"
     autoscaling:
-      min_replicas: 2                 # Minimum number of replicas to run
+      min_replicas: 1                 # Minimum number of replicas to run
       max_replicas: 5                 # Maximum number of replicas to run
+    resources:
+      requests:
+        cpu: 300m
+        memory: 256Mi
+      limits:
+        cpu: 1000m
+        memory: 800Mi
 
 rhea:
   image: rhea:v1.2.3                # Image to pull for Rhea

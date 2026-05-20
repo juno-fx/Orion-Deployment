@@ -13,7 +13,7 @@ spec:
   strategy:
     rollingUpdate:
       maxSurge: 1
-      maxUnavailable: 50%
+      maxUnavailable: 0
     type: RollingUpdate
 
   template:
@@ -39,6 +39,15 @@ spec:
         {{ $key }}: "{{ $value }}"
         {{- end }}
       {{- end }}
+      affinity:
+        podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+            - weight: 100
+              podAffinityTerm:
+                labelSelector:
+                  matchLabels:
+                    app: hubble
+                topologyKey: kubernetes.io/hostname
       serviceAccountName: orion-hubble
       containers:
         - name: hubble
@@ -62,12 +71,7 @@ spec:
             - name: GENESIS_NAMESPACE
               value: "{{ .Values.genesis_namespace }}"
           resources:
-            requests:
-              cpu: 500m
-              memory: 400Mi
-            limits:
-              cpu: 1000m
-              memory: 800Mi
+            {{- toYaml .Values.hubble.resources | nindent 12 }}
           ports:
             - containerPort: 3000
               name: endpoint
