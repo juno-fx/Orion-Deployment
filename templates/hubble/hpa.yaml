@@ -23,5 +23,5 @@ spec:
         container: hubble
         target:
           type: Utilization
-          averageUtilization: 50
+          averageUtilization: 75
 {{- end }}

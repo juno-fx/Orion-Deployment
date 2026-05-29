@@ -35,7 +35,7 @@ kuiper:
       cpu: 300m
       memory: 400Mi
     limits:
-      cpu: 500m
+      cpu: 600m
       memory: 800Mi
 
 hubble:
@@ -54,8 +54,8 @@ hubble:
         cpu: 300m
         memory: 256Mi
       limits:
-        cpu: 1000m
-        memory: 800Mi
+        cpu: 600m
+        memory: 512Mi
 
 rhea:
   image: rhea:v1.2.3                # Image to pull for Rhea
