@@ -1,2 +1,5 @@
 juno
 .devbox
+.git
+.gitignore
+.hack
