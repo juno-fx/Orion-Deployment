@@ -77,6 +77,10 @@ spec:
             - name: PULL_SECRET
               value: "{{ .Values.image_pull_secret }}"
             {{- end }}
+            {{- range $key, $value := .Values.kuiper.env }}
+            - name: "{{ $key }}"
+              value: "{{ $value }}"
+            {{- end }}
             - name: JUNO_PROJECT
               valueFrom:
                 fieldRef:
