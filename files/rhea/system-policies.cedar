@@ -31,6 +31,7 @@ when
 {
   principal.serviceAccountName == "genesis" ||
   principal.serviceAccountName == "orion-hubble" ||
+  principal.serviceAccountName == "metrics-gatherer" ||
   principal.serviceAccountName == "kuiper" ||
   principal.serviceAccountName == "titan" ||
   principal.serviceAccountName == "terra"
