@@ -23,11 +23,11 @@ kuiper:
     max_replicas: 5                   # Maximum number of replicas to run
   resources:
     requests:
-      cpu: 200m
-      memory: 192Mi
-    limits:
-      cpu: 500m
+      cpu: 350m
       memory: 256Mi
+    limits:
+      cpu: 1000m
+      memory: 512Mi
 
 hubble:
   tolerations: []
