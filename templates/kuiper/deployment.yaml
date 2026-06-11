@@ -69,11 +69,11 @@ spec:
             periodSeconds: 10
             failureThreshold: 6
           startupProbe:
-            httpGet:
-              path: "/kuiper/.health"
+            tcpSocket:
               port: 8000
+            initialDelaySeconds: 5
             periodSeconds: 5
-            failureThreshold: 4
+            failureThreshold: 12
           resources:
             {{- toYaml .Values.kuiper.resources | nindent 12 }}
           env:
