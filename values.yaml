@@ -58,3 +58,11 @@ rhea:
     limits:
       cpu: 50m
       memory: 64Mi
+
+resourceQuota:
+  enabled: false
+  hard:
+    cpu_request: "16"
+    memory_request: "32Gi"
+    cpu_limit: "32"
+    memory_limit: "64Gi"
