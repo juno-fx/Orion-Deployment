@@ -48,11 +48,21 @@ spec:
                   matchLabels:
                     app: hubble
                 topologyKey: kubernetes.io/hostname
+      terminationGracePeriodSeconds: 60
       serviceAccountName: orion-hubble
       containers:
         - name: hubble
           image: {{.Values.registry}}/{{ .Values.hubble.image }}
           imagePullPolicy: Always
+          lifecycle:
+            preStop:
+              exec:
+                command: ["sleep", "15"]
+          readinessProbe:
+            tcpSocket:
+              port: 3000
+            initialDelaySeconds: 10
+            periodSeconds: 10
           env:
             - name: WORKLOAD_SHARING
               value: "{{ .Values.workload_sharing }}"

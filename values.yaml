@@ -20,15 +20,15 @@ kuiper:
     labels:                           # Node selector to deploy the Kuiper server to
       juno-innovations.com/service: "true"
   autoscaling:
-    min_replicas: 1                   # Minimum number of replicas to run
+    min_replicas: 2                   # Minimum number of replicas to run
     max_replicas: 5                   # Maximum number of replicas to run
   resources:
     requests:
+      cpu: 150m
+      memory: 200Mi
+    limits:
       cpu: 300m
       memory: 400Mi
-    limits:
-      cpu: 600m
-      memory: 800Mi
 
 hubble:
     image: hubble:v6.0.0            # Image to pull for Hubble
@@ -39,23 +39,23 @@ hubble:
       labels:                         # Node selector to deploy the Hubble server to
         juno-innovations.com/service: "true"
     autoscaling:
-      min_replicas: 1                 # Minimum number of replicas to run
+      min_replicas: 2                 # Minimum number of replicas to run
       max_replicas: 5                 # Maximum number of replicas to run
     resources:
       requests:
+        cpu: 150m
+        memory: 128Mi
+      limits:
         cpu: 300m
         memory: 256Mi
-      limits:
-        cpu: 600m
-        memory: 512Mi
 
 rhea:
   image: rhea:v1.2.3                # Image to pull for Rhea
   env: {}                            # Environment variables to set for the Rhea server
   resources:
     requests:
-      cpu: 200m
-      memory: 100Mi
+      cpu: 100m
+      memory: 50Mi
     limits:
-      cpu: 350m
-      memory: 250Mi
+      cpu: 175m
+      memory: 125Mi
