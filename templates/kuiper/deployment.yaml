@@ -30,7 +30,6 @@ spec:
       tolerations:
         {{- toYaml .Values.kuiper.tolerations | nindent 8 }}
       {{- end }}
-      terminationGracePeriodSeconds: 60
       serviceAccountName: kuiper
       {{- if .Values.image_pull_secret }}
       imagePullSecrets:
@@ -42,23 +41,10 @@ spec:
         {{ $key }}: "{{ $value }}"
         {{- end }}
       {{- end }}
-      affinity:
-        podAntiAffinity:
-          preferredDuringSchedulingIgnoredDuringExecution:
-            - weight: 100
-              podAffinityTerm:
-                labelSelector:
-                  matchLabels:
-                    app: kuiper
-                topologyKey: kubernetes.io/hostname
       containers:
         - name: kuiper
           image: {{.Values.registry}}/{{ .Values.kuiper.image }}
           imagePullPolicy: Always
-          lifecycle:
-            preStop:
-              exec:
-                command: ["sleep", "15"]
           readinessProbe:
             tcpSocket:
               port: 8000
