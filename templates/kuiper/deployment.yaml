@@ -5,6 +5,7 @@ metadata:
   name: kuiper
   namespace: {{ .Release.Namespace }}
 spec:
+  replicas: {{ .Values.kuiper.replicas }}
   revisionHistoryLimit: 0
   selector:
     matchLabels:
