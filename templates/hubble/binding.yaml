@@ -1,26 +1,26 @@
 apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
 metadata:
-  name: orion-hubble-{{ .Values.show }}
+  name: orion-hubble-{{ .Release.Namespace }}
   namespace: argocd
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: Role
-  name: orion-hubble-{{ .Values.show }}
+  name: orion-hubble-{{ .Release.Namespace }}
 subjects:
   - kind: ServiceAccount
     name: orion-hubble
-    namespace: {{ .Values.namespace }}
+    namespace: {{ .Release.Namespace }}
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding
 metadata:
-  name: orion-hubble-rhea-{{ .Values.show }}
+  name: orion-hubble-rhea-{{ .Release.Namespace }}
 subjects:
 - kind: ServiceAccount
   name: orion-hubble
-  namespace: {{ .Values.namespace }}
+  namespace: {{ .Release.Namespace }}
 roleRef:
   kind: ClusterRole
-  name: configmap-reader-global-{{ .Values.show }}
+  name: configmap-reader-global-{{ .Release.Namespace }}
   apiGroup: rbac.authorization.k8s.io
