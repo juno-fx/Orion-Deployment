@@ -24,11 +24,11 @@ kuiper:
     max_replicas: 5                   # Maximum number of replicas to run
   resources:
     requests:
-      cpu: 150m
-      memory: 200Mi
+      cpu: 100m
+      memory: 160Mi
     limits:
       cpu: 300m
-      memory: 400Mi
+      memory: 256Mi
 
 hubble:
     image: hubble:v6.0.0            # Image to pull for Hubble
@@ -43,10 +43,10 @@ hubble:
       max_replicas: 5                 # Maximum number of replicas to run
     resources:
       requests:
-        cpu: 150m
-        memory: 128Mi
+        cpu: 25m
+        memory: 192Mi
       limits:
-        cpu: 300m
+        cpu: 100m
         memory: 256Mi
 
 rhea:
@@ -54,8 +54,8 @@ rhea:
   env: {}                            # Environment variables to set for the Rhea server
   resources:
     requests:
-      cpu: 100m
-      memory: 50Mi
+      cpu: 5m
+      memory: 24Mi
     limits:
-      cpu: 175m
-      memory: 125Mi
+      cpu: 50m
+      memory: 64Mi
