@@ -17,10 +17,9 @@ spec:
     scaleUp:
       stabilizationWindowSeconds: 30
   metrics:
-    - type: ContainerResource
-      containerResource:
+    - type: Resource
+      resource:
         name: cpu
-        container: kuiper
         target:
           type: Utilization
           averageUtilization: 75
