@@ -43,8 +43,8 @@ hubble:
       cpu: 75m
       memory: 192Mi
     limits:
-      cpu: 150m
-      memory: 320Mi
+      cpu: 1000m
+      memory: 512Mi
 
 rhea:
   image: rhea:v1.2.3                # Image to pull for Rhea
