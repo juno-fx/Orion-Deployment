@@ -40,8 +40,8 @@ hubble:
     max_replicas: 5                   # Maximum number of replicas to run
   resources:
     requests:
-      cpu: 75m
-      memory: 192Mi
+      cpu: 350m
+      memory: 256Mi
     limits:
       cpu: 1000m
       memory: 512Mi
