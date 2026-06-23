@@ -38,6 +38,7 @@ hubble:
   autoscaling:
     min_replicas: 1                   # Minimum number of replicas to run
     max_replicas: 5                   # Maximum number of replicas to run
+
   resources:
     requests:
       cpu: 350m
