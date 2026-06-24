@@ -2,8 +2,8 @@
 apiVersion: rbac.authorization.k8s.io/v1
 kind: Role
 metadata:
-  name: orion-hubble-{{ .Values.show }}
-  namespace: {{ .Values.namespace }}
+  name: orion-hubble-{{ .Release.Namespace }}
+  namespace: {{ .Release.Namespace }}
 rules:
 - apiGroups: [""]
   resources: ["serviceaccounts/token"]

@@ -1,8 +1,8 @@
-{{- if .Values.active}}
+{{- if .Values.active }}
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  namespace: {{ .Values.namespace }}
+  namespace: {{ .Release.Namespace }}
   name: hubble-ingress
   annotations:
     cert-manager.io/issuer: "{{ .Values.cert_manager_issuer }}"
@@ -15,7 +15,6 @@ metadata:
     nginx.ingress.kubernetes.io/proxy-read-timeout: "30"
     nginx.ingress.kubernetes.io/proxy-next-upstream-timeout: "30"
     nginx.ingress.kubernetes.io/affinity: "cookie"
-    nginx.ingress.kubernetes.io/session-cookie-path: "/"
     nginx.ingress.kubernetes.io/session-cookie-name: "juno-hubble-session"
     nginx.ingress.kubernetes.io/session-cookie-expires: "172800"
     nginx.ingress.kubernetes.io/session-cookie-max-age: "172800"
@@ -40,4 +39,4 @@ spec:
                 name: hubble
                 port:
                   number: 8000
-{{- end}}
+{{- end }}

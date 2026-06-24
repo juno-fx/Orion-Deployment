@@ -3,7 +3,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: hubble
-  namespace: {{ .Values.namespace }}
+  namespace: {{ .Release.Namespace }}
 spec:
   revisionHistoryLimit: 0
   selector:
@@ -13,7 +13,7 @@ spec:
   strategy:
     rollingUpdate:
       maxSurge: 1
-      maxUnavailable: 50%
+      maxUnavailable: 0
     type: RollingUpdate
 
   template:
@@ -44,6 +44,11 @@ spec:
         - name: hubble
           image: {{.Values.registry}}/{{ .Values.hubble.image }}
           imagePullPolicy: Always
+          readinessProbe:
+            tcpSocket:
+              port: 3000
+            initialDelaySeconds: 10
+            periodSeconds: 10
           env:
             - name: WORKLOAD_SHARING
               value: "{{ .Values.workload_sharing }}"
@@ -62,12 +67,7 @@ spec:
             - name: GENESIS_NAMESPACE
               value: "{{ .Values.genesis_namespace }}"
           resources:
-            requests:
-              cpu: 500m
-              memory: 400Mi
-            limits:
-              cpu: 1000m
-              memory: 800Mi
+            {{- toYaml .Values.hubble.resources | nindent 12 }}
           ports:
             - containerPort: 3000
               name: endpoint

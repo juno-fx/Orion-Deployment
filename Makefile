@@ -5,11 +5,12 @@ PROJECT="orion"
 	@cargo install cedar-policy-cli --root .hack
 
 format: .hack/bin/cedar
-	@.hack/bin/cedar format --write -p files/rhea/policies.cedar
+	@.hack/bin/cedar format --write -p files/rhea/system-policies.cedar
+	@.hack/bin/cedar format --write -p files/rhea/user-policies.cedar
 
 lint: .hack/bin/cedar
-	@sed 's/{{ .Values.namespace }}/default/g' files/rhea/system-policies.cedar > .tmp-system-policies.cedar
-	@sed 's/{{ .Values.namespace }}/default/g' files/rhea/user-policies.cedar > .tmp-user-policies.cedar
+	@sed 's/{{ .Release.Namespace }}/default/g' files/rhea/system-policies.cedar > .tmp-system-policies.cedar
+	@sed 's/{{ .Release.Namespace }}/default/g' files/rhea/user-policies.cedar > .tmp-user-policies.cedar
 	@.hack/bin/cedar format --check -p .tmp-system-policies.cedar
 	@.hack/bin/cedar format --check -p .tmp-user-policies.cedar
 

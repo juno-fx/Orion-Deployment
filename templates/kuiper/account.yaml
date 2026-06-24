@@ -3,5 +3,5 @@ kind: ServiceAccount
 apiVersion: v1
 metadata:
   name: kuiper
-  namespace: {{ .Values.namespace }}
+  namespace: {{ .Release.Namespace }}
 {{- end }}
