@@ -6,7 +6,7 @@ permit (
      Action::"PUT",
      Action::"DELETE",
      Action::"PATCH"],
-  resource == {{ .Values.namespace }}::Service::"hubble"
+  resource == {{ .Release.Namespace }}::Service::"hubble"
 )
 when
 {
@@ -25,7 +25,7 @@ permit (
      Action::"PUT",
      Action::"DELETE",
      Action::"PATCH"],
-  resource == {{ .Values.namespace }}::Service::"kuiper"
+  resource == {{ .Release.Namespace }}::Service::"kuiper"
 )
 when
 {

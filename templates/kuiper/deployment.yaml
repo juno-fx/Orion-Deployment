@@ -3,8 +3,9 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: kuiper
-  namespace: {{ .Values.namespace }}
+  namespace: {{ .Release.Namespace }}
 spec:
+  replicas: {{ .Values.kuiper.replicas }}
   revisionHistoryLimit: 0
   selector:
     matchLabels:
@@ -13,7 +14,7 @@ spec:
   strategy:
     rollingUpdate:
       maxSurge: 1
-      maxUnavailable: 50%
+      maxUnavailable: 0
     type: RollingUpdate
 
   template:
@@ -44,30 +45,24 @@ spec:
         - name: kuiper
           image: {{.Values.registry}}/{{ .Values.kuiper.image }}
           imagePullPolicy: Always
+          readinessProbe:
+            tcpSocket:
+              port: 8000
+            initialDelaySeconds: 10
+            periodSeconds: 10
           livenessProbe:
             tcpSocket:
               port: 8000
             periodSeconds: 10
             failureThreshold: 6
           startupProbe:
-            httpGet:
-              path: "/kuiper/.health"
+            tcpSocket:
               port: 8000
+            initialDelaySeconds: 5
             periodSeconds: 5
-            failureThreshold: 4
-          readinessProbe:
-            httpGet:
-              path: "/kuiper/.health"
-              port: 8000
-            periodSeconds: 5
-            failureThreshold: 2
+            failureThreshold: 12
           resources:
-            requests:
-              cpu: 500m
-              memory: 400Mi
-            limits:
-              cpu: 1000m
-              memory: 800Mi
+            {{- toYaml .Values.kuiper.resources | nindent 12 }}
           env:
             - name: WORKLOAD_SHARING
               value: "{{ .Values.workload_sharing }}"
