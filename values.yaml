@@ -29,7 +29,7 @@ kuiper:
 
 hubble:
   tolerations: []
-  image: hubble:1178-feat-embed-nginx            # Image to pull for Hubble
+  image: hubble:v6.1.1            # Image to pull for Hubble
   env: {}                             # Environment variables to set for the Hubble server
   node_selector:                      # Node selector to deploy the Hubble server to
     enable: true                      # Enable node selector
