@@ -4,26 +4,12 @@ kind: Ingress
 metadata:
   namespace: {{ .Release.Namespace }}
   name: hubble-ingress
-  annotations:
-    cert-manager.io/issuer: "{{ .Values.cert_manager_issuer }}"
-    kubernetes.io/ingress.class: "{{ .Values.ingressClassName }}"
-    nginx.ingress.kubernetes.io/auth-url: "http://hubble.{{ .Release.Namespace }}.svc.cluster.local:3000/api/socket-auth/"
-    nginx.ingress.kubernetes.io/use-regex: "true"
-    nginx.ingress.kubernetes.io/proxy-body-size: "0"
-    nginx.ingress.kubernetes.io/proxy-connect-timeout: "30"
-    nginx.ingress.kubernetes.io/proxy-send-timeout: "30"
-    nginx.ingress.kubernetes.io/proxy-read-timeout: "30"
-    nginx.ingress.kubernetes.io/proxy-next-upstream-timeout: "30"
-    nginx.ingress.kubernetes.io/affinity: "cookie"
-    nginx.ingress.kubernetes.io/session-cookie-name: "juno-hubble-session"
-    nginx.ingress.kubernetes.io/session-cookie-expires: "172800"
-    nginx.ingress.kubernetes.io/session-cookie-max-age: "172800"
-
 spec:
+  {{- if .Values.ingressClassName }}
   ingressClassName: "{{ .Values.ingressClassName }}"
+  {{- end }}
   rules:
-    - host: {{ .Values.host }}
-      http:
+    - http:
         paths:
           - path: "/"
             pathType: Prefix
@@ -32,11 +18,7 @@ spec:
                 name: hubble
                 port:
                   number: 3000
-          - path: "/socket.io"
-            pathType: ImplementationSpecific
-            backend:
-              service:
-                name: hubble
-                port:
-                  number: 8000
+      {{- if .Values.host }}
+      host: {{ .Values.host }}
+      {{- end }}
 {{- end }}
