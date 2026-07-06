@@ -4,7 +4,12 @@ kind: Service
 metadata:
   name: hubble
   namespace: {{ .Release.Namespace }}
+  annotations:
+{{- range $key, $value := .Values.service.annotations }}
+    {{ $key }}: "{{ $value }}"
+{{- end }}
 spec:
+  type: {{ .Values.service.type }}
   sessionAffinity: ClientIP
   selector:
     app: hubble

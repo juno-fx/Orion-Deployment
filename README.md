@@ -23,9 +23,62 @@ This chart has been tested with these ingress controllers:
 
 All three are tested in Kind and should work in production Kubernetes clusters.
 
+Set `ingress.className` to match your cluster's ingress class configuration.
+
+> The root-level `ingressClassName` is deprecated and will be removed in a future release. Use `ingress.className` instead.
+
 ### Gateway API
 
 Gateway API resources are not included in this chart but can be used by pointing an HTTPRoute at the `hubble` service (ports 3000 / 8000).
+
+---
+
+## Service and Ingress Configuration
+
+### Service
+
+The hubble service (external-facing) supports configurable type and annotations.
+
+```yaml
+service:
+  type: ClusterIP            # ClusterIP | LoadBalancer | NodePort
+  annotations: {}            # Annotations applied to the hubble service
+```
+
+Example for Coreweave CKS (public LoadBalancer with DNS):
+
+```yaml
+service:
+  type: LoadBalancer
+  annotations:
+    service.beta.kubernetes.io/coreweave-load-balancer-type: public
+    service.beta.kubernetes.io/external-hostname: hubble
+```
+
+The internal services (kuiper) are always ClusterIP and not user-configurable.
+
+### Ingress
+
+The ingress resource can be toggled and configured independently.
+
+```yaml
+ingress:
+  enabled: true              # Toggle the ingress resource; combined with active flag
+  className: ""              # Overrides root ingressClassName when set; falls back to it when empty
+  annotations: {}            # Annotations applied to the ingress resource
+```
+
+When `ingress.enabled` is `false`, the ingress resource is omitted entirely (regardless of the `active` flag).
+
+Annotations on the ingress are useful for provider-specific features. Example for Traefik with cert-manager:
+
+```yaml
+ingress:
+  enabled: true
+  className: traefik
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt-prod
+```
 
 ---
 
