@@ -36,12 +36,13 @@ kubectl rollout status deployment/argocd-server \
   --namespace argocd \
   --timeout=120s
 
-# ---- Install Genesis from GitHub (headless, no ingress) ----
+# ---- Install Genesis from GitHub (host set to avoid ingress conflict with hubble) ----
 echo "[GENESIS] Installing Genesis from GitHub..."
 helm install genesis \
   "https://github.com/juno-fx/Genesis-Deployment/archive/refs/heads/main.tar.gz" \
   --set "env.BASIC_AUTH_EMAIL=admin@juno-innovations.com" \
   --set "env.BASIC_AUTH_PASSWORD=juno" \
+  --set "host=genesis.internal" \
   --set "titan.owner=admin" \
   --set "titan.email=admin@juno-innovations.com" \
   --set "titan.uid=1000"
