@@ -47,3 +47,54 @@ orion: cluster ingress dependencies
 		--timeout=180s
 	@echo "Orion ready..."
 	@kubectl get pods
+
+# --- smoke tests ---
+SMOKE_SCENARIOS = dns nohost
+
+smoke-test-%:
+	@SMOKE_SCENARIO=$* .hack/smoke-test.sh
+
+smoke-test: $(addprefix smoke-test-,$(SMOKE_SCENARIOS))
+
+# --- interactive tests ---
+interactive-test-%:
+	@SMOKE_SCENARIO=$* .hack/interactive-test.sh
+
+interactive-test-clean:
+	@docker rm -f orion-browser 2>/dev/null || true
+	@kind delete cluster --name orion
+
+# --- provider-pinned smoke test targets ---
+smoke-test-dns-traefik:
+	@INGRESS_PROVIDER=traefik SMOKE_SCENARIO=dns .hack/smoke-test.sh
+
+smoke-test-dns-cilium:
+	@INGRESS_PROVIDER=cilium SMOKE_SCENARIO=dns .hack/smoke-test.sh
+
+smoke-test-nohost-traefik:
+	@INGRESS_PROVIDER=traefik SMOKE_SCENARIO=nohost .hack/smoke-test.sh
+
+smoke-test-nohost-cilium:
+	@INGRESS_PROVIDER=cilium SMOKE_SCENARIO=nohost .hack/smoke-test.sh
+
+# --- provider-pinned interactive test targets ---
+interactive-test-dns-traefik:
+	@INGRESS_PROVIDER=traefik SMOKE_SCENARIO=dns .hack/interactive-test.sh
+
+interactive-test-dns-cilium:
+	@INGRESS_PROVIDER=cilium SMOKE_SCENARIO=dns .hack/interactive-test.sh
+
+interactive-test-nohost-traefik:
+	@INGRESS_PROVIDER=traefik SMOKE_SCENARIO=nohost .hack/interactive-test.sh
+
+interactive-test-nohost-cilium:
+	@INGRESS_PROVIDER=cilium SMOKE_SCENARIO=nohost .hack/interactive-test.sh
+
+# --- run all smoke tests sequentially (for CI) ---
+smoke-test-all:
+	@for scenario in $(SMOKE_SCENARIOS); do \
+		for provider in nginx traefik cilium; do \
+			echo "====== smoke-test: $$scenario / $$provider ======"; \
+			INGRESS_PROVIDER=$$provider SMOKE_SCENARIO=$$scenario .hack/smoke-test.sh; \
+		done; \
+	done

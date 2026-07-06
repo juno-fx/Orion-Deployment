@@ -1,0 +1,6 @@
+host: orion.local
+pull_policy: IfNotPresent
+hubble:
+  env:
+    BASIC_AUTH_EMAIL: "admin@juno-innovations.com"
+    BASIC_AUTH_PASSWORD: "juno"
