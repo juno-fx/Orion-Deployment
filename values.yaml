@@ -1,6 +1,7 @@
 registry: junoinnovations             # Registry to pull the Orion images from
 guid:                                 # GUID of the project
 host:                                 # Hostname of the project
+# DEPRECATED — use ingress.className instead. Will be removed in a future release.
 ingressClassName: nginx
 active: true                          # Whether the project is active
 image_pull_secret:                    # Image pull secret to use for the project. This is the name of the secret in the namespace
@@ -65,3 +66,14 @@ resourceQuota:
     memory_request: "32Gi"
     cpu_limit: "32"
     memory_limit: "64Gi"
+
+# Service configuration for the external-facing hubble service
+service:
+  type: ClusterIP            # ClusterIP | LoadBalancer | NodePort
+  annotations: {}            # Annotations applied to the hubble service
+
+# Ingress configuration
+ingress:
+  enabled: true              # Toggle the ingress resource; combined with active flag
+  className: ""              # Overrides root ingressClassName when set; falls back to it when empty
+  annotations: {}            # Annotations applied to the ingress resource
