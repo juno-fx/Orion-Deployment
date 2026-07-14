@@ -1,12 +1,17 @@
-{{- if .Values.active }}
+{{- if and .Values.ingress.enabled .Values.active }}
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   namespace: {{ .Release.Namespace }}
   name: hubble-ingress
+  annotations:
+{{- range $key, $value := .Values.ingress.annotations }}
+    {{ $key }}: "{{ $value }}"
+{{- end }}
 spec:
-  {{- if .Values.ingressClassName }}
-  ingressClassName: "{{ .Values.ingressClassName }}"
+  {{- $className := .Values.ingress.className | default .Values.ingressClassName }}
+  {{- if $className }}
+  ingressClassName: "{{ $className }}"
   {{- end }}
   rules:
     - http:
