@@ -9,15 +9,14 @@ metadata:
     {{ $key }}: "{{ $value }}"
 {{- end }}
 spec:
-  {{- $className := .Values.ingress.className | default .Values.ingressClassName }}
-  {{- if $className }}
-  ingressClassName: "{{ $className }}"
+  {{- with .Values.ingress.className | default .Values.ingressClassName }}
+  ingressClassName: "{{ . }}"
   {{- end }}
   rules:
     - http:
         paths:
-          {{- $hostIsIP := regexMatch "^[0-9]+[.][0-9]+[.][0-9]+[.][0-9]+$" (.Values.host | default "") -}}
-          {{- $usePrefix := or .Values.ingress.usePathPrefix $hostIsIP -}}
+          {{- $hostIsIP := regexMatch "^[0-9]+[.][0-9]+[.][0-9]+[.][0-9]+$" (.Values.host | default "") }}
+          {{- $usePrefix := or .Values.ingress.usePathPrefix $hostIsIP }}
           - path: "/{{ if $usePrefix }}{{ .Release.Namespace }}{{ end }}"
             pathType: Prefix
             backend:
