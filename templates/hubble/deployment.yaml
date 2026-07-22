@@ -54,7 +54,8 @@ spec:
               value: "{{ .Values.workload_sharing }}"
             - name: "AUTH_TRUST_HOST"
               value: "true"
-            {{- $usePrefix := eq (include "usePathPrefix" .) "true" }}
+            {{- $hostIsIP := regexMatch "^[0-9]+[.][0-9]+[.][0-9]+[.][0-9]+(:[0-9]+)?$" (.Values.host | default "") }}
+            {{- $usePrefix := or .Values.ingress.usePathPrefix $hostIsIP }}
             - name: "NEXTAUTH_URL"
               value: "{{ .Values.http_scheme }}://{{ .Values.host }}/{{ if $usePrefix }}{{ .Release.Namespace }}/{{ end }}api/auth"
           {{- range $key, $value := .Values.hubble.env }}
