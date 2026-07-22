@@ -15,8 +15,8 @@ spec:
   rules:
     - http:
         paths:
-          {{- $hostIsIP := eq (include "hubble.hostIsIP" .) "true" }}
-          {{- $usePrefix := eq (include "hubble.usePathPrefix" .) "true" }}
+          {{- $hostIsIP := eq (include "hostIsIP" .) "true" }}
+          {{- $usePrefix := or .Values.ingress.usePathPrefix $hostIsIP }}
           - path: "/{{ if $usePrefix }}{{ .Release.Namespace }}{{ end }}"
             pathType: Prefix
             backend:

@@ -54,7 +54,7 @@ spec:
               value: "{{ .Values.workload_sharing }}"
             - name: "AUTH_TRUST_HOST"
               value: "true"
-            {{- $usePrefix := eq (include "hubble.usePathPrefix" .) "true" }}
+            {{- $usePrefix := eq (include "usePathPrefix" .) "true" }}
             - name: "NEXTAUTH_URL"
               value: "{{ .Values.http_scheme }}://{{ .Values.host }}/{{ if $usePrefix }}{{ .Release.Namespace }}/{{ end }}api/auth"
           {{- range $key, $value := .Values.hubble.env }}
