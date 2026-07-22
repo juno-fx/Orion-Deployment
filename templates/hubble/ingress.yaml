@@ -16,14 +16,16 @@ spec:
   rules:
     - http:
         paths:
-          - path: "/{{ .Release.Namespace }}"
+          {{- $hostIsIP := regexMatch "^[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+$" (.Values.host | default "") -}}
+          {{- $usePrefix := or .Values.ingress.usePathPrefix $hostIsIP -}}
+          - path: "/{{ if $usePrefix }}{{ .Release.Namespace }}{{ end }}"
             pathType: Prefix
             backend:
               service:
                 name: hubble
                 port:
                   number: 3000
-      {{- if .Values.host }}
-      host: {{ .Values.host }}
+      {{- if and .Values.host (not $hostIsIP) }}
+      host: "{{ .Values.host }}"
       {{- end }}
 {{- end }}
