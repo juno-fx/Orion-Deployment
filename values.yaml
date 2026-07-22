@@ -1,5 +1,4 @@
 registry: junoinnovations             # Registry to pull the Orion images from
-guid:                                 # GUID of the project
 host:                                 # Hostname of the project
 # DEPRECATED — use ingress.className instead. Will be removed in a future release.
 ingressClassName: nginx
@@ -8,9 +7,7 @@ image_pull_secret:                    # Image pull secret to use for the project
 genesis_proxy: true                   # Whether to use the Genesis proxy
 genesis_namespace: argocd             # Namespace where Genesis is deployed
 http_scheme: https
-nextauth_url_tpl: "{{ .Values.http_scheme }}://{{ .Values.host }}/api/auth"
 workload_sharing: false               # Setting True will enable the ability for users to share workloads with other users
-cert_manager_issuer: letsencrypt-prod
 
 kuiper:
   tolerations: []
@@ -77,3 +74,4 @@ ingress:
   enabled: true              # Toggle the ingress resource; combined with active flag
   className: ""              # Overrides root ingressClassName when set; falls back to it when empty
   annotations: {}            # Annotations applied to the ingress resource
+  usePathPrefix: false       # Prefix ingress path with the release namespace
