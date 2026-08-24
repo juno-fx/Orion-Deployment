@@ -1,15 +1,15 @@
 
-![Orion Logo](https://juno-fx.github.io/Orion-Documentation/genesis5.4.0-orion4.5.0/assets/logos/orion/orion-dark.png)
+![Orion Logo](https://juno-fx.github.io/Orion-Documentation/genesis5.5.0-orion4.6.0/assets/logos/orion/orion-dark.png)
 
-[Read the full documentation here](https://juno-fx.github.io/Orion-Documentation/genesis5.4.0-orion4.5.0)
+[Read the full documentation here](https://juno-fx.github.io/Orion-Documentation/genesis5.5.0-orion4.6.0)
 
-## Deployment Chart v4.5.0
+## Deployment Chart v4.6.0
 
-This deployment chart includes the release images for Hubble (v6.5.0), Kuiper (v4.4.0), and Rhea (v1.2.3).
+This deployment chart includes the release images for Hubble (v6.6.0), Kuiper (v4.5.0), and Rhea (v1.2.3).
 
-See all the latest feature changes via our Changelogs [here](https://juno-fx.github.io/Orion-Documentation/genesis5.4.0-orion4.5.0/changelogs/feature/#2026-08-07)
+See all the latest feature changes via our Changelogs [here](https://juno-fx.github.io/Orion-Documentation/genesis5.4.0-orion4.5.0/changelogs/feature/#2026-08-21)
 
-A summary of all deprecations, migration steps between major versions and addressed security vulnerabilities is kept [in our technical changelog here](https://juno-fx.github.io/Orion-Documentation/genesis5.4.0-orion4.5.0/changelogs/technical/#2026-08-07-genesis-v540-orion-projects-v450).
+A summary of all deprecations, migration steps between major versions and addressed security vulnerabilities is kept [in our technical changelog here](https://juno-fx.github.io/Orion-Documentation/genesis5.5.0-orion4.6.0/changelogs/technical/#2026-08-21-genesis-v550-orion-projects-v460).
 
 ---
 
