@@ -17,7 +17,7 @@ spec:
         paths:
           {{- $hostIsIP := regexMatch "^[0-9]+[.][0-9]+[.][0-9]+[.][0-9]+(:[0-9]+)?$" (.Values.host | default "") }}
           {{- $usePrefix := or .Values.ingress.usePathPrefix $hostIsIP }}
-          - path: "/{{ if $usePrefix }}{{ .Release.Namespace }}{{ end }}"
+          - path: "/{{ if $usePrefix }}{{ .Release.Namespace }}{{ end }}/"
             pathType: Prefix
             backend:
               service:
