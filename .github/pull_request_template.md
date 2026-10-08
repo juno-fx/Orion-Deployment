@@ -1,7 +1,12 @@
-### Before requesting review, I have done the following:
+## Summary
 
-- [ ] Code Formatting
-- [ ] Linting
-- [ ] Added Tests (if any)
-- [ ] Updated Documentation (if any)
-- [ ] Resolved any Merge Conflicts
+### Goal:
+What is this branch trying to accomplish?
+
+
+### Changes:
+What did you do?
+
+
+### Notes:
+Anything reviewers should know?
