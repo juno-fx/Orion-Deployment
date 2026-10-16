@@ -5,7 +5,7 @@
 
 ## Deployment Chart v4.8.1
 
-This deployment chart includes the release images for Genesis (v6.8.0), Titan (v2.2.2), Terra (v4.1.0), Metrics Gatherer (v1.1.0), and Rhea (v1.2.3).
+This deployment chart includes the release images for Hubble (v6.9.2), Kuiper (v4.7.1), and Rhea (v1.2.3).
 
 See all the latest feature changes via our Changelogs [here](https://juno-fx.github.io/Orion-Documentation/genesis6.1.0-orion4.8.1/changelogs/feature/#2026-10-16)
 
