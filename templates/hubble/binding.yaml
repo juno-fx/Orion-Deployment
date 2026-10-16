@@ -2,7 +2,7 @@ apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
 metadata:
   name: orion-hubble-{{ .Release.Namespace }}
-  namespace: argocd
+  namespace: {{ get (.Values.hubble.env | default dict) "GENESIS_NAMESPACE" | default .Values.genesis_namespace }}
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: Role

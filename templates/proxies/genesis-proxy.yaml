@@ -6,7 +6,7 @@ metadata:
   namespace: {{ .Release.Namespace }}
 spec:
   type: ExternalName
-  externalName: genesis.{{ .Values.genesis_namespace }}.svc.cluster.local
+  externalName: genesis.{{ coalesce (get (.Values.hubble.env | default dict) "GENESIS_NAMESPACE") (get (.Values.kuiper.env | default dict) "GENESIS_NAMESPACE") .Values.genesis_namespace }}.svc.cluster.local
   ports:
     - port: 8000
       targetPort: 8000
