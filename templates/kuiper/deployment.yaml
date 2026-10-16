@@ -63,6 +63,7 @@ spec:
             failureThreshold: 12
           resources:
             {{- toYaml .Values.kuiper.resources | nindent 12 }}
+          {{- $genesisNamespace := get (.Values.kuiper.env | default dict) "GENESIS_NAMESPACE" | default .Values.genesis_namespace }}
           env:
             - name: WORKLOAD_SHARING
               value: "{{ .Values.workload_sharing }}"
@@ -73,8 +74,10 @@ spec:
               value: "{{ .Values.image_pull_secret }}"
             {{- end }}
             {{- range $key, $value := .Values.kuiper.env }}
+            {{- if ne $key "GENESIS_NAMESPACE" }}
             - name: "{{ $key }}"
               value: "{{ $value }}"
+            {{- end }}
             {{- end }}
             - name: JUNO_PROJECT
               valueFrom:
@@ -85,7 +88,7 @@ spec:
                 fieldRef:
                   fieldPath: metadata.namespace
             - name: GENESIS_NAMESPACE
-              value: "{{ .Values.genesis_namespace }}"
+              value: "{{ $genesisNamespace }}"
 
           ports:
             - containerPort: 8000
@@ -95,10 +98,12 @@ spec:
           imagePullPolicy: Always
           env:
             - name: GENESIS_NAMESPACE
-              value: "{{ .Values.genesis_namespace }}"
+              value: "{{ get (.Values.rhea.env | default dict) "GENESIS_NAMESPACE" | default $genesisNamespace }}"
           {{- range $key, $value := .Values.rhea.env }}
+          {{- if ne $key "GENESIS_NAMESPACE" }}
             - name: "{{ $key }}"
               value: "{{ $value }}"
+          {{- end }}
           {{- end }}
           ports:
             - containerPort: 13000

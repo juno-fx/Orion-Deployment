@@ -49,6 +49,7 @@ spec:
               port: 3000
             initialDelaySeconds: 10
             periodSeconds: 10
+          {{- $genesisNamespace := get (.Values.hubble.env | default dict) "GENESIS_NAMESPACE" | default .Values.genesis_namespace }}
           env:
             - name: WORKLOAD_SHARING
               value: "{{ .Values.workload_sharing }}"
@@ -59,8 +60,10 @@ spec:
             - name: "NEXTAUTH_URL"
               value: "{{ .Values.http_scheme }}://{{ .Values.host }}/{{ if $usePrefix }}{{ .Release.Namespace }}/{{ end }}api/auth"
           {{- range $key, $value := .Values.hubble.env }}
+          {{- if ne $key "GENESIS_NAMESPACE" }}
             - name: "{{ $key }}"
               value: "{{ $value }}"
+          {{- end }}
           {{- end }}
             - name: JUNO_PROJECT
               valueFrom:
@@ -71,7 +74,7 @@ spec:
                 fieldRef:
                   fieldPath: metadata.namespace
             - name: GENESIS_NAMESPACE
-              value: "{{ .Values.genesis_namespace }}"
+              value: "{{ $genesisNamespace }}"
           resources:
             {{- toYaml .Values.hubble.resources | nindent 12 }}
           ports:
@@ -84,10 +87,12 @@ spec:
           imagePullPolicy: Always
           env:
             - name: GENESIS_NAMESPACE
-              value: "{{ .Values.genesis_namespace }}"
+              value: "{{ get (.Values.rhea.env | default dict) "GENESIS_NAMESPACE" | default $genesisNamespace }}"
           {{- range $key, $value := .Values.rhea.env }}
+          {{- if ne $key "GENESIS_NAMESPACE" }}
             - name: "{{ $key }}"
               value: "{{ $value }}"
+          {{- end }}
           {{- end }}
           ports:
             - containerPort: 13000
