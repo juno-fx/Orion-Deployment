@@ -89,6 +89,10 @@ spec:
                   fieldPath: metadata.namespace
             - name: GENESIS_NAMESPACE
               value: "{{ $genesisNamespace }}"
+            {{- with .Values.ingress.className | default .Values.ingressClassName }}
+            - name: INGRESS_CLASS_NAME
+              value: "{{ . }}"
+            {{- end }}
 
           ports:
             - containerPort: 8000
